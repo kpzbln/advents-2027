@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Три новогодних адвент-календаря для уютного декабря"
+    />
+    <title>Адвенты — уютный декабрь</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap"
+    />
+    <style>
+      :root {
+        --cream: #fff0d2;
+        --green: #405c26;
+        --brown: #805333;
+        --ink: #302710;
+        --card-border: #49351f;
+        --image-border: #ffdc9c;
+        --divider: #cda778;
+        --yellow-status: #f4eba6;
+        --yellow-border: #879044;
+        --waiting-status: #eee8cd;
+        --waiting-border: #70725a;
+        --focus-ring: #1f6f3b;
+        --page-width: 393px;
+        --page-height: 852px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-height: 100%;
+        background: #000;
+      }
+
+      body {
+        min-width: 0;
+        min-height: 100dvh;
+        margin: 0;
+        overflow-x: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+        color: var(--brown);
+        font-family: "Nunito", system-ui, sans-serif;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .skip-link {
+        position: fixed;
+        z-index: 10;
+        top: 8px;
+        left: 8px;
+        padding: 8px 12px;
+        border-radius: 10px;
+        background: var(--green);
+        color: #fff;
+        transform: translateY(-160%);
+        transition: transform 180ms ease;
+      }
+
+      .skip-link:focus-visible {
+        transform: translateY(0);
+      }
+
+      .app-shell {
+        position: relative;
+        width: min(100%, var(--page-width));
+        min-height: min(var(--page-height), 100dvh);
+        overflow: hidden;
+        background: var(--cream);
+      }
+
+      body.is-loading .page:not([hidden]) {
+        visibility: hidden;
+      }
+
+      .loading-screen {
+        position: absolute;
+        z-index: 4;
+        inset: 0;
+        min-height: min(var(--page-height), 100dvh);
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: 14px;
+        background: var(--cream);
+      }
+
+      .loading-spinner {
+        width: 44px;
+        height: 44px;
+        border: 4px solid rgb(64 92 38 / 20%);
+        border-top-color: var(--green);
+        border-radius: 50%;
+        animation: spinner-rotate 780ms linear infinite;
+      }
+
+      .loading-label {
+        margin: 0;
+        color: var(--green);
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      @keyframes spinner-rotate {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .page {
+        width: 100%;
+        min-height: min(var(--page-height), 100dvh);
+        padding: clamp(40px, 15vw, 59px) 16px max(16px, env(safe-area-inset-bottom));
+        display: flex;
+        flex-direction: column;
+      }
+
+      .site-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        padding: 8px 0;
+        text-align: center;
+      }
+
+      .header-main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(8px, 3.8vw, 15px);
+        width: 100%;
+      }
+
+      .header-heart {
+        width: clamp(50px, 17.8vw, 70px);
+        height: auto;
+        flex: 0 1 auto;
+      }
+
+      .site-title {
+        margin: 0;
+        color: var(--green);
+        font-size: clamp(32px, 10vw, 38px);
+        font-weight: 800;
+        line-height: 1.08;
+      }
+
+      .site-subtitle {
+        margin: 0;
+        color: var(--brown);
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .calendar-list {
+        display: grid;
+        gap: 16px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .calendar-card {
+        display: grid;
+        grid-template-columns: clamp(116px, 50%, 170px) minmax(0, 1fr);
+        gap: 12px;
+        width: 100%;
+        padding: 5px 12px 5px 5px;
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        background: rgb(255 255 255 / 12%);
+        color: var(--brown);
+        text-decoration: none;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          background-color 180ms ease;
+      }
+
+      .calendar-card:hover {
+        background: rgb(255 255 255 / 24%);
+        box-shadow: 0 8px 18px rgb(73 53 31 / 12%);
+      }
+
+      .calendar-card:focus-visible {
+        outline: 3px solid var(--focus-ring);
+        outline-offset: 3px;
+      }
+
+      .calendar-card:active {
+        transform: translateY(2px) scale(0.99);
+        box-shadow: none;
+      }
+
+      .calendar-art {
+        width: 100%;
+        aspect-ratio: 17 / 15;
+        align-self: end;
+        border: 1px solid var(--image-border);
+        border-radius: 15px;
+        background-color: #d3d3d3;
+        background-repeat: no-repeat;
+        background-position: var(--product-position), center;
+        background-size: var(--product-size), cover;
+      }
+
+      .calendar-art--hello-kitty {
+        --product-position: 18.451px -13.43px;
+        --product-size: 78.581% 118.745%;
+        background-image:
+          url("img/optimized/hello-kitty/image.png"),
+          url("img/optimized/hello-kitty/background.png");
+      }
+
+      .calendar-art--payot {
+        --product-position: 0.491px -38.805px;
+        --product-size: 100% 151.111%;
+        background-image:
+          url("img/optimized/payot/image.png"),
+          url("img/optimized/payot/background.png");
+      }
+
+      .calendar-art--kinder-mix {
+        --product-position: 43.529px 11.583px;
+        --product-size: 49.181% 83.934%;
+        background-image:
+          url("img/optimized/kinder-mix/image.png"),
+          url("img/optimized/kinder-mix/background.png");
+      }
+
+      .calendar-copy {
+        min-width: 0;
+        min-height: 150px;
+        padding: 8px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .calendar-status {
+        max-width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        min-height: 24px;
+        padding: 1px 8px;
+        border: 1px solid var(--yellow-border);
+        border-radius: 15px;
+        background: var(--yellow-status);
+        color: var(--ink);
+        font-size: clamp(11px, 3.2vw, 12.5px);
+        font-weight: 800;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+
+      .calendar-status[data-state="waiting"] {
+        border-color: var(--waiting-border);
+        background: var(--waiting-status);
+      }
+
+      .calendar-status-icon {
+        flex: 0 0 auto;
+        color: var(--green);
+        font-size: 14px;
+        line-height: 1;
+      }
+
+      .calendar-title {
+        align-self: stretch;
+        margin: 0;
+        color: var(--brown);
+        font-size: clamp(20px, 6.1vw, 24px);
+        font-weight: 800;
+        line-height: 1.08;
+        overflow-wrap: anywhere;
+      }
+
+      .calendar-progress {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .calendar-divider {
+        width: 100%;
+        height: 1px;
+        background: var(--divider);
+      }
+
+      .calendar-progress-label {
+        margin: 0;
+        color: var(--brown);
+        font-size: clamp(15px, 4.3vw, 17px);
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .bottom-illustration {
+        margin-top: auto;
+        padding-top: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
+
+      .bottom-illustration img {
+        display: block;
+        width: min(100%, 369.24px);
+        height: auto;
+      }
+
+      .detail-page {
+        gap: 16px;
+      }
+
+      .detail-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        border: 1px solid var(--card-border);
+        border-radius: 14px;
+        background: rgb(255 255 255 / 20%);
+        color: var(--green);
+        text-decoration: none;
+        font-size: 24px;
+        line-height: 1;
+      }
+
+      .back-link:focus-visible,
+      .day-button:focus-visible {
+        outline: 3px solid var(--focus-ring);
+        outline-offset: 3px;
+      }
+
+      .detail-title {
+        margin: 0;
+        color: var(--green);
+        font-size: clamp(25px, 8vw, 32px);
+        font-weight: 800;
+        line-height: 1.05;
+      }
+
+      .detail-summary {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .detail-status {
+        margin: 0;
+        color: var(--brown);
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .day-grid {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .day-button {
+        min-width: 0;
+        min-height: 48px;
+        padding: 6px;
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        background: #fff8e9;
+        color: var(--green);
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 800;
+        line-height: 1;
+        transition:
+          transform 180ms ease,
+          background-color 180ms ease,
+          color 180ms ease;
+      }
+
+      .day-button:hover {
+        background: #f4eba6;
+      }
+
+      .day-button:active {
+        transform: translateY(2px) scale(0.97);
+      }
+
+      .day-button[data-opened="true"] {
+        background: var(--green);
+        color: #fff8e9;
+      }
+
+      .day-button:disabled {
+        cursor: not-allowed;
+        opacity: 0.55;
+      }
+
+      .day-button:disabled:hover {
+        background: #fff8e9;
+      }
+
+      .detail-note {
+        margin: 0;
+        color: var(--brown);
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .toast {
+        position: fixed;
+        z-index: 5;
+        right: 16px;
+        bottom: max(16px, env(safe-area-inset-bottom));
+        left: 16px;
+        max-width: 361px;
+        margin: auto;
+        padding: 10px 14px;
+        border: 1px solid var(--card-border);
+        border-radius: 14px;
+        background: var(--green);
+        color: #fff;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.25;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(12px);
+        transition:
+          opacity 180ms ease,
+          transform 180ms ease;
+      }
+
+      .toast[data-visible="true"] {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      @media (max-height: 700px) {
+        .page {
+          padding-top: 28px;
+        }
+
+        .bottom-illustration {
+          padding-top: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+
+        .loading-spinner {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="is-loading">
+    <a class="skip-link" href="#calendar-list">Перейти к календарям</a>
+    <div class="app-shell">
+      <div id="loading-screen" class="loading-screen" role="status" aria-live="polite" aria-label="Загружаем календари">
+        <span class="loading-spinner" aria-hidden="true"></span>
+        <p class="loading-label">Загружаем календари…</p>
+      </div>
+      <main id="selection-page" class="page" aria-labelledby="page-title">
+        <header class="site-header">
+          <div class="header-main">
+            <img class="header-heart" src="img/optimized/left-heart.png" alt="" />
+            <h1 id="page-title" class="site-title">Адвенты</h1>
+            <img class="header-heart" src="img/optimized/right-heart.png" alt="" />
+          </div>
+          <p class="site-subtitle">Три календаря, один уютный декабрь</p>
+        </header>
+
+        <ul id="calendar-list" class="calendar-list" aria-label="Адвент-календари"></ul>
+
+        <div class="bottom-illustration" aria-hidden="true">
+          <img
+            src="img/optimized/love-is-image.png"
+            alt=""
+            width="1023"
+            height="385"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </main>
+
+      <main id="calendar-page" class="page detail-page" hidden aria-labelledby="detail-title">
+        <div class="detail-header">
+          <a class="back-link" href="#" aria-label="Вернуться к выбору календаря">‹</a>
+          <h1 id="detail-title" class="detail-title"></h1>
+        </div>
+        <p id="detail-summary" class="detail-summary"></p>
+        <p id="detail-status" class="detail-status" aria-live="polite"></p>
+        <div id="day-grid" class="day-grid" aria-label="Дни календаря"></div>
+        <p id="detail-note" class="detail-note"></p>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" data-visible="false"></div>
+
+    <script>
+      const TOTAL_DAYS = 24;
+      const storagePrefix = "advent-opened-";
+      const loadingScreen = document.querySelector("#loading-screen");
+      const criticalAssets = [
+        "img/optimized/left-heart.png",
+        "img/optimized/right-heart.png",
+        "img/optimized/love-is-image.png",
+        "img/optimized/hello-kitty/background.png",
+        "img/optimized/hello-kitty/image.png",
+        "img/optimized/payot/background.png",
+        "img/optimized/payot/image.png",
+        "img/optimized/kinder-mix/background.png",
+        "img/optimized/kinder-mix/image.png",
+      ];
+      const calendars = [
+        {
+          id: "hello-kitty",
+          name: "Hello Kitty & Friends",
+          status: "available",
+          artClass: "calendar-art--hello-kitty",
+          note: "Все 24 дня уже доступны для открытия.",
+          initialOpened: [],
+        },
+        {
+          id: "payot",
+          name: "PAYOT",
+          status: "waiting",
+          artClass: "calendar-art--payot",
+          unlockHour: 6,
+          note: "Последний день откроется в 06:00 по местному времени.",
+          initialOpened: Array.from({ length: 23 }, (_, index) => index + 1),
+        },
+        {
+          id: "kinder-mix",
+          name: "Kinder Mix",
+          status: "complete",
+          artClass: "calendar-art--kinder-mix",
+          note: "Все 24 дня уже открыты.",
+          initialOpened: Array.from({ length: TOTAL_DAYS }, (_, index) => index + 1),
+        },
+      ];
+
+      const selectionPage = document.querySelector("#selection-page");
+      const calendarPage = document.querySelector("#calendar-page");
+      const calendarList = document.querySelector("#calendar-list");
+      const detailTitle = document.querySelector("#detail-title");
+      const detailSummary = document.querySelector("#detail-summary");
+      const detailStatus = document.querySelector("#detail-status");
+      const dayGrid = document.querySelector("#day-grid");
+      const detailNote = document.querySelector("#detail-note");
+      const toast = document.querySelector("#toast");
+      const memoryOpenedDays = new Map();
+      let lastCalendarId = "";
+      let toastTimer;
+
+      function waitForImage(url) {
+        return new Promise((resolve) => {
+          const image = new Image();
+          image.onload = () => {
+            if (typeof image.decode === "function") {
+              image.decode().catch(() => {}).finally(resolve);
+              return;
+            }
+            resolve();
+          };
+          image.onerror = resolve;
+          image.src = url;
+        });
+      }
+
+      async function revealApp() {
+        const fontPromises = document.fonts
+          ? [
+              document.fonts.load('700 16px "Nunito"'),
+              document.fonts.load('800 38px "Nunito"'),
+            ]
+          : [];
+        const assetPromises = criticalAssets.map(waitForImage);
+        const resourcesReady = Promise.allSettled([...fontPromises, ...assetPromises]);
+        const timeout = new Promise((resolve) => window.setTimeout(resolve, 5000));
+
+        await Promise.race([resourcesReady, timeout]);
+        document.body.classList.remove("is-loading");
+        document.body.classList.add("is-ready");
+        loadingScreen.setAttribute("aria-hidden", "true");
+        loadingScreen.hidden = true;
+        window.requestAnimationFrame(playEntryAnimation);
+      }
+
+      function entryTargets() {
+        if (!calendarPage.hidden) {
+          return [
+            calendarPage.querySelector(".detail-header"),
+            calendarPage.querySelector(".detail-summary"),
+            calendarPage.querySelector(".detail-status"),
+            ...calendarPage.querySelectorAll(".day-button"),
+            calendarPage.querySelector(".detail-note"),
+          ].filter(Boolean);
+        }
+        return [
+          selectionPage.querySelector(".site-header"),
+          ...selectionPage.querySelectorAll(".calendar-card"),
+          selectionPage.querySelector(".bottom-illustration"),
+        ].filter(Boolean);
+      }
+
+      function playEntryAnimation() {
+        const targets = entryTargets();
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || typeof Element.prototype.animate !== "function") {
+          return;
+        }
+        targets.forEach((element, index) => {
+          element.animate(
+            [
+              { opacity: 0, transform: "translateY(18px) scale(0.98)" },
+              { opacity: 1, transform: "translateY(0) scale(1)" },
+            ],
+            {
+              duration: 440,
+              delay: Math.min(index, 12) * 52,
+              easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+              fill: "both",
+            },
+          );
+        });
+      }
+
+      function getCalendar(id) {
+        return calendars.find((calendar) => calendar.id === id);
+      }
+
+      function getOpenedDays(calendar) {
+        if (memoryOpenedDays.has(calendar.id)) {
+          return new Set(memoryOpenedDays.get(calendar.id));
+        }
+        try {
+          const stored = JSON.parse(localStorage.getItem(storagePrefix + calendar.id));
+          if (Array.isArray(stored)) {
+            const openedDays = stored.filter((day) => Number.isInteger(day) && day >= 1 && day <= TOTAL_DAYS);
+            memoryOpenedDays.set(calendar.id, openedDays);
+            return new Set(openedDays);
+          }
+        } catch {
+          // A missing or invalid local value falls back to the initial state.
+        }
+        const initialOpened = [...calendar.initialOpened];
+        memoryOpenedDays.set(calendar.id, initialOpened);
+        return new Set(initialOpened);
+      }
+
+      function saveOpenedDays(calendar, openedDays) {
+        const sortedDays = [...openedDays].sort((a, b) => a - b);
+        memoryOpenedDays.set(calendar.id, sortedDays);
+        try {
+          localStorage.setItem(storagePrefix + calendar.id, JSON.stringify(sortedDays));
+        } catch {
+          // Session memory keeps the interaction working when storage is unavailable.
+        }
+      }
+
+      function nextUnlock(calendar) {
+        const date = new Date();
+        date.setHours(calendar.unlockHour, 0, 0, 0);
+        if (date <= new Date()) {
+          date.setDate(date.getDate() + 1);
+        }
+        return date;
+      }
+
+      function waitingLabel(calendar) {
+        const unlock = nextUnlock(calendar);
+        const today = new Date();
+        const dayLabel = unlock.toDateString() === today.toDateString() ? "Сегодня" : "Завтра";
+        return `${dayLabel} в ${String(calendar.unlockHour).padStart(2, "0")}:00`;
+      }
+
+      function isWaiting(calendar) {
+        return calendar.status === "waiting" && new Date() < nextUnlock(calendar);
+      }
+
+      function getStatus(calendar, openedDays) {
+        if (calendar.status === "complete" || openedDays.size >= TOTAL_DAYS) {
+          return { state: "complete", icon: "✓", label: "Всё открыто" };
+        }
+        if (isWaiting(calendar)) {
+          return { state: "waiting", icon: "◷", label: waitingLabel(calendar) };
+        }
+        return {
+          state: "available",
+          icon: "✓",
+          label: `Можно открыть ${TOTAL_DAYS - openedDays.size}`,
+        };
+      }
+
+      function cardMarkup(calendar) {
+        const openedDays = getOpenedDays(calendar);
+        const status = getStatus(calendar, openedDays);
+        return `
+          <li>
+            <a class="calendar-card" href="#calendar/${calendar.id}" data-calendar-id="${calendar.id}" aria-label="Открыть календарь ${calendar.name}. ${status.label}. Открыто ${openedDays.size} из ${TOTAL_DAYS}">
+              <span class="calendar-art ${calendar.artClass}" aria-hidden="true"></span>
+              <span class="calendar-copy">
+                <span class="calendar-status" data-state="${status.state}">
+                  <span class="calendar-status-icon" aria-hidden="true">${status.icon}</span>
+                  <span>${status.label}</span>
+                </span>
+                <span class="calendar-title">${calendar.name}</span>
+                <span class="calendar-progress">
+                  <span class="calendar-divider" aria-hidden="true"></span>
+                  <span class="calendar-progress-label">Открыто ${openedDays.size} из ${TOTAL_DAYS}</span>
+                </span>
+              </span>
+            </a>
+          </li>
+        `;
+      }
+
+      function renderSelection() {
+        calendarList.innerHTML = calendars.map(cardMarkup).join("");
+        calendarList.querySelectorAll(".calendar-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            lastCalendarId = card.dataset.calendarId;
+          });
+        });
+      }
+
+      function isDayOpenable(calendar, day) {
+        if (isWaiting(calendar)) {
+          return false;
+        }
+        return day >= 1 && day <= TOTAL_DAYS;
+      }
+
+      function renderDetail(calendar) {
+        const openedDays = getOpenedDays(calendar);
+        const status = getStatus(calendar, openedDays);
+        detailTitle.textContent = calendar.name;
+        detailSummary.textContent = `${openedDays.size} из ${TOTAL_DAYS} дней открыто`;
+        detailStatus.textContent = status.state === "waiting" ? `Следующее открытие: ${status.label}` : status.label;
+        detailNote.textContent = calendar.note;
+        document.title = `${calendar.name} — Адвенты`;
+
+        dayGrid.innerHTML = Array.from({ length: TOTAL_DAYS }, (_, index) => {
+          const day = index + 1;
+          const opened = openedDays.has(day);
+          const openable = isDayOpenable(calendar, day);
+          const lockedLabel = status.state === "waiting" ? `, откроется ${status.label.toLowerCase()}` : "";
+          const stateLabel = opened ? ", открыт" : openable ? ", доступен для открытия" : lockedLabel;
+          return `<button class="day-button" type="button" data-day="${day}" data-opened="${opened}" ${openable ? "" : "disabled"} aria-label="День ${day}${stateLabel}">${day}</button>`;
+        }).join("");
+
+        dayGrid.querySelectorAll(".day-button").forEach((button) => {
+          button.addEventListener("click", () => openDay(calendar, Number(button.dataset.day)));
+        });
+      }
+
+      function openDay(calendar, day) {
+        const openedDays = getOpenedDays(calendar);
+        if (!isDayOpenable(calendar, day)) {
+          showToast(`Этот день откроется ${waitingLabel(calendar).toLowerCase()}.`);
+          return;
+        }
+        if (openedDays.has(day)) {
+          showToast(`День ${day} уже открыт.`);
+          return;
+        }
+        openedDays.add(day);
+        saveOpenedDays(calendar, openedDays);
+        renderDetail(calendar);
+        renderSelection();
+        showToast(`День ${day} открыт.`);
+      }
+
+      function showToast(message) {
+        window.clearTimeout(toastTimer);
+        toast.textContent = message;
+        toast.dataset.visible = "true";
+        toastTimer = window.setTimeout(() => {
+          toast.dataset.visible = "false";
+        }, 2600);
+      }
+
+      function renderRoute() {
+        const match = window.location.hash.match(/^#calendar\/([a-z0-9-]+)$/i);
+        const calendar = match ? getCalendar(match[1]) : null;
+        renderSelection();
+
+        if (!calendar) {
+          selectionPage.hidden = false;
+          calendarPage.hidden = true;
+          document.title = "Адвенты — уютный декабрь";
+          if (lastCalendarId) {
+            const lastCard = document.querySelector(`[data-calendar-id="${lastCalendarId}"]`);
+            lastCard?.focus();
+          }
+          if (document.body.classList.contains("is-ready")) {
+            window.requestAnimationFrame(playEntryAnimation);
+          }
+          return;
+        }
+
+        selectionPage.hidden = true;
+        calendarPage.hidden = false;
+        renderDetail(calendar);
+        calendarPage.querySelector(".back-link").focus();
+        if (document.body.classList.contains("is-ready")) {
+          window.requestAnimationFrame(playEntryAnimation);
+        }
+      }
+
+      window.addEventListener("hashchange", renderRoute);
+      window.setInterval(() => {
+        renderSelection();
+        if (window.location.hash.startsWith("#calendar/")) {
+          const id = window.location.hash.slice("#calendar/".length);
+          const calendar = getCalendar(id);
+          if (calendar) {
+            renderDetail(calendar);
+          }
+        }
+      }, 60_000);
+
+      renderRoute();
+      revealApp();
+    </script>
+  </body>
+</html>
