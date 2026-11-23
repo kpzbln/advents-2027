@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap"
+    />
+    <link rel="icon" href="data:," />
+
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Адвенты</title>
+
+        <link rel="stylesheet" href="advent-hello-kitty.css" />
+  </head>
+
+  <body class="page-is-loading">
+    <div class="page-loader" role="status" aria-live="polite">
+      <div class="page-loader-content">
+        <div class="page-loader-spinner" aria-hidden="true"></div>
+      </div>
+    </div>
+    <noscript>
+      <style>
+        .page-loader {
+          display: none;
+        }
+
+        body.page-is-loading {
+          overflow: auto;
+        }
+      </style>
+    </noscript>
+    <div class="page-snow" aria-hidden="true"></div>
+    <header>
+      <div class="top-blur-spacer"></div>
+    </header>
+
+    <div class="page-content">
+      <div class="calendar-intro">
+        <div class="hello-kitty-logo"></div>
+        <div class="calendar-progress">
+          <div class="calendar-progress-text" aria-live="polite">Собрано 0 из 24</div>
+        </div>
+      </div>
+
+      <div class="advent-calendar">
+        <div class="calendar-info">
+          <div class="current-date">
+            <div class="current-date-container">
+              <div class="current-date-text">1 декабря</div>
+            </div>
+          </div>
+
+          <div class="next-unlock">
+            <div class="next-unlock-container">
+              <div class="next-unlock-text">Завтра в 06:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-board">
+          <div class="calendar-board-content">
+            <div class="calendar-row">
+              <div
+                class="calendar-door-available"
+                data-day="1"
+                role="button"
+                tabindex="0"
+                aria-label="Открыть подарок за 1 декабря"
+                aria-haspopup="dialog"
+              >
+                <div class="gift-box-red">
+                  <div class="day-number">1</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="17">
+                <div class="gift-box-green">
+                  <div class="day-number">17</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="12">
+                <div class="gift-box-red"><div class="day-number">12</div></div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="16">
+                <div class="gift-box-green">
+                  <div class="day-number">16</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="5">
+                <div class="gift-box-red"><div class="day-number">5</div></div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="20">
+                <div class="gift-box-green">
+                  <div class="day-number">20</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="calendar-row">
+              <div class="calendar-door-locked" data-day="21">
+                <div class="gift-box-green">
+                  <div class="day-number">21</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="3">
+                <div class="gift-box-red">
+                  <div class="day-number">3</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="22">
+                <div class="gift-box-green">
+                  <div class="day-number">22</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="10">
+                <div class="gift-box-red">
+                  <div class="day-number">10</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="7">
+                <div class="gift-box-green">
+                  <div class="day-number">7</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="18">
+                <div class="gift-box-red">
+                  <div class="day-number">18</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="calendar-row">
+              <div class="calendar-door-locked" data-day="2">
+                <div class="gift-box-red"><div class="day-number">2</div></div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="19">
+                <div class="gift-box-green">
+                  <div class="day-number">19</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="15">
+                <div class="gift-box-red"><div class="day-number">15</div></div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="4">
+                <div class="gift-box-green">
+                  <div class="day-number">4</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="13">
+                <div class="gift-box-red"><div class="day-number">13</div></div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="8">
+                <div class="gift-box-green">
+                  <div class="day-number">8</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="calendar-row">
+              <div class="calendar-door-locked" data-day="14">
+                <div class="gift-box-green">
+                  <div class="day-number">14</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="6">
+                <div class="gift-box-red">
+                  <div class="day-number">6</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="11">
+                <div class="gift-box-green">
+                  <div class="day-number">11</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="9">
+                <div class="gift-box-red">
+                  <div class="day-number">9</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="23">
+                <div class="gift-box-green">
+                  <div class="day-number">23</div>
+                </div>
+              </div>
+
+              <div class="calendar-door-locked" data-day="24">
+                <div class="gift-box-red">
+                  <div class="day-number">24</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer"><div class="winter-scene"></div></div>
+
+    <div class="gift-modal" role="presentation" aria-hidden="true">
+      <div
+        class="gift-modal-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="gift-confirmation-title"
+      >
+        <button class="gift-modal-close" type="button" aria-label="Закрыть">
+          ×
+        </button>
+        <div class="gift-confirmation">
+          <h2 class="gift-modal-title" id="gift-confirmation-title">
+            Открыть подарок?
+          </h2>
+          <p class="gift-modal-message">Подарок за 1 декабря уже ждёт тебя.</p>
+          <div class="gift-modal-actions">
+            <button
+              class="gift-modal-action gift-modal-action-secondary gift-modal-cancel"
+              type="button"
+            >
+              Отмена
+            </button>
+            <button class="gift-modal-action gift-modal-confirm" type="button">
+              ОК
+            </button>
+          </div>
+        </div>
+        <div class="gift-result" hidden>
+          <picture class="gift-modal-image-frame">
+            <source
+              class="gift-modal-image-source"
+              srcset="img/advent-hello-kitty/gifts/01.webp"
+              type="image/webp"
+            />
+            <img
+              class="gift-modal-image"
+              src="img/advent-hello-kitty/gifts/01.png"
+              alt="Подарок за 1 декабря"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <p class="gift-modal-caption" id="gift-modal-caption">
+            Hello Kitty в праздничном костюме
+          </p>
+          <p class="gift-modal-category" id="gift-modal-category">Фигурка</p>
+          <p class="gift-modal-day" id="gift-modal-day">День 1 · 1 декабря</p>
+          <p class="gift-modal-description" id="gift-modal-description">
+            Праздничная фигурка из коллекции Hello Kitty &amp; Friends.
+          </p>
+          <p class="gift-image-placeholder" hidden>
+            Изображение игрушки пока не добавлено.
+          </p>
+        </div>
+      </div>
+    </div>
+
+        <script src="advent-hello-kitty.js"></script>
+  </body>
+</html>
