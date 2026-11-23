@@ -2,6 +2,37 @@ const pageSnow = document.querySelector(".page-snow");
       const pageLoader = document.querySelector(".page-loader");
       let pageLoadingFinished = false;
 
+      const pageAssetUrls = [
+        "img/advent-hello-kitty/hello-kitty-logo.webp",
+        "img/advent-hello-kitty/calendar-progress.webp",
+        "img/advent-hello-kitty/current-date.webp",
+        "img/advent-hello-kitty/next-unlock.webp",
+        "img/advent-hello-kitty/calendar-board.webp",
+        "img/advent-hello-kitty/calendar-door-opened.webp",
+        "img/advent-hello-kitty/gift-box-red.webp",
+        "img/advent-hello-kitty/gift-box-green.webp",
+        "img/advent-hello-kitty/winter-scene.webp",
+        ...Array.from(
+          { length: 24 },
+          (_, index) =>
+            `img/advent-hello-kitty/gifts/${String(index + 1).padStart(2, "0")}.webp`,
+        ),
+      ];
+
+      const waitForImage = (url) =>
+        new Promise((resolve) => {
+          const image = new Image();
+          image.onload = () => {
+            if (typeof image.decode === "function") {
+              image.decode().catch(() => {}).finally(resolve);
+              return;
+            }
+            resolve();
+          };
+          image.onerror = resolve;
+          image.src = url;
+        });
+
       const finishPageLoading = () => {
         if (!pageLoader || pageLoadingFinished) {
           return;
@@ -24,11 +55,12 @@ const pageSnow = document.querySelector(".page-snow");
           await document.fonts.ready;
         }
 
+        await Promise.allSettled(pageAssetUrls.map(waitForImage));
+
         finishPageLoading();
       };
 
       waitForPageResources();
-      window.setTimeout(finishPageLoading, 8000);
 
       const randomBetween = (min, max) => Math.random() * (max - min) + min;
 
@@ -73,168 +105,168 @@ const pageSnow = document.querySelector(".page-snow");
           caption: "Hello Kitty в праздничном костюме",
           category: "Фигурка",
           description: "Hello Kitty в красной шапочке и шарфе для зимней коллекции.",
-          image: "img/advent-hello-kitty/gifts/01.png",
+          image: "img/advent-hello-kitty/gifts/01.webp",
           imageWebp: "img/advent-hello-kitty/gifts/01.webp",
         },
         2: {
           caption: "Lala в зимней шапочке",
           category: "Фигурка",
           description: "Нежная Lala в розовом праздничном образе из серии Hello Kitty & Friends.",
-          image: "img/advent-hello-kitty/gifts/02.png",
+          image: "img/advent-hello-kitty/gifts/02.webp",
           imageWebp: "img/advent-hello-kitty/gifts/02.webp",
         },
         3: {
           caption: "Подставка Bitty Pop! для демонстрации",
           category: "Подставка",
           description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/03.png",
+          image: "img/advent-hello-kitty/gifts/03.webp",
           imageWebp: "img/advent-hello-kitty/gifts/03.webp",
         },
         4: {
           caption: "Kiki в зимней шапочке",
           category: "Фигурка",
           description: "Kiki в голубой зимней шапочке и тёплом праздничном образе.",
-          image: "img/advent-hello-kitty/gifts/04.png",
+          image: "img/advent-hello-kitty/gifts/04.webp",
           imageWebp: "img/advent-hello-kitty/gifts/04.webp",
         },
         5: {
           caption: "Праздничная ёлочка",
           category: "Аксессуар",
           description: "Золотистая ёлочка на подставке для зимней витрины.",
-          image: "img/advent-hello-kitty/gifts/05.png",
+          image: "img/advent-hello-kitty/gifts/05.webp",
           imageWebp: "img/advent-hello-kitty/gifts/05.webp",
         },
         6: {
           caption: "Подставка Bitty Pop! для демонстрации",
           category: "Подставка",
           description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/06.png",
+          image: "img/advent-hello-kitty/gifts/06.webp",
           imageWebp: "img/advent-hello-kitty/gifts/06.webp",
         },
         7: {
           caption: "Tuxedo Sam в зимнем образе",
           category: "Фигурка",
           description: "Забавный Tuxedo Sam в зимнем костюме и цилиндре.",
-          image: "img/advent-hello-kitty/gifts/07.png",
+          image: "img/advent-hello-kitty/gifts/07.webp",
           imageWebp: "img/advent-hello-kitty/gifts/07.webp",
         },
         8: {
           caption: "Двойная красная подставка Bitty Pop!",
           category: "Подставка",
           description: "Красный элемент для демонстрации двух фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/08.png",
+          image: "img/advent-hello-kitty/gifts/08.webp",
           imageWebp: "img/advent-hello-kitty/gifts/08.webp",
         },
         9: {
           caption: "Подарочная коробка с бантом",
           category: "Аксессуар",
           description: "Праздничная коробочка для зимней композиции календаря.",
-          image: "img/advent-hello-kitty/gifts/09.png",
+          image: "img/advent-hello-kitty/gifts/09.webp",
           imageWebp: "img/advent-hello-kitty/gifts/09.webp",
         },
         10: {
           caption: "Красный элемент подставки Bitty Pop!",
           category: "Подставка",
           description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/10.png",
+          image: "img/advent-hello-kitty/gifts/10.webp",
           imageWebp: "img/advent-hello-kitty/gifts/10.webp",
         },
         11: {
           caption: "Chococat в праздничном костюме",
           category: "Фигурка",
           description: "Chococat в зелёном праздничном костюме и зимней шапочке.",
-          image: "img/advent-hello-kitty/gifts/11.png",
+          image: "img/advent-hello-kitty/gifts/11.webp",
           imageWebp: "img/advent-hello-kitty/gifts/11.webp",
         },
         12: {
           caption: "Подставка Bitty Pop! для демонстрации",
           category: "Подставка",
           description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/12.png",
+          image: "img/advent-hello-kitty/gifts/12.webp",
           imageWebp: "img/advent-hello-kitty/gifts/12.webp",
         },
         13: {
           caption: "My Melody в зимнем образе",
           category: "Фигурка",
           description: "My Melody в тёплой шапочке и праздничной зимней одежде.",
-          image: "img/advent-hello-kitty/gifts/13.png",
+          image: "img/advent-hello-kitty/gifts/13.webp",
           imageWebp: "img/advent-hello-kitty/gifts/13.webp",
         },
         14: {
           caption: "Голубой футляр для брелка",
           category: "Футляр",
           description: "Голубой футляр с Hello Kitty для хранения брелка.",
-          image: "img/advent-hello-kitty/gifts/14.png",
+          image: "img/advent-hello-kitty/gifts/14.webp",
           imageWebp: "img/advent-hello-kitty/gifts/14.webp",
         },
         15: {
           caption: "Красный элемент подставки Bitty Pop!",
           category: "Подставка",
           description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/15.png",
+          image: "img/advent-hello-kitty/gifts/15.webp",
           imageWebp: "img/advent-hello-kitty/gifts/15.webp",
         },
         16: {
           caption: "Pochacco в костюме ёлочки",
           category: "Фигурка",
           description: "Pochacco в зелёном костюме ёлочки с праздничной звездой.",
-          image: "img/advent-hello-kitty/gifts/16.png",
+          image: "img/advent-hello-kitty/gifts/16.webp",
           imageWebp: "img/advent-hello-kitty/gifts/16.webp",
         },
         17: {
           caption: "Pompompurin в оленьих рожках",
           category: "Фигурка",
           description: "Pompompurin в праздничном образе с оленьими рожками.",
-          image: "img/advent-hello-kitty/gifts/17.png",
+          image: "img/advent-hello-kitty/gifts/17.webp",
           imageWebp: "img/advent-hello-kitty/gifts/17.webp",
         },
         18: {
           caption: "Подставка Bitty Pop! для демонстрации",
           category: "Подставка",
           description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/18.png",
+          image: "img/advent-hello-kitty/gifts/18.webp",
           imageWebp: "img/advent-hello-kitty/gifts/18.webp",
         },
         19: {
           caption: "Голубой футляр для брелка",
           category: "Футляр",
           description: "Голубой футляр с Hello Kitty для хранения брелка.",
-          image: "img/advent-hello-kitty/gifts/19.png",
+          image: "img/advent-hello-kitty/gifts/19.webp",
           imageWebp: "img/advent-hello-kitty/gifts/19.webp",
         },
         20: {
           caption: "Подставка Bitty Pop! для демонстрации",
           category: "Подставка",
           description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/20.png",
+          image: "img/advent-hello-kitty/gifts/20.webp",
           imageWebp: "img/advent-hello-kitty/gifts/20.webp",
         },
         21: {
           caption: "Kuromi в костюме оленёнка",
           category: "Фигурка",
           description: "Kuromi в тёплом праздничном костюме маленького оленёнка.",
-          image: "img/advent-hello-kitty/gifts/21.png",
+          image: "img/advent-hello-kitty/gifts/21.webp",
           imageWebp: "img/advent-hello-kitty/gifts/21.webp",
         },
         22: {
           caption: "Подарок с зимним бантом",
           category: "Аксессуар",
           description: "Розовая подарочная коробка со снежинками и праздничным бантом.",
-          image: "img/advent-hello-kitty/gifts/22.png",
+          image: "img/advent-hello-kitty/gifts/22.webp",
           imageWebp: "img/advent-hello-kitty/gifts/22.webp",
         },
         23: {
           caption: "Красная треугольная подставка",
           category: "Подставка",
           description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/23.png",
+          image: "img/advent-hello-kitty/gifts/23.webp",
           imageWebp: "img/advent-hello-kitty/gifts/23.webp",
         },
         24: {
           caption: "Hello Kitty в зимнем образе",
           category: "Фигурка",
           description: "Hello Kitty в праздничной шапочке и зимнем наряде.",
-          image: "img/advent-hello-kitty/gifts/24.png",
+          image: "img/advent-hello-kitty/gifts/24.webp",
           imageWebp: "img/advent-hello-kitty/gifts/24.webp",
         },
       };
@@ -349,7 +381,7 @@ const pageSnow = document.querySelector(".page-snow");
         door.innerHTML =
           '<div class="gift-box-received gift-box-revealed" aria-hidden="true"></div>';
         const revealedGift = door.firstElementChild;
-        revealedGift.style.backgroundImage = `url("${gift.imageWebp}"), url("${gift.image}")`;
+        revealedGift.style.backgroundImage = `url("${gift.imageWebp}")`;
       };
 
       const markDoorOpened = (door, gift) => {

@@ -105,6 +105,33 @@
         align-self: stretch;
       }
 
+      .calendar-home-link {
+        align-self: flex-start;
+        margin: 0 0 2px 4px;
+        padding: 7px 13px;
+        border: 1px solid rgb(18 53 84 / 28%);
+        border-radius: 999px;
+        background: rgb(235 247 255 / 82%);
+        color: #123554;
+        font-family: Nunito, sans-serif;
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1;
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgb(13 48 78 / 12%);
+        transition: transform 180ms ease, background-color 180ms ease;
+      }
+
+      .calendar-home-link:hover {
+        background: #fff;
+        transform: translateY(-1px);
+      }
+
+      .calendar-home-link:focus-visible {
+        outline: 3px solid rgb(18 53 84 / 48%);
+        outline-offset: 3px;
+      }
+
       .calendar-intro {
         display: flex;
         width: 360px;
@@ -532,12 +559,6 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: 84% auto;
-      }
-
-      .gift-box-01 {
-        border-radius: 2px;
-        background: url("img/advent-hello-kitty/gifts/01.png") center / contain
-          no-repeat;
       }
 
       .page-footer {

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Три новогодних адвент-календаря для уютного декабря"
+    />
+    <title>Адвенты — уютный декабрь</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap"
+    />
+    <link rel="stylesheet" href="main-page.css" />
+  </head>
+  <body class="is-loading">
+    <a class="skip-link" href="#calendar-list">Перейти к календарям</a>
+    <div class="app-shell">
+      <div id="loading-screen" class="loading-screen" role="status" aria-live="polite" aria-label="Загружаем календари">
+        <span class="loading-spinner" aria-hidden="true"></span>
+        <p class="loading-label">Загружаем календари…</p>
+      </div>
+      <main id="selection-page" class="page" aria-labelledby="page-title">
+        <header class="site-header">
+          <div class="header-main">
+            <img class="header-heart" src="img/main-page/left-heart.webp" alt="" width="192" height="108" />
+            <h1 id="page-title" class="site-title">Адвенты</h1>
+            <img class="header-heart" src="img/main-page/right-heart.webp" alt="" width="192" height="108" />
+          </div>
+          <p class="site-subtitle">Три календаря, один уютный декабрь</p>
+        </header>
+
+        <ul id="calendar-list" class="calendar-list" aria-label="Адвент-календари"></ul>
+
+        <div class="bottom-illustration" aria-hidden="true">
+          <img
+            src="img/main-page/love-is-image.webp"
+            alt=""
+            width="1023"
+            height="385"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </main>
+
+      <main id="calendar-page" class="page detail-page" hidden aria-labelledby="detail-title">
+        <div class="detail-header">
+          <a class="back-link" href="#" aria-label="Вернуться к выбору календаря">‹</a>
+          <h1 id="detail-title" class="detail-title"></h1>
+        </div>
+        <p id="detail-summary" class="detail-summary"></p>
+        <p id="detail-status" class="detail-status" aria-live="polite"></p>
+        <div id="day-grid" class="day-grid" aria-label="Дни календаря"></div>
+        <p id="detail-note" class="detail-note"></p>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" data-visible="false"></div>
+    <script src="main-page.js"></script>
+  </body>
+</html>
