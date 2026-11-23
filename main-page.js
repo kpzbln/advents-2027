@@ -1,6 +1,14 @@
 const TOTAL_DAYS = 24;
       const storagePrefix = "advent-opened-";
       const loadingScreen = document.querySelector("#loading-screen");
+      const entryAnimationStorageKey = "advents-main-entry-animation-played-v1";
+      let entryAnimationPlayed = false;
+      try {
+        entryAnimationPlayed =
+          sessionStorage.getItem(entryAnimationStorageKey) === "true";
+      } catch {
+        // The animation still works when session storage is unavailable.
+      }
       const criticalAssets = [
         "img/main-page/left-heart.webp",
         "img/main-page/right-heart.webp",
@@ -103,6 +111,15 @@ const TOTAL_DAYS = 24;
       }
 
       function playEntryAnimation() {
+        if (entryAnimationPlayed) {
+          return;
+        }
+        entryAnimationPlayed = true;
+        try {
+          sessionStorage.setItem(entryAnimationStorageKey, "true");
+        } catch {
+          // The in-memory flag still prevents repeated animation in this page.
+        }
         const targets = entryTargets();
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || typeof Element.prototype.animate !== "function") {
           return;
@@ -110,13 +127,13 @@ const TOTAL_DAYS = 24;
         targets.forEach((element, index) => {
           element.animate(
             [
-              { opacity: 0, transform: "translateY(8px)" },
-              { opacity: 1, transform: "translateY(0)" },
+              { opacity: 0, transform: "translateY(18px) scale(0.98)" },
+              { opacity: 1, transform: "translateY(0) scale(1)" },
             ],
             {
-              duration: 340,
-              delay: Math.min(index, 12) * 32,
-              easing: "cubic-bezier(0.22, 0.61, 0.36, 1)",
+              duration: 440,
+              delay: Math.min(index, 12) * 52,
+              easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
               fill: "both",
             },
           );
