@@ -110,13 +110,13 @@ const TOTAL_DAYS = 24;
         targets.forEach((element, index) => {
           element.animate(
             [
-              { opacity: 0, transform: "translateY(18px) scale(0.98)" },
-              { opacity: 1, transform: "translateY(0) scale(1)" },
+              { opacity: 0, transform: "translateY(8px)" },
+              { opacity: 1, transform: "translateY(0)" },
             ],
             {
-              duration: 440,
-              delay: Math.min(index, 12) * 52,
-              easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+              duration: 340,
+              delay: Math.min(index, 12) * 32,
+              easing: "cubic-bezier(0.22, 0.61, 0.36, 1)",
               fill: "both",
             },
           );

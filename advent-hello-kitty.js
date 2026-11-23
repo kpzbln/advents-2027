@@ -2,6 +2,39 @@ const pageSnow = document.querySelector(".page-snow");
       const pageLoader = document.querySelector(".page-loader");
       let pageLoadingFinished = false;
 
+      function playPageEntryAnimation() {
+        const targets = [
+          document.querySelector(".calendar-home-link-wrap"),
+          document.querySelector(".hello-kitty-logo"),
+          document.querySelector(".calendar-progress"),
+          document.querySelector(".calendar-info"),
+          document.querySelector(".calendar-board"),
+          document.querySelector(".page-footer"),
+        ].filter(Boolean);
+
+        if (
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          typeof Element.prototype.animate !== "function"
+        ) {
+          return;
+        }
+
+        targets.forEach((element, index) => {
+          element.animate(
+            [
+              { opacity: 0, transform: "translateY(8px)" },
+              { opacity: 1, transform: "translateY(0)" },
+            ],
+            {
+              duration: 340,
+              delay: index * 32,
+              easing: "cubic-bezier(0.22, 0.61, 0.36, 1)",
+              fill: "both",
+            },
+          );
+        });
+      }
+
       const pageAssetUrls = [
         "img/advent-hello-kitty/hello-kitty-logo.webp",
         "img/advent-hello-kitty/calendar-progress.webp",
@@ -41,6 +74,7 @@ const pageSnow = document.querySelector(".page-snow");
         pageLoadingFinished = true;
         pageLoader.classList.add("is-hidden");
         document.body.classList.remove("page-is-loading");
+        window.requestAnimationFrame(playPageEntryAnimation);
         window.setTimeout(() => pageLoader.remove(), 420);
       };
 
