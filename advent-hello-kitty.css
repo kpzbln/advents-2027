@@ -108,7 +108,7 @@
       .calendar-home-link-wrap {
         display: flex;
         width: 360px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         justify-content: flex-start;
       }
 
