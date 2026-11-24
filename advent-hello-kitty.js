@@ -329,6 +329,7 @@ const pageSnow = document.querySelector(".page-snow");
       const giftModalDescription = document.querySelector(
         ".gift-modal-description",
       );
+      const calendarHomeLink = document.querySelector(".calendar-home-link");
       const giftImagePlaceholder = document.querySelector(
         ".gift-image-placeholder",
       );
@@ -595,4 +596,30 @@ const pageSnow = document.querySelector(".page-snow");
       giftModalImageFrame.addEventListener("click", () => {
         giftResult.classList.remove("gift-result-enter");
         playGiftClickShine(giftModalImageFrame);
+      });
+
+      calendarHomeLink?.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        let cameFromMainPage = false;
+        try {
+          const referrerUrl = document.referrer
+            ? new URL(document.referrer)
+            : null;
+          cameFromMainPage = Boolean(
+            referrerUrl &&
+              referrerUrl.origin === window.location.origin &&
+              (referrerUrl.pathname.endsWith("/") ||
+                referrerUrl.pathname.endsWith("/index.html")),
+          );
+        } catch {
+          cameFromMainPage = false;
+        }
+
+        if (cameFromMainPage && window.history.length > 1) {
+          window.history.back();
+          return;
+        }
+
+        window.location.replace(calendarHomeLink.href);
       });
