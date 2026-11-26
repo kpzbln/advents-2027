@@ -25,7 +25,7 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
           id: "hello-kitty",
           name: "Hello Kitty & Friends",
           artClass: "calendar-art--hello-kitty",
-          note: "Все 24 дня уже доступны для открытия.",
+          note: "\u041a\u0430\u0436\u0434\u044b\u0439 \u0434\u0435\u043d\u044c \u0441 1 \u043f\u043e 24 \u0434\u0435\u043a\u0430\u0431\u0440\u044f \u043e\u0442\u043a\u0440\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u0432 06:00 \u043f\u043e \u043c\u0435\u0441\u0442\u043d\u043e\u043c\u0443 \u0432\u0440\u0435\u043c\u0435\u043d\u0438.",
         },
         {
           id: "payot",
@@ -51,8 +51,21 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
       const detailNote = document.querySelector("#detail-note");
       const toast = document.querySelector("#toast");
       let toastTimer;
+      let refreshTimer;
       let selectionMarkup = "";
       let detailSignature = "";
+
+      function scheduleRefresh() {
+        window.clearTimeout(refreshTimer);
+        const next = calendarState.nextUnlock("payot");
+        if (!next) return;
+        const delay = Math.max(next.getTime() - Date.now() + 50, 1000);
+        refreshTimer = window.setTimeout(() => {
+          calendarState.invalidate();
+          renderRoute();
+          scheduleRefresh();
+        }, delay);
+      }
 
       async function revealApp() {
         const fontPromises = document.fonts
@@ -220,6 +233,7 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
         saveOpenedDays(calendar, openedDays);
         renderDetail(calendar);
         renderSelection();
+        scheduleRefresh();
         showToast(`День ${day} открыт.`);
       }
 
@@ -260,29 +274,23 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
       window.addEventListener("pageshow", () => {
         calendarState.invalidate();
         renderRoute();
+        scheduleRefresh();
       });
       window.addEventListener("storage", (event) => {
         if (calendarState.isProgressKey(event.key)) {
           calendarState.invalidate();
           renderRoute();
+          scheduleRefresh();
         }
       });
       document.addEventListener("visibilitychange", () => {
         if (!document.hidden) {
           calendarState.invalidate();
           renderRoute();
+          scheduleRefresh();
         }
       });
-      window.setInterval(() => {
-        renderSelection();
-        if (window.location.hash.startsWith("#calendar/")) {
-          const id = window.location.hash.slice("#calendar/".length);
-          const calendar = getCalendar(id);
-          if (calendar) {
-            renderDetail(calendar);
-          }
-        }
-      }, 1000);
 
       renderRoute();
+      scheduleRefresh();
       revealApp();

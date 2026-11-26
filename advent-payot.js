@@ -36,155 +36,7 @@ const giftDialog = ModalDialog.create({
   initialFocus: giftModalClose,
 });
 
-const giftFiles = {
-  1: ["PAYOT_01_box_front_illustration.webp", "PAYOT_01_SOURCE_30ml_illustration.webp"],
-  2: ["PAYOT_02_box_front_illustration.webp", "PAYOT_02_NUE_GELEE_50ml_illustration.webp"],
-  3: ["PAYOT_03_box_front_illustration.webp", "PAYOT_03_ROSELIFT_5ml_illustration.webp"],
-  4: ["PAYOT_04_box_front_illustration.webp", "PAYOT_04_RITUEL_DOUCEUR_100ml_illustration.webp"],
-  5: ["PAYOT_05_box_front_illustration.webp", "PAYOT_05_NEO_SERUM_5ml_illustration.webp"],
-  6: ["PAYOT_06_box_front_illustration.webp", "PAYOT_06_PATE_GRISE_10ml_illustration.webp"],
-  7: ["PAYOT_07_box_front_illustration.webp", "PAYOT_07_NUE_LOTION_TONIQUE_20ml_illustration.webp"],
-  8: ["PAYOT_08_box_front_illustration.webp", "PAYOT_08_STICK_LEVRES_4g_illustration.webp"],
-  9: ["PAYOT_09_box_front_corrected_illustration.webp", "PAYOT_09_ESSENTIEL_SHAMPOO_25ml_illustration.webp"],
-  10: ["PAYOT_10_box_front_illustration.webp", "PAYOT_10_ESSENTIEL_CONDITIONER_25ml_illustration.webp"],
-  11: ["PAYOT_11_box_front_illustration.webp", "PAYOT_11_PATE_GRISE_MASK_15ml_illustration.webp"],
-  12: ["PAYOT_12_box_front_illustration.webp", "PAYOT_12_MY_PAYOT_CREME_VITAMINEE_15ml_illustration.webp"],
-  13: ["PAYOT_13_box_front_illustration.webp", "PAYOT_13_NUE_MASQUE_PEELING_INTENSE_4ml_illustration.webp"],
-  14: ["PAYOT_14_box_front_illustration.webp", "PAYOT_14_RITUEL_DOUCEUR_SCRUB_25ml_illustration.webp"],
-  15: ["PAYOT_15_box_front_illustration.webp", "PAYOT_15_SUPREME_EYE_5ml_illustration.webp"],
-  16: ["PAYOT_16_box_front_illustration.webp", "PAYOT_16_MY_PAYOT_CLEANSING_MASK_15ml_illustration.webp"],
-  17: ["PAYOT_17_box_front_illustration.webp", "PAYOT_17_PATE_GRISE_EMULSION_15ml_illustration.webp"],
-  18: ["PAYOT_18_box_front_illustration.webp", "PAYOT_18_RITUEL_DOUCEUR_HAND_CREAM_30ml_illustration.webp"],
-  19: ["PAYOT_19_box_front_illustration.webp", "PAYOT_19_MY_PAYOT_HUILE_BONNE_5ml_illustration.webp"],
-  20: ["PAYOT_20_box_front_illustration.webp", "PAYOT_20_SOURCE_MASQUE_15ml_illustration.webp"],
-  21: ["PAYOT_21_box_front_illustration.webp", "PAYOT_21_LISSE_SLEEPING_CREME_30ml_illustration.webp"],
-  22: ["PAYOT_22_box_front_illustration.webp", "PAYOT_22_NUE_EAU_MICELLAIRE_100ml_illustration.webp"],
-  23: ["PAYOT_23_box_front_illustration.webp", "PAYOT_23_PATE_GRISE_CLEANSING_GEL_50ml_illustration.webp"],
-  24: ["PAYOT_24_box_front_illustration.webp", "PAYOT_24_SOURCE_INFUSION_125ml_illustration.webp"],
-};
-
-const giftDetails = {
-  1: {
-    caption: "SOURCE — увлажняющий крем, 30 мл",
-    category: "Увлажнение",
-    description: "Адаптогенный увлажняющий крем PAYOT для ежедневного ухода.",
-  },
-  2: {
-    caption: "NUE — очищающий гель, 50 мл",
-    category: "Очищение",
-    description: "Мягкий очищающий гель для свежего и комфортного ухода за кожей.",
-  },
-  3: {
-    caption: "Roselift — уход для кожи, 5 мл",
-    category: "Уход за лицом",
-    description: "Мини-формат средства Roselift для ежедневного ухода PAYOT.",
-  },
-  4: {
-    caption: "RITUEL DOUCEUR — средство для ухода, 100 мл",
-    category: "Уход за телом",
-    description: "Нежное средство из линии RITUEL DOUCEUR для мягкого ухода.",
-  },
-  5: {
-    caption: "NEO-SERUM — сыворотка, 5 мл",
-    category: "Сыворотка",
-    description: "Концентрированный мини-формат сыворотки PAYOT.",
-  },
-  6: {
-    caption: "PÂTE GRISE — локальный уход, 10 мл",
-    category: "Уход за проблемной кожей",
-    description: "Средство линии PÂTE GRISE для локального ухода за кожей.",
-  },
-  7: {
-    caption: "NUE — тонизирующий лосьон, 20 мл",
-    category: "Тонизирование",
-    description: "Освежающий лосьон NUE для завершения этапа очищения.",
-  },
-  8: {
-    caption: "Stick lèvres — бальзам для губ, 4 г",
-    category: "Уход за губами",
-    description: "Компактный бальзам PAYOT для ежедневного ухода за губами.",
-  },
-  9: {
-    caption: "ESSENTIEL — шампунь, 25 мл",
-    category: "Уход за волосами",
-    description: "Дорожный формат шампуня ESSENTIEL для мягкого очищения волос.",
-  },
-  10: {
-    caption: "ESSENTIEL — кондиционер, 25 мл",
-    category: "Уход за волосами",
-    description: "Дорожный формат кондиционера ESSENTIEL для ухода за волосами.",
-  },
-  11: {
-    caption: "PÂTE GRISE — маска, 15 мл",
-    category: "Маска",
-    description: "Маска PÂTE GRISE для ухода за кожей с несовершенствами.",
-  },
-  12: {
-    caption: "MY PAYOT — витаминный крем, 15 мл",
-    category: "Уход за лицом",
-    description: "Витаминный крем MY PAYOT для свежего и сияющего вида кожи.",
-  },
-  13: {
-    caption: "NUE — интенсивная пилинг-маска, 4 мл",
-    category: "Маска",
-    description: "Интенсивная пилинг-маска NUE в компактном формате.",
-  },
-  14: {
-    caption: "RITUEL DOUCEUR — скраб, 25 мл",
-    category: "Уход за телом",
-    description: "Мягкий скраб RITUEL DOUCEUR для гладкости кожи.",
-  },
-  15: {
-    caption: "SUPREME EYE — уход для глаз, 5 мл",
-    category: "Уход за зоной вокруг глаз",
-    description: "Мини-формат ухода SUPREME EYE для нежной зоны вокруг глаз.",
-  },
-  16: {
-    caption: "MY PAYOT — очищающая маска, 15 мл",
-    category: "Маска",
-    description: "Очищающая маска MY PAYOT для ухода за кожей лица.",
-  },
-  17: {
-    caption: "PÂTE GRISE — эмульсия, 15 мл",
-    category: "Уход за проблемной кожей",
-    description: "Эмульсия PÂTE GRISE для ежедневного ухода за кожей.",
-  },
-  18: {
-    caption: "RITUEL DOUCEUR — крем для рук, 30 мл",
-    category: "Уход за руками",
-    description: "Питательный крем RITUEL DOUCEUR для мягкости кожи рук.",
-  },
-  19: {
-    caption: "MY PAYOT — масло для сияния кожи, 5 мл",
-    category: "Масло",
-    description: "Мини-формат масла MY PAYOT для ухоженного и сияющего вида кожи.",
-  },
-  20: {
-    caption: "SOURCE — маска, 15 мл",
-    category: "Маска",
-    description: "Увлажняющая маска SOURCE для ухода за кожей лица.",
-  },
-  21: {
-    caption: "LISSE — ночной крем, 30 мл",
-    category: "Ночной уход",
-    description: "Ночной крем LISSE для вечернего ухода за кожей.",
-  },
-  22: {
-    caption: "NUE — мицеллярная вода, 100 мл",
-    category: "Очищение",
-    description: "Мицеллярная вода NUE для бережного удаления макияжа и загрязнений.",
-  },
-  23: {
-    caption: "PÂTE GRISE — очищающий гель, 50 мл",
-    category: "Очищение",
-    description: "Очищающий гель PÂTE GRISE для ежедневного ухода за кожей.",
-  },
-  24: {
-    caption: "SOURCE — маска-инфузия, 125 мл",
-    category: "Увлажнение",
-    description: "Увлажняющее средство SOURCE для насыщенного ухода за кожей.",
-  },
-};
+const { giftFiles, giftDetails } = globalThis.AdventCalendarData.payot;
 
 const gifts = Array.from({ length: TOTAL_DAYS }, (_, index) => {
   const day = index + 1;
@@ -465,6 +317,19 @@ if (focusGift) {
 updateProgress();
 
 let refreshSignature = "";
+let refreshTimer;
+
+function scheduleRefresh() {
+  window.clearTimeout(refreshTimer);
+  const next = calendarState.nextUnlock("payot", openedDays, new Date());
+  if (!next) return;
+  const delay = Math.max(next.getTime() - Date.now() + 50, 1000);
+  refreshTimer = window.setTimeout(() => {
+    refreshCalendar();
+    scheduleRefresh();
+  }, delay);
+}
+
 const refreshCalendar = () => {
   calendarState.invalidate();
   openedDays = loadOpenedDays();
@@ -483,12 +348,21 @@ const refreshCalendar = () => {
 };
 
 window.addEventListener("storage", (event) => {
-  if (calendarState.isProgressKey(event.key)) refreshCalendar();
+  if (calendarState.isProgressKey(event.key)) {
+    refreshCalendar();
+    scheduleRefresh();
+  }
 });
-window.addEventListener("pageshow", refreshCalendar);
+window.addEventListener("pageshow", () => {
+  refreshCalendar();
+  scheduleRefresh();
+});
 document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) refreshCalendar();
+  if (!document.hidden) {
+    refreshCalendar();
+    scheduleRefresh();
+  }
 });
-window.setInterval(refreshCalendar, 1000);
+scheduleRefresh();
 
 PageResources.ready(pageAssetUrls).then(finishLoading);

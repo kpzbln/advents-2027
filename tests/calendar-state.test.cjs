@@ -14,23 +14,19 @@ function calendar(storage = new Map(), blocked = false) {
   return context.AdventCalendar;
 }
 
-test("PAYOT migrates the latest test progress once and shares it between pages", () => {
-  const storage = new Map([
-    ["advent-opened-payot", JSON.stringify(Array.from({ length: 23 }, (_, i) => i + 1))],
-    ["advent-opened-payot-test-v2", '[1,2,3,4,"5",5,30]'],
-  ]);
+test("PAYOT starts empty and shares saved progress between pages", () => {
+  const storage = new Map();
   const detail = calendar(storage);
-  assert.deepEqual([...detail.loadOpenedDays("payot")], [1, 2, 3, 4, 5]);
-  assert.equal(storage.has("advent-opened-payot-test-v2"), false);
+  assert.deepEqual([...detail.loadOpenedDays("payot")], []);
   const landing = calendar(storage);
-  assert.deepEqual([...landing.loadOpenedDays("payot")], [1, 2, 3, 4, 5]);
+  assert.deepEqual([...landing.loadOpenedDays("payot")], []);
   detail.saveOpenedDays("payot", [1, 2, 3, 4, 5, 6]);
   landing.invalidate();
   assert.equal(landing.loadOpenedDays("payot").size, 6);
 });
 
-test("an intentionally empty migration value is preserved", () => {
-  const state = calendar(new Map([["advent-opened-payot-test-v2", "[]"]]));
+test("old PAYOT test progress is ignored", () => {
+  const state = calendar(new Map([["advent-opened-payot-test-v2", "[1,2,3,4]"]]));
   assert.equal(state.loadOpenedDays("payot").size, 0);
 });
 
@@ -51,7 +47,7 @@ test("PAYOT unlocks exactly at 06:00 and only during its December season", () =>
 });
 
 test("overdue gifts remain openable while future dates stay locked", () => {
-  const state = calendar();
+  const state = calendar(new Map([["advent-opened-payot", "[1,2,3,4]"]]));
   const now = new Date(2026, 11, 19, 6);
   const opened = state.loadOpenedDays("payot");
   assert.equal(opened.size, 4);
@@ -76,10 +72,13 @@ test("storage errors retain progress across refreshes during the session", () =>
   assert.equal(state.loadOpenedDays("payot").size, 5);
 });
 
-test("Hello Kitty keeps all days available and reads either legacy progress format", () => {
-  const state = calendar(new Map([["advent-opened-hello-kitty", '["1","2"]']]));
+test("Hello Kitty starts empty and follows the daily December schedule", () => {
+  const state = calendar();
   const opened = state.loadOpenedDays("hello-kitty");
-  assert.equal(opened.size, 2);
-  assert.equal(state.isDayAvailable("hello-kitty", 24, opened, new Date(2026, 10, 26)), true);
-  assert.equal(state.nextUnlock("hello-kitty", opened), null);
+  assert.equal(opened.size, 0);
+  assert.equal(state.isDayAvailable("hello-kitty", 1, opened, new Date(2026, 11, 1, 5, 59, 59)), false);
+  assert.equal(state.isDayAvailable("hello-kitty", 1, opened, new Date(2026, 11, 1, 6)), true);
+  assert.equal(state.isDayAvailable("hello-kitty", 2, opened, new Date(2026, 11, 1, 6)), false);
+  assert.equal(state.nextUnlock("hello-kitty", opened, new Date(2026, 11, 1, 6)).getDate(), 2);
+  assert.equal(state.nextUnlock("hello-kitty", opened, new Date(2026, 11, 1, 6)).getHours(), 6);
 });

@@ -5,18 +5,17 @@
   const configs = {
     "hello-kitty": {
       storageKey: "hello-kitty-opened-gifts",
-      legacyKeys: ["advent-opened-hello-kitty"],
-      schedule: "all",
+      schedule: "daily",
+      year: SEASON_YEAR,
+      unlockHour: 6,
       initialOpened: [],
     },
     payot: {
       storageKey: "advent-opened-payot",
-      // The latest PAYOT test progress takes precedence over the old 23-day seed.
-      migrationKey: "advent-opened-payot-test-v2",
       schedule: "daily",
       year: SEASON_YEAR,
       unlockHour: 6,
-      initialOpened: [1, 2, 3, 4],
+      initialOpened: [],
     },
     "kinder-mix": {
       storageKey: "advent-opened-kinder-mix",
@@ -128,7 +127,9 @@
 
   function isProgressKey(key) {
     return key === null || Object.values(configs).some((config) =>
-      [config.storageKey, config.migrationKey, ...(config.legacyKeys || [])].includes(key));
+      [config.storageKey, config.migrationKey, ...(config.legacyKeys || [])]
+        .filter(Boolean)
+        .includes(key));
   }
 
   globalThis.AdventCalendar = Object.freeze({

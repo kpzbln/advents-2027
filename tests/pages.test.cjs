@@ -72,20 +72,22 @@ function page(script, storage, initialTime) {
     },
     window: {
       location: { hash: "", origin: "https://example.test", replace() {} },
-      history: { length: 1 }, setTimeout, clearTimeout,
+      history: { length: 1 },
+      setTimeout: (fn) => { intervals.push(fn); return intervals.length; },
+      clearTimeout: () => {},
       setInterval: (fn) => intervals.push(fn),
       addEventListener: (type, fn) => { events[type] = fn; },
       requestAnimationFrame: (fn) => fn(), matchMedia: () => ({ matches: true }),
     },
   });
-  for (const file of ["calendar-state.js", "page-resources.js", "modal-dialog.js", script]) {
+  for (const file of ["calendar-state.js", "calendar-data.js", "page-resources.js", "modal-dialog.js", script]) {
     vm.runInContext(fs.readFileSync(file, "utf8"), context, { filename: file });
   }
   return { context, elements, events, now, intervals };
 }
 
 test("opening a PAYOT gift updates the same progress on the landing page and in preview", () => {
-  const storage = new Map([["advent-opened-payot-test-v2", "[1,2,3,4]"]]);
+  const storage = new Map([["advent-opened-payot", "[1,2,3,4]"]]);
   const time = new Date(2026, 11, 5, 6);
   const landing = page("main-page.js", storage, time);
   const payot = page("advent-payot.js", storage, time);

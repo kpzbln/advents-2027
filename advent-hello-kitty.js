@@ -118,178 +118,9 @@ const pageSnow = document.querySelector(".page-snow");
 
       createPageSnow();
 
-      const gifts = {
-        1: {
-          caption: "Hello Kitty в праздничном костюме",
-          category: "Фигурка",
-          description: "Hello Kitty в красной шапочке и шарфе для зимней коллекции.",
-          image: "img/advent-hello-kitty/gifts/01.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/01.webp",
-        },
-        2: {
-          caption: "Lala в зимней шапочке",
-          category: "Фигурка",
-          description: "Нежная Lala в розовом праздничном образе из серии Hello Kitty & Friends.",
-          image: "img/advent-hello-kitty/gifts/02.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/02.webp",
-        },
-        3: {
-          caption: "Подставка Bitty Pop! для демонстрации",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/03.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/03.webp",
-        },
-        4: {
-          caption: "Kiki в зимней шапочке",
-          category: "Фигурка",
-          description: "Kiki в голубой зимней шапочке и тёплом праздничном образе.",
-          image: "img/advent-hello-kitty/gifts/04.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/04.webp",
-        },
-        5: {
-          caption: "Праздничная ёлочка",
-          category: "Аксессуар",
-          description: "Золотистая ёлочка на подставке для зимней витрины.",
-          image: "img/advent-hello-kitty/gifts/05.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/05.webp",
-        },
-        6: {
-          caption: "Подставка Bitty Pop! для демонстрации",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/06.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/06.webp",
-        },
-        7: {
-          caption: "Tuxedo Sam в зимнем образе",
-          category: "Фигурка",
-          description: "Забавный Tuxedo Sam в зимнем костюме и цилиндре.",
-          image: "img/advent-hello-kitty/gifts/07.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/07.webp",
-        },
-        8: {
-          caption: "Двойная красная подставка Bitty Pop!",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации двух фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/08.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/08.webp",
-        },
-        9: {
-          caption: "Подарочная коробка с бантом",
-          category: "Аксессуар",
-          description: "Праздничная коробочка для зимней композиции календаря.",
-          image: "img/advent-hello-kitty/gifts/09.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/09.webp",
-        },
-        10: {
-          caption: "Красный элемент подставки Bitty Pop!",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/10.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/10.webp",
-        },
-        11: {
-          caption: "Chococat в праздничном костюме",
-          category: "Фигурка",
-          description: "Chococat в зелёном праздничном костюме и зимней шапочке.",
-          image: "img/advent-hello-kitty/gifts/11.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/11.webp",
-        },
-        12: {
-          caption: "Подставка Bitty Pop! для демонстрации",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/12.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/12.webp",
-        },
-        13: {
-          caption: "My Melody в зимнем образе",
-          category: "Фигурка",
-          description: "My Melody в тёплой шапочке и праздничной зимней одежде.",
-          image: "img/advent-hello-kitty/gifts/13.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/13.webp",
-        },
-        14: {
-          caption: "Голубой футляр для брелка",
-          category: "Футляр",
-          description: "Голубой футляр с Hello Kitty для хранения брелка.",
-          image: "img/advent-hello-kitty/gifts/14.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/14.webp",
-        },
-        15: {
-          caption: "Красный элемент подставки Bitty Pop!",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/15.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/15.webp",
-        },
-        16: {
-          caption: "Pochacco в костюме ёлочки",
-          category: "Фигурка",
-          description: "Pochacco в зелёном костюме ёлочки с праздничной звездой.",
-          image: "img/advent-hello-kitty/gifts/16.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/16.webp",
-        },
-        17: {
-          caption: "Pompompurin в оленьих рожках",
-          category: "Фигурка",
-          description: "Pompompurin в праздничном образе с оленьими рожками.",
-          image: "img/advent-hello-kitty/gifts/17.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/17.webp",
-        },
-        18: {
-          caption: "Подставка Bitty Pop! для демонстрации",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/18.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/18.webp",
-        },
-        19: {
-          caption: "Голубой футляр для брелка",
-          category: "Футляр",
-          description: "Голубой футляр с Hello Kitty для хранения брелка.",
-          image: "img/advent-hello-kitty/gifts/19.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/19.webp",
-        },
-        20: {
-          caption: "Подставка Bitty Pop! для демонстрации",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/20.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/20.webp",
-        },
-        21: {
-          caption: "Kuromi в костюме оленёнка",
-          category: "Фигурка",
-          description: "Kuromi в тёплом праздничном костюме маленького оленёнка.",
-          image: "img/advent-hello-kitty/gifts/21.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/21.webp",
-        },
-        22: {
-          caption: "Подарок с зимним бантом",
-          category: "Аксессуар",
-          description: "Розовая подарочная коробка со снежинками и праздничным бантом.",
-          image: "img/advent-hello-kitty/gifts/22.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/22.webp",
-        },
-        23: {
-          caption: "Красная треугольная подставка",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/23.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/23.webp",
-        },
-        24: {
-          caption: "Hello Kitty в зимнем образе",
-          category: "Фигурка",
-          description: "Hello Kitty в праздничной шапочке и зимнем наряде.",
-          image: "img/advent-hello-kitty/gifts/24.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/24.webp",
-        },
-      };
+      const gifts = globalThis.AdventCalendarData.helloKitty;
 
-      const progressText = document.querySelector(".calendar-progress-text");
+const progressText = document.querySelector(".calendar-progress-text");
       let giftDoors = [...document.querySelectorAll("[data-day]")];
       const giftModal = document.querySelector(".gift-modal");
       const giftModalContent = document.querySelector(".gift-modal-content");
@@ -327,10 +158,11 @@ const pageSnow = document.querySelector(".page-snow");
         [...calendarState.loadOpenedDays("hello-kitty")].map(String),
       );
 
-      const openedGiftDays = loadOpenedGiftDays();
+      let openedGiftDays = loadOpenedGiftDays();
       let activeDoor = null;
       let activeGift = null;
       let imageFallbackAttempted = false;
+      let refreshTimer;
 
       const dateLabel = (day) => `${day} декабря`;
 
@@ -342,6 +174,14 @@ const pageSnow = document.querySelector(".page-snow");
       const saveOpenedGiftDays = () => {
         calendarState.saveOpenedDays("hello-kitty", openedGiftDays);
       };
+
+      const isGiftAvailable = (day, now = new Date()) =>
+        calendarState.isDayAvailable(
+          "hello-kitty",
+          Number(day),
+          new Set([...openedGiftDays].map(Number)),
+          now,
+        );
 
       const updateCalendarMeta = () => {
         const now = new Date();
@@ -373,6 +213,8 @@ const pageSnow = document.querySelector(".page-snow");
         const day = door.dataset.day;
         door.classList.remove("calendar-door-locked");
         door.classList.add("calendar-door-available");
+        door.disabled = false;
+        door.removeAttribute("aria-disabled");
         const shineDelay = ((Number(day) * 0.37) % 5).toFixed(2);
         door.style.setProperty("--shine-delay", `-${shineDelay}s`);
         if (door.tagName === "BUTTON") {
@@ -384,6 +226,21 @@ const pageSnow = document.querySelector(".page-snow");
         }
         door.setAttribute("aria-haspopup", "dialog");
         door.setAttribute("aria-label", `Открыть подарок за ${dateLabel(day)}`);
+      };
+
+      const setDoorLocked = (door, now = new Date()) => {
+        const day = Number(door.dataset.day);
+        door.classList.remove("calendar-door-available", "calendar-door-opened");
+        door.classList.add("calendar-door-locked");
+        door.disabled = true;
+        door.setAttribute("aria-disabled", "true");
+        door.removeAttribute("aria-haspopup");
+        door.removeAttribute("role");
+        door.removeAttribute("tabindex");
+        door.setAttribute(
+          "aria-label",
+          `\u041f\u043e\u0434\u0430\u0440\u043e\u043a \u043f\u043e\u043a\u0430 \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u0435\u043d \u0437\u0430 ${dateLabel(day)}, ${calendarState.unlockLabel(calendarState.unlockDate("hello-kitty", day), now).toLowerCase()}`,
+        );
       };
 
       giftDoors = giftDoors.map((door) =>
@@ -401,7 +258,10 @@ const pageSnow = document.querySelector(".page-snow");
 
       const markDoorOpened = (door, gift) => {
         door.classList.remove("calendar-door-available");
+        door.classList.remove("calendar-door-locked");
         door.classList.add("calendar-door-opened");
+        door.disabled = false;
+        door.removeAttribute("aria-disabled");
         door.setAttribute(
           "aria-label",
           `Открытый подарок за ${dateLabel(door.dataset.day)}. Открыть снова`,
@@ -409,18 +269,49 @@ const pageSnow = document.querySelector(".page-snow");
         setGiftVisual(door, gift);
       };
 
-      giftDoors.forEach((door) => {
-        if (gifts[door.dataset.day]) {
-          setDoorAvailable(door);
-        }
-      });
+      const refreshDoors = (now = new Date()) => {
+        giftDoors.forEach((door) => {
+          const gift = gifts[door.dataset.day];
+          if (!gift) return;
+          const day = door.dataset.day;
+          if (openedGiftDays.has(day)) {
+            if (!door.classList.contains("calendar-door-opened")) {
+              markDoorOpened(door, gift);
+            }
+          } else if (isGiftAvailable(day, now)) {
+            setDoorAvailable(door);
+          } else {
+            setDoorLocked(door, now);
+          }
+        });
+      };
 
-      giftDoors.forEach((door) => {
-        const gift = gifts[door.dataset.day];
-        if (gift && openedGiftDays.has(door.dataset.day)) {
-          markDoorOpened(door, gift);
-        }
-      });
+      refreshDoors();
+
+      function scheduleRefresh() {
+        window.clearTimeout(refreshTimer);
+        const next = calendarState.nextUnlock(
+          "hello-kitty",
+          new Set([...openedGiftDays].map(Number)),
+          new Date(),
+        );
+        if (!next) return;
+        const delay = Math.max(next.getTime() - Date.now() + 50, 1000);
+        refreshTimer = window.setTimeout(() => {
+          refreshCalendar();
+          scheduleRefresh();
+        }, delay);
+      }
+
+      function refreshCalendar() {
+        calendarState.invalidate();
+        openedGiftDays = loadOpenedGiftDays();
+        const now = new Date();
+        refreshDoors(now);
+        updateProgress();
+        updateCalendarMeta();
+        scheduleRefresh();
+      }
 
       updateProgress();
       updateCalendarMeta();
@@ -500,6 +391,9 @@ const pageSnow = document.querySelector(".page-snow");
       };
 
       const openGiftModal = (view, door) => {
+        if (!isGiftAvailable(door.dataset.day)) {
+          return;
+        }
         activeDoor = door;
         activeGift = gifts[door.dataset.day];
         if (view === "confirmation") {
@@ -540,7 +434,7 @@ const pageSnow = document.querySelector(".page-snow");
 
       const handleGiftActivation = (door) => {
         const day = door.dataset.day;
-        if (!gifts[day]) {
+        if (!gifts[day] || !isGiftAvailable(day)) {
           return;
         }
 
@@ -556,6 +450,16 @@ const pageSnow = document.querySelector(".page-snow");
             handleGiftActivation(door);
           }
         });
+      });
+
+      window.addEventListener("storage", (event) => {
+        if (calendarState.isProgressKey(event.key)) {
+          refreshCalendar();
+        }
+      });
+      window.addEventListener("pageshow", refreshCalendar);
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) refreshCalendar();
       });
 
       giftModalConfirm.addEventListener("click", revealGift);
@@ -606,3 +510,5 @@ const pageSnow = document.querySelector(".page-snow");
 
         window.location.replace(calendarHomeLink.href);
       });
+
+      scheduleRefresh();

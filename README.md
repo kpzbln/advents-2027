@@ -3,18 +3,33 @@
 Static HTML/CSS/JavaScript site. Serve the repository over HTTP(S); service workers
 do not run when opening HTML through `file://`.
 
+## Development
+
+The repository includes a local Node.js runtime in `.tools`, but that folder is
+ignored by Git. In PowerShell, from the project root, add it to `PATH` once per
+terminal session:
+
+```powershell
+$nodeDir = Join-Path (Get-Location) ".tools\node-v22.23.5-win-x64"
+$env:Path = "$nodeDir;$env:Path"
+```
+
+Then run `npm start` to serve the site at `http://localhost:4173/`, or run
+`npm run check` to validate JavaScript, manifest and offline assets before the
+test suite. If `.tools\node-v22.23.5-win-x64` is missing, install Node.js 22 LTS
+and reopen the terminal.
+
 ## Progress and dates
 
 `calendar-state.js` is the shared source for progress, available days, labels and
 preview selection. PAYOT uses December **2026**, with each day opening at **06:00
 in the visitor's local time**. Change `SEASON_YEAR` there for a different season.
-Hello Kitty intentionally keeps all 24 gifts available, and Kinder Mix keeps its
-existing completed state.
+Hello Kitty follows the same daily December schedule as PAYOT, and Kinder Mix
+keeps its existing completed state.
 
-Existing PAYOT test progress is migrated once from `advent-opened-payot-test-v2`
-to `advent-opened-payot`. Without a saved value, days 1–4 remain the initial opened
-gifts. Opening dates apply to the other days; an already opened gift can always
-be viewed again. Progress is local to the browser and is not an account sync.
+PAYOT starts with no opened gifts for a new browser. Opening dates apply to each
+day; an already opened gift can always be viewed again. Progress is local to the
+browser and is not an account sync.
 
 ## Images and offline support
 
@@ -22,7 +37,8 @@ The site uses WebP assets. Original PAYOT PNGs are preserved locally in
 `.tools/original-images/advent-payot/` (ignored by Git), and remain recoverable
 from earlier Git commits.
 
-After replacing/adding source PAYOT PNGs, run `npm run optimize:images`. It keeps
+Gift descriptions and image mappings live in `calendar-data.js`; page scripts only
+contain rendering and interaction logic. After replacing/adding source PAYOT PNGs, run `npm run optimize:images`. It keeps
 matching box/product proportions, archives the PNGs, and regenerates
 `offline-assets.js`. The image manifest includes every deployed image so a
 successful first service-worker installation supports all gifts offline.
@@ -38,7 +54,7 @@ closing, returning focus to the trigger, and preserving background `inert` state
 
 ## Checks
 
-Run `npm test` for date boundaries, saved-progress migration and page integration,
+Run `npm test` for date boundaries, saved progress and page integration,
 resource timeouts, and offline/service-worker behavior. These tests use Node's
 built-in test runner and simulated DOM/cache APIs; browser visual checks are
 separate.

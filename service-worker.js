@@ -8,6 +8,7 @@ const APP_SHELL = [
   "./main-page.css",
   "./main-page.js",
   "./calendar-state.js",
+  "./calendar-data.js",
   "./page-resources.js",
   "./modal-dialog.js",
   "./pwa.js",
