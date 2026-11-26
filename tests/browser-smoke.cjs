@@ -80,6 +80,11 @@ if (!browserPath) {
     await page.goto(`${baseUrl}/index.html`, { waitUntil: "domcontentloaded" });
     await page.locator("#calendar-list").waitFor();
     assert.equal(await page.title(), "Адвенты — уютный декабрь");
+    assert.ok(
+      ["flex", "inline-flex"].includes(
+        await page.locator('[data-calendar-id="payot"] .calendar-status-icon').evaluate((element) => getComputedStyle(element).display),
+      ),
+    );
     const kinder = page.locator('[data-calendar-id="kinder-mix"]');
     assert.equal(await kinder.evaluate((element) => element.tagName), "DIV");
     assert.equal(await kinder.getAttribute("aria-disabled"), "true");

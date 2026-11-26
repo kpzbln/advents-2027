@@ -67,17 +67,18 @@ button {
 .page-loader-spinner {
   width: 36px;
   height: 36px;
-  border: 3px solid rgb(28 35 68 / 18%);
-  border-top-color: var(--payot-navy);
+  border: 3px solid rgb(247 241 229 / 28%);
+  border-top-color: var(--payot-gold);
   border-radius: 50%;
   animation: loader-spin 900ms linear infinite;
 }
 
 .page-loader-label {
   margin: 0;
-  color: var(--payot-navy);
+  color: var(--payot-cream);
   font-size: 14px;
   font-weight: 800;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 35%);
 }
 
 .payot-page {
