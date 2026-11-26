@@ -19,7 +19,7 @@ html {
   min-height: 100%;
   overflow-x: clip;
   background:
-    linear-gradient(180deg, #2c2e4a 0%, #20213a 52%, #171827 100%);
+    linear-gradient(180deg, #2c2e4a 0%, #20213a 52%, #171827 100%) #2c2e4a;
   overscroll-behavior: none;
 }
 

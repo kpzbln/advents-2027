@@ -8,7 +8,7 @@
         overflow-x: clip;
         overscroll-behavior: none;
         background:
-          linear-gradient(180deg, #dff3ff 0%, #c6e3f8 52%, #afd5ed 100%);
+          linear-gradient(180deg, #dff3ff 0%, #c6e3f8 52%, #afd5ed 100%) #dff3ff;
       }
 
       body {

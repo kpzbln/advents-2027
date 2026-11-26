@@ -9,8 +9,8 @@
   "display": "standalone",
   "display_override": ["standalone"],
   "orientation": "portrait",
-  "theme_color": "#8fcbed",
-  "background_color": "#eaf6ff",
+  "theme_color": "#fff0d2",
+  "background_color": "#fff0d2",
   "icons": [
     {
       "src": "img/pwa/icon-192.webp",

@@ -1,7 +1,7 @@
 importScripts("./offline-assets.js");
 
 const CACHE_PREFIX = "advents-";
-const CACHE_NAME = "advents-2027-v20";
+const CACHE_NAME = "advents-2027-v21";
 const APP_SHELL = [
   "./",
   "./index.html",
