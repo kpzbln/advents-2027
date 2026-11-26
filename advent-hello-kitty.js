@@ -113,21 +113,29 @@ const pageSnow = document.querySelector(".page-snow");
       };
 
       const createPageSnow = () => {
-        if (
-          !pageSnow ||
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ) {
+        if (!pageSnow) {
           return;
         }
 
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
         const flakeCount = window.innerWidth < 600 ? 24 : 36;
         for (let index = 0; index < flakeCount; index += 1) {
           const flake = document.createElement("span");
           flake.className = "page-snowflake";
           randomizeSnowflake(flake, true);
-          flake.addEventListener("animationiteration", () => {
-            randomizeSnowflake(flake);
-          });
+          if (prefersReducedMotion) {
+            flake.classList.add("page-snowflake--static");
+            flake.style.setProperty(
+              "--static-top",
+              `${randomBetween(4, 96).toFixed(1)}vh`,
+            );
+          } else {
+            flake.addEventListener("animationiteration", () => {
+              randomizeSnowflake(flake);
+            });
+          }
           pageSnow.append(flake);
         }
       };
@@ -313,6 +321,9 @@ const pageSnow = document.querySelector(".page-snow");
       const giftModalTitle = document.querySelector(".gift-modal-title");
       const giftModalMessage = document.querySelector(".gift-modal-message");
       const giftConfirmation = document.querySelector(".gift-confirmation");
+      const giftConfirmationPreview = document.querySelector(
+        ".gift-confirmation-preview",
+      );
       const giftResult = document.querySelector(".gift-result");
       const giftModalConfirm = document.querySelector(".gift-modal-confirm");
       const giftModalCancel = document.querySelector(".gift-modal-cancel");
@@ -458,6 +469,25 @@ const pageSnow = document.querySelector(".page-snow");
         giftModalImageSource.srcset = gift.imageWebp;
       };
 
+      const updateConfirmationPreview = (door) => {
+        if (!giftConfirmationPreview || !door) {
+          return;
+        }
+
+        const day = door.dataset.day;
+        const boxClass = door.querySelector(".gift-box-green")
+          ? "gift-box-green"
+          : "gift-box-red";
+        const box = document.createElement("div");
+        const dayNumber = document.createElement("div");
+
+        box.className = `gift-confirmation-gift-box ${boxClass}`;
+        dayNumber.className = "day-number";
+        dayNumber.textContent = day;
+        box.append(dayNumber);
+        giftConfirmationPreview.replaceChildren(box);
+      };
+
       const closeGiftModal = () => {
         giftModal.classList.remove("is-open");
         giftModal.setAttribute("aria-hidden", "true");
@@ -468,6 +498,7 @@ const pageSnow = document.querySelector(".page-snow");
       };
 
       const showConfirmation = () => {
+        updateConfirmationPreview(activeDoor);
         giftConfirmation.hidden = false;
         giftResult.hidden = true;
         giftResult.classList.remove("gift-result-enter");

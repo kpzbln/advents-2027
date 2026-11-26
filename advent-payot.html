@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#20213a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="PAYOT" />
+    <meta
+      name="description"
+      content="Адвент-календарь PAYOT — уютный декабрь с ежедневными открытиями"
+    />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="img/pwa/icon-192.webp" type="image/webp" />
+    <link rel="apple-touch-icon" href="img/pwa/icon-192.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Source+Serif+4:wght@900&display=swap"
+    />
+    <link rel="stylesheet" href="advent-payot.css" />
+    <title>PAYOT — Адвенты</title>
+  </head>
+
+  <body class="page-is-loading">
+    <div
+      class="page-loader"
+      role="status"
+      aria-live="polite"
+      aria-label="Загружаем календарь PAYOT"
+    >
+      <div class="page-loader-spinner" aria-hidden="true"></div>
+      <p class="page-loader-label">Загружаем календарь…</p>
+    </div>
+    <noscript>
+      <style>
+        .page-loader {
+          display: none;
+        }
+        body.page-is-loading {
+          overflow: auto;
+        }
+      </style>
+    </noscript>
+
+    <main class="payot-page">
+      <div class="top-blur-spacer" aria-hidden="true"></div>
+      <div class="calendar-home-link-wrap">
+        <a class="calendar-home-link" href="index.html">← Все календари</a>
+      </div>
+
+      <section class="calendar-intro" aria-labelledby="payot-title">
+        <h1 id="payot-title" class="visually-hidden">PAYOT</h1>
+        <div class="calendar-progress" aria-live="polite">
+          <span class="calendar-progress-text">Открыто 23 из 24</span>
+        </div>
+      </section>
+
+      <section class="advent-calendar" aria-labelledby="calendar-title">
+        <h2 id="calendar-title" class="visually-hidden">
+          Адвент-календарь PAYOT
+        </h2>
+        <div class="calendar-info">
+          <div class="current-date" aria-label="Текущая дата">
+            <div class="current-date-container">
+              <span id="current-date-text" class="current-date-text"
+                >24 декабря</span
+              >
+            </div>
+          </div>
+          <div class="next-unlock" aria-label="Следующее открытие">
+            <div class="next-unlock-container">
+              <span id="next-unlock-text" class="next-unlock-text"
+                >Завтра в 06:00</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <section
+          id="payot-focus-panel"
+          class="payot-focus-panel"
+          aria-labelledby="payot-focus-title"
+          aria-live="polite"
+        >
+          <div class="payot-focus-copy">
+            <p id="payot-focus-kicker" class="payot-focus-kicker">
+              Ближайшее доступное средство
+            </p>
+            <h3 id="payot-focus-title" class="payot-focus-title">
+              Средство за 5 декабря
+            </h3>
+            <p id="payot-focus-status" class="payot-focus-status">
+              Не открыто · день 5
+            </p>
+          </div>
+          <div class="payot-focus-visual" aria-hidden="true">
+            <div class="payot-focus-box-frame">
+              <img
+                id="payot-focus-box"
+                class="payot-focus-box"
+                alt=""
+                decoding="async"
+              />
+              <span id="payot-focus-number" class="payot-focus-number">5</span>
+            </div>
+            <div class="payot-focus-product-frame">
+              <img
+                id="payot-focus-product"
+                class="payot-focus-product"
+                alt=""
+                decoding="async"
+              />
+            </div>
+          </div>
+        </section>
+
+        <div class="calendar-board" aria-live="polite">
+          <div
+            id="payot-gift-grid"
+            class="payot-gift-grid"
+            aria-label="Подарки PAYOT"
+          ></div>
+        </div>
+      </section>
+
+      <div class="payot-gift-modal" role="presentation" aria-hidden="true">
+        <div
+          class="payot-gift-modal-content"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="payot-confirmation-title"
+        >
+          <button
+            class="payot-gift-modal-close"
+            type="button"
+            aria-label="Закрыть"
+          >
+            ×
+          </button>
+
+          <div class="payot-gift-confirmation">
+            <div class="payot-modal-box-frame" aria-hidden="true">
+              <img
+                id="payot-modal-box"
+                class="payot-modal-box"
+                alt=""
+                decoding="async"
+              />
+              <span id="payot-modal-number" class="payot-modal-number">24</span>
+            </div>
+            <h2 class="payot-gift-modal-title" id="payot-confirmation-title">
+              Открыть подарок?
+            </h2>
+            <p class="payot-gift-modal-message" id="payot-gift-modal-message">
+              Подарок уже ждёт тебя.
+            </p>
+            <div class="payot-gift-modal-actions">
+              <button
+                class="payot-gift-modal-action payot-gift-modal-cancel"
+                type="button"
+              >
+                Отмена
+              </button>
+              <button
+                class="payot-gift-modal-action payot-gift-modal-confirm"
+                type="button"
+              >
+                Открыть
+              </button>
+            </div>
+          </div>
+
+          <div class="payot-gift-result" hidden>
+            <div class="payot-modal-image-frame">
+              <img
+                id="payot-modal-image"
+                class="payot-modal-image"
+                alt=""
+                decoding="async"
+              />
+            </div>
+            <h2 class="payot-gift-modal-title" id="payot-modal-title"></h2>
+            <p class="payot-gift-modal-category" id="payot-modal-category"></p>
+            <p class="payot-gift-modal-day" id="payot-modal-day"></p>
+            <p
+              class="payot-gift-modal-description"
+              id="payot-modal-description"
+            ></p>
+          </div>
+        </div>
+      </div>
+
+      <p class="payot-note">
+        Последнее открытие доступно после 06:00 по местному времени.
+      </p>
+    </main>
+
+    <script src="advent-payot.js"></script>
+    <script src="pwa.js"></script>
+  </body>
+</html>

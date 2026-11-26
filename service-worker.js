@@ -1,4 +1,4 @@
-const CACHE_NAME = "advents-2027-v1";
+const CACHE_NAME = "advents-2027-v15";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -7,6 +7,12 @@ const APP_SHELL = [
   "./advent-hello-kitty.html",
   "./advent-hello-kitty.css",
   "./advent-hello-kitty.js",
+  "./advent-payot.html",
+  "./advent-payot.css",
+  "./advent-payot.js",
+  "./img/advent-payot/calendar-progress.png",
+  "./img/advent-payot/current-date.png",
+  "./img/advent-payot/next-unlock.png",
   "./manifest.webmanifest",
   "./img/pwa/icon-192.webp",
   "./img/pwa/icon-512.webp",

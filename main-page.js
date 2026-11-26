@@ -229,7 +229,9 @@ const TOTAL_DAYS = 24;
         const status = getStatus(calendar, openedDays);
         const calendarHref = calendar.id === "hello-kitty"
           ? "advent-hello-kitty.html"
-          : `#calendar/${calendar.id}`;
+          : calendar.id === "payot"
+            ? "advent-payot.html"
+            : `#calendar/${calendar.id}`;
         return `
           <li>
             <a class="calendar-card" href="${calendarHref}" data-calendar-id="${calendar.id}" aria-label="Открыть календарь ${calendar.name}. ${status.label}. Открыто ${openedDays.size} из ${TOTAL_DAYS}">
@@ -334,6 +336,20 @@ const TOTAL_DAYS = 24;
       }
 
       window.addEventListener("hashchange", renderRoute);
+      window.addEventListener("pageshow", () => {
+        memoryOpenedDays.clear();
+        renderRoute();
+      });
+      window.addEventListener("storage", (event) => {
+        if (
+          event.key === null ||
+          event.key.startsWith(storagePrefix) ||
+          event.key === "hello-kitty-opened-gifts"
+        ) {
+          memoryOpenedDays.clear();
+          renderRoute();
+        }
+      });
       window.setInterval(() => {
         renderSelection();
         if (window.location.hash.startsWith("#calendar/")) {
