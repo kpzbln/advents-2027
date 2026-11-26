@@ -20,6 +20,8 @@
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Source+Serif+4:wght@900&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
     <link rel="stylesheet" href="advent-payot.css" />
     <title>PAYOT — Адвенты</title>
@@ -55,7 +57,7 @@
       <section class="calendar-intro" aria-labelledby="payot-title">
         <h1 id="payot-title" class="visually-hidden">PAYOT</h1>
         <div class="calendar-progress" aria-live="polite">
-          <span class="calendar-progress-text">Открыто 23 из 24</span>
+          <span class="calendar-progress-text">Открыто 4 из 24</span>
         </div>
       </section>
 
@@ -91,7 +93,7 @@
               Ближайшее доступное средство
             </p>
             <h3 id="payot-focus-title" class="payot-focus-title">
-              Средство за 5 декабря
+              Подарок за 5 декабря
             </h3>
             <p id="payot-focus-status" class="payot-focus-status">
               Не открыто · день 5
@@ -116,6 +118,9 @@
               />
             </div>
           </div>
+          <button id="payot-focus-action" class="payot-focus-action" type="button" aria-haspopup="dialog" disabled>
+            Открыть подарок
+          </button>
         </section>
 
         <div class="calendar-board" aria-live="polite">
@@ -133,6 +138,7 @@
           role="dialog"
           aria-modal="true"
           aria-labelledby="payot-confirmation-title"
+          aria-describedby="payot-gift-modal-message"
         >
           <button
             class="payot-gift-modal-close"
@@ -182,6 +188,9 @@
                 alt=""
                 decoding="async"
               />
+              <p id="payot-modal-image-placeholder" class="payot-modal-image-placeholder" role="status" hidden>
+                Изображение средства не загрузилось.
+              </p>
             </div>
             <h2 class="payot-gift-modal-title" id="payot-modal-title"></h2>
             <p class="payot-gift-modal-category" id="payot-modal-category"></p>
@@ -195,10 +204,13 @@
       </div>
 
       <p class="payot-note">
-        Последнее открытие доступно после 06:00 по местному времени.
+        Каждый день с 1 по 24 декабря открывается в 06:00 по местному времени.
       </p>
     </main>
 
+    <script src="calendar-state.js"></script>
+    <script src="page-resources.js"></script>
+    <script src="modal-dialog.js"></script>
     <script src="advent-payot.js"></script>
     <script src="pwa.js"></script>
   </body>

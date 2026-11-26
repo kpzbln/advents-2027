@@ -1,5 +1,5 @@
-const TOTAL_DAYS = 24;
-      const storagePrefix = "advent-opened-";
+const calendarState = globalThis.AdventCalendar;
+const TOTAL_DAYS = calendarState.TOTAL_DAYS;
       const loadingScreen = document.querySelector("#loading-screen");
       const entryAnimationStorageKey = "advents-main-entry-animation-played-v1";
       let entryAnimationPlayed = false;
@@ -24,27 +24,20 @@ const TOTAL_DAYS = 24;
         {
           id: "hello-kitty",
           name: "Hello Kitty & Friends",
-          status: "available",
           artClass: "calendar-art--hello-kitty",
           note: "Все 24 дня уже доступны для открытия.",
-          initialOpened: [],
         },
         {
           id: "payot",
           name: "PAYOT",
-          status: "waiting",
           artClass: "calendar-art--payot",
-          unlockHour: 6,
-          note: "Последний день откроется в 06:00 по местному времени.",
-          initialOpened: Array.from({ length: 23 }, (_, index) => index + 1),
+          note: "Каждый день с 1 по 24 декабря открывается в 06:00 по местному времени.",
         },
         {
           id: "kinder-mix",
           name: "Kinder Mix",
-          status: "complete",
           artClass: "calendar-art--kinder-mix",
           note: "Все 24 дня уже открыты.",
-          initialOpened: Array.from({ length: TOTAL_DAYS }, (_, index) => index + 1),
         },
       ];
 
@@ -57,23 +50,9 @@ const TOTAL_DAYS = 24;
       const dayGrid = document.querySelector("#day-grid");
       const detailNote = document.querySelector("#detail-note");
       const toast = document.querySelector("#toast");
-      const memoryOpenedDays = new Map();
       let toastTimer;
-
-      function waitForImage(url) {
-        return new Promise((resolve) => {
-          const image = new Image();
-          image.onload = () => {
-            if (typeof image.decode === "function") {
-              image.decode().catch(() => {}).finally(resolve);
-              return;
-            }
-            resolve();
-          };
-          image.onerror = resolve;
-          image.src = url;
-        });
-      }
+      let selectionMarkup = "";
+      let detailSignature = "";
 
       async function revealApp() {
         const fontPromises = document.fonts
@@ -82,10 +61,7 @@ const TOTAL_DAYS = 24;
               document.fonts.load('800 38px "Nunito"'),
             ]
           : [];
-        const assetPromises = criticalAssets.map(waitForImage);
-        const resourcesReady = Promise.allSettled([...fontPromises, ...assetPromises]);
-
-        await resourcesReady;
+        await PageResources.ready(criticalAssets, Promise.allSettled(fontPromises));
         document.body.classList.remove("is-loading");
         document.body.classList.add("is-ready");
         loadingScreen.setAttribute("aria-hidden", "true");
@@ -144,84 +120,20 @@ const TOTAL_DAYS = 24;
         return calendars.find((calendar) => calendar.id === id);
       }
 
-      function storageKeysFor(calendar) {
-        const landingKey = storagePrefix + calendar.id;
-        if (calendar.id === "hello-kitty") {
-          return ["hello-kitty-opened-gifts", landingKey];
-        }
-        return [landingKey];
-      }
-
       function getOpenedDays(calendar) {
-        if (memoryOpenedDays.has(calendar.id)) {
-          return new Set(memoryOpenedDays.get(calendar.id));
-        }
-
-        for (const storageKey of storageKeysFor(calendar)) {
-          try {
-            const stored = JSON.parse(localStorage.getItem(storageKey) || "null");
-            if (Array.isArray(stored)) {
-              const openedDays = stored
-                .map(Number)
-                .filter((day) => Number.isInteger(day) && day >= 1 && day <= TOTAL_DAYS);
-              memoryOpenedDays.set(calendar.id, openedDays);
-              return new Set(openedDays);
-            }
-          } catch {
-            // A missing or invalid local value falls back to the next key.
-          }
-        }
-
-        const initialOpened = [...calendar.initialOpened];
-        memoryOpenedDays.set(calendar.id, initialOpened);
-        return new Set(initialOpened);
+        return calendarState.loadOpenedDays(calendar.id);
       }
 
       function saveOpenedDays(calendar, openedDays) {
-        const sortedDays = [...openedDays].sort((a, b) => a - b);
-        memoryOpenedDays.set(calendar.id, sortedDays);
-        try {
-          const serializedDays = JSON.stringify(sortedDays);
-          storageKeysFor(calendar).forEach((storageKey) => {
-            localStorage.setItem(storageKey, serializedDays);
-          });
-        } catch {
-          // Session memory keeps the interaction working when storage is unavailable.
-        }
-      }
-
-      function nextUnlock(calendar) {
-        const date = new Date();
-        date.setHours(calendar.unlockHour, 0, 0, 0);
-        if (date <= new Date()) {
-          date.setDate(date.getDate() + 1);
-        }
-        return date;
+        calendarState.saveOpenedDays(calendar.id, openedDays);
       }
 
       function waitingLabel(calendar) {
-        const unlock = nextUnlock(calendar);
-        const today = new Date();
-        const dayLabel = unlock.toDateString() === today.toDateString() ? "Сегодня" : "Завтра";
-        return `${dayLabel} в ${String(calendar.unlockHour).padStart(2, "0")}:00`;
-      }
-
-      function isWaiting(calendar) {
-        return calendar.status === "waiting" && new Date() < nextUnlock(calendar);
+        return calendarState.unlockLabel(calendarState.nextUnlock(calendar.id, getOpenedDays(calendar)));
       }
 
       function getStatus(calendar, openedDays) {
-        if (calendar.status === "complete" || openedDays.size >= TOTAL_DAYS) {
-          return { state: "complete", icon: "✓", label: "Всё открыто" };
-        }
-        if (isWaiting(calendar)) {
-          return { state: "waiting", icon: "◷", label: waitingLabel(calendar) };
-        }
-        return {
-          state: "available",
-          icon: "✓",
-          label: `Можно открыть ${TOTAL_DAYS - openedDays.size}`,
-        };
+        return calendarState.status(calendar.id, openedDays);
       }
 
       function cardMarkup(calendar) {
@@ -253,19 +165,27 @@ const TOTAL_DAYS = 24;
       }
 
       function renderSelection() {
-        calendarList.innerHTML = calendars.map(cardMarkup).join("");
+        const markup = calendars.map(cardMarkup).join("");
+        if (selectionMarkup !== markup) {
+          const focusedCalendar = document.activeElement?.dataset.calendarId;
+          calendarList.innerHTML = markup;
+          selectionMarkup = markup;
+          if (focusedCalendar) {
+            calendarList.querySelector(`[data-calendar-id="${focusedCalendar}"]`)?.focus();
+          }
+        }
       }
 
       function isDayOpenable(calendar, day) {
-        if (isWaiting(calendar)) {
-          return false;
-        }
-        return day >= 1 && day <= TOTAL_DAYS;
+        return calendarState.isDayAvailable(calendar.id, day, getOpenedDays(calendar));
       }
 
       function renderDetail(calendar) {
         const openedDays = getOpenedDays(calendar);
         const status = getStatus(calendar, openedDays);
+        const signature = JSON.stringify([calendar.id, [...openedDays], status]);
+        if (signature === detailSignature) return;
+        detailSignature = signature;
         detailTitle.textContent = calendar.name;
         detailSummary.textContent = `${openedDays.size} из ${TOTAL_DAYS} дней открыто`;
         detailStatus.textContent = status.state === "waiting" ? `Следующее открытие: ${status.label}` : status.label;
@@ -318,6 +238,7 @@ const TOTAL_DAYS = 24;
         renderSelection();
 
         if (!calendar) {
+          detailSignature = "";
           selectionPage.hidden = false;
           calendarPage.hidden = true;
           document.title = "Адвенты — уютный декабрь";
@@ -337,16 +258,18 @@ const TOTAL_DAYS = 24;
 
       window.addEventListener("hashchange", renderRoute);
       window.addEventListener("pageshow", () => {
-        memoryOpenedDays.clear();
+        calendarState.invalidate();
         renderRoute();
       });
       window.addEventListener("storage", (event) => {
-        if (
-          event.key === null ||
-          event.key.startsWith(storagePrefix) ||
-          event.key === "hello-kitty-opened-gifts"
-        ) {
-          memoryOpenedDays.clear();
+        if (calendarState.isProgressKey(event.key)) {
+          calendarState.invalidate();
+          renderRoute();
+        }
+      });
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+          calendarState.invalidate();
           renderRoute();
         }
       });
@@ -359,7 +282,7 @@ const TOTAL_DAYS = 24;
             renderDetail(calendar);
           }
         }
-      }, 60_000);
+      }, 1000);
 
       renderRoute();
       revealApp();

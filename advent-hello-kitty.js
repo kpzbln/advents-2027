@@ -1,3 +1,4 @@
+const calendarState = globalThis.AdventCalendar;
 const pageSnow = document.querySelector(".page-snow");
       const pageLoader = document.querySelector(".page-loader");
       let pageLoadingFinished = false;
@@ -52,20 +53,6 @@ const pageSnow = document.querySelector(".page-snow");
         ),
       ];
 
-      const waitForImage = (url) =>
-        new Promise((resolve) => {
-          const image = new Image();
-          image.onload = () => {
-            if (typeof image.decode === "function") {
-              image.decode().catch(() => {}).finally(resolve);
-              return;
-            }
-            resolve();
-          };
-          image.onerror = resolve;
-          image.src = url;
-        });
-
       const finishPageLoading = () => {
         if (!pageLoader || pageLoadingFinished) {
           return;
@@ -79,18 +66,7 @@ const pageSnow = document.querySelector(".page-snow");
       };
 
       const waitForPageResources = async () => {
-        if (document.readyState !== "complete") {
-          await new Promise((resolve) => {
-            window.addEventListener("load", resolve, { once: true });
-          });
-        }
-
-        if (document.fonts?.ready) {
-          await document.fonts.ready;
-        }
-
-        await Promise.allSettled(pageAssetUrls.map(waitForImage));
-
+        await PageResources.ready(pageAssetUrls);
         finishPageLoading();
       };
 
@@ -318,6 +294,9 @@ const pageSnow = document.querySelector(".page-snow");
       const giftModal = document.querySelector(".gift-modal");
       const giftModalContent = document.querySelector(".gift-modal-content");
       const giftModalClose = document.querySelector(".gift-modal-close");
+      const giftDialog = ModalDialog.create({
+        overlay: giftModal, dialog: giftModalContent, initialFocus: giftModalClose,
+      });
       const giftModalTitle = document.querySelector(".gift-modal-title");
       const giftModalMessage = document.querySelector(".gift-modal-message");
       const giftConfirmation = document.querySelector(".gift-confirmation");
@@ -344,23 +323,9 @@ const pageSnow = document.querySelector(".page-snow");
       const giftImagePlaceholder = document.querySelector(
         ".gift-image-placeholder",
       );
-      const openedGiftStorageKey = "hello-kitty-opened-gifts";
-
-      const loadOpenedGiftDays = () => {
-        try {
-          const savedDays = JSON.parse(
-            localStorage.getItem(openedGiftStorageKey) || "[]",
-          );
-          if (!Array.isArray(savedDays)) {
-            return new Set();
-          }
-          return new Set(
-            savedDays.map(String).filter((day) => Boolean(gifts[day])),
-          );
-        } catch {
-          return new Set();
-        }
-      };
+      const loadOpenedGiftDays = () => new Set(
+        [...calendarState.loadOpenedDays("hello-kitty")].map(String),
+      );
 
       const openedGiftDays = loadOpenedGiftDays();
       let activeDoor = null;
@@ -375,14 +340,18 @@ const pageSnow = document.querySelector(".page-snow");
       };
 
       const saveOpenedGiftDays = () => {
-        try {
-          localStorage.setItem(
-            openedGiftStorageKey,
-            JSON.stringify([...openedGiftDays]),
+        calendarState.saveOpenedDays("hello-kitty", openedGiftDays);
+      };
+
+      const updateCalendarMeta = () => {
+        const now = new Date();
+        document.querySelector(".current-date-text").textContent = new Intl.DateTimeFormat(
+          "ru-RU", { day: "numeric", month: "long" },
+        ).format(now);
+        document.querySelector(".next-unlock-text").textContent =
+          openedGiftDays.size === 24 ? "Всё открыто" : calendarState.unlockLabel(
+            calendarState.nextUnlock("hello-kitty", new Set([...openedGiftDays].map(Number)), now), now,
           );
-        } catch {
-          // Progress remains available during the current session.
-        }
       };
 
       const makeSemanticDoor = (door) => {
@@ -425,7 +394,7 @@ const pageSnow = document.querySelector(".page-snow");
         door.classList.add("calendar-door-gift");
         door.classList.toggle("calendar-door-stand", gift.category === "Подставка");
         door.innerHTML =
-          '<div class="gift-box-received gift-box-revealed" aria-hidden="true"></div>';
+          '<div class="gift-box-received gift-box-revealed" aria-hidden="true"></div><span class="gift-opened-mark" aria-hidden="true">✓</span>';
         const revealedGift = door.firstElementChild;
         revealedGift.style.backgroundImage = `url("${gift.imageWebp}")`;
       };
@@ -454,6 +423,7 @@ const pageSnow = document.querySelector(".page-snow");
       });
 
       updateProgress();
+      updateCalendarMeta();
 
       const updateModalGift = (gift, day) => {
         giftModalMessage.textContent = `Подарок за ${dateLabel(day)} уже ждёт тебя.`;
@@ -489,12 +459,7 @@ const pageSnow = document.querySelector(".page-snow");
       };
 
       const closeGiftModal = () => {
-        giftModal.classList.remove("is-open");
-        giftModal.setAttribute("aria-hidden", "true");
-        document.body.classList.remove("modal-open");
-        if (activeDoor) {
-          activeDoor.focus();
-        }
+        giftDialog.close();
       };
 
       const showConfirmation = () => {
@@ -507,6 +472,7 @@ const pageSnow = document.querySelector(".page-snow");
           "aria-labelledby",
           "gift-confirmation-title",
         );
+        giftModalContent.setAttribute("aria-describedby", "gift-confirmation-message");
       };
 
       const showGift = () => {
@@ -517,6 +483,7 @@ const pageSnow = document.querySelector(".page-snow");
           giftResult.classList.add("gift-result-enter");
         });
         giftModalContent.setAttribute("aria-labelledby", "gift-modal-caption");
+        giftModalContent.setAttribute("aria-describedby", "gift-modal-description");
       };
 
       const showOpenedGift = (day) => {
@@ -541,10 +508,7 @@ const pageSnow = document.querySelector(".page-snow");
         } else {
           showOpenedGift(door.dataset.day);
         }
-        giftModal.classList.add("is-open");
-        giftModal.setAttribute("aria-hidden", "false");
-        document.body.classList.add("modal-open");
-        giftModalClose.focus();
+        giftDialog.open(door);
       };
 
       const revealGift = () => {
@@ -561,6 +525,7 @@ const pageSnow = document.querySelector(".page-snow");
         }, 900);
         saveOpenedGiftDays();
         updateProgress();
+        updateCalendarMeta();
         openGiftModal("gift", activeDoor);
       };
 
@@ -596,19 +561,6 @@ const pageSnow = document.querySelector(".page-snow");
       giftModalConfirm.addEventListener("click", revealGift);
       giftModalCancel.addEventListener("click", closeGiftModal);
       giftModalClose.addEventListener("click", closeGiftModal);
-      giftModal.addEventListener("click", (event) => {
-        if (event.target === giftModal) {
-          closeGiftModal();
-        }
-      });
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && giftModal.classList.contains("is-open")) {
-          closeGiftModal();
-        }
-      });
-      giftModalContent.addEventListener("click", (event) =>
-        event.stopPropagation(),
-      );
       giftModalImage.addEventListener("error", () => {
         if (activeGift && !imageFallbackAttempted) {
           imageFallbackAttempted = true;
