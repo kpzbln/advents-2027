@@ -9,6 +9,12 @@
       media="print"
       onload="this.media='all'"
     />
+    <meta name="description" content="Адвент-календарь Hello Kitty с ежедневными открытиями" />
+        <meta property="og:title" content="Hello Kitty — Адвенты" />
+    <meta property="og:description" content="Адвент-календарь Hello Kitty с ежедневными открытиями" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="img/advent-hello-kitty/winter-scene.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="img/pwa/icon-192.webp" type="image/webp" />
     <link rel="apple-touch-icon" href="img/pwa/icon-192.webp" />
@@ -21,7 +27,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Адвенты" />
 
-    <title>Адвенты</title>
+    <title>Hello Kitty — Адвенты</title>
 
         <link rel="stylesheet" href="advent-hello-kitty.css" />
   </head>
@@ -55,7 +61,7 @@
       <div class="calendar-intro">
         <div class="hello-kitty-logo"></div>
         <div class="calendar-progress">
-          <div class="calendar-progress-text" aria-live="polite">Собрано 0 из 24</div>
+          <div class="calendar-progress-text" aria-live="polite">Открыто 0 из 24</div>
         </div>
       </div>
 
@@ -294,7 +300,9 @@
       </div>
     </div>
 
+    <script src="app-config.js"></script>
     <script src="calendar-state.js"></script>
+    <script src="calendar-controller.js"></script>
     <script src="calendar-data.js"></script>
     <script src="page-resources.js"></script>
     <script src="modal-dialog.js"></script>

@@ -189,6 +189,16 @@
         box-shadow: 0 8px 18px rgb(73 53 31 / 12%);
       }
 
+      .calendar-card--disabled {
+        cursor: default;
+        opacity: 0.78;
+      }
+
+      .calendar-card--disabled:hover {
+        background: rgb(255 255 255 / 12%);
+        box-shadow: none;
+      }
+
       .calendar-card:focus-visible {
         outline: 3px solid var(--focus-ring);
         outline-offset: 3px;

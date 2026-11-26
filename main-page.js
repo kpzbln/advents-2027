@@ -37,7 +37,8 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
           id: "kinder-mix",
           name: "Kinder Mix",
           artClass: "calendar-art--kinder-mix",
-          note: "Все 24 дня уже открыты.",
+          enabled: false,
+          note: "\u0421\u043a\u043e\u0440\u043e \u043f\u043e\u044f\u0432\u0438\u0442\u0441\u044f \u043f\u043e\u0434\u0440\u043e\u0431\u043d\u044b\u0439 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044c.",
         },
       ];
 
@@ -51,21 +52,9 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
       const detailNote = document.querySelector("#detail-note");
       const toast = document.querySelector("#toast");
       let toastTimer;
-      let refreshTimer;
       let selectionMarkup = "";
       let detailSignature = "";
-
-      function scheduleRefresh() {
-        window.clearTimeout(refreshTimer);
-        const next = calendarState.nextUnlock("payot");
-        if (!next) return;
-        const delay = Math.max(next.getTime() - Date.now() + 50, 1000);
-        refreshTimer = window.setTimeout(() => {
-          calendarState.invalidate();
-          renderRoute();
-          scheduleRefresh();
-        }, delay);
-      }
+      const calendarControllers = new Map();
 
       async function revealApp() {
         const fontPromises = document.fonts
@@ -133,16 +122,26 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
         return calendars.find((calendar) => calendar.id === id);
       }
 
+      function getController(calendar) {
+        return calendarControllers.get(calendar.id);
+      }
+
+      calendars.forEach((calendar) => {
+        calendarControllers.set(calendar.id, AdventCalendarController.create(calendar.id, {
+          onRefresh: () => renderRoute(),
+        }));
+      });
+
       function getOpenedDays(calendar) {
-        return calendarState.loadOpenedDays(calendar.id);
+        return getController(calendar).getOpenedDays();
       }
 
       function saveOpenedDays(calendar, openedDays) {
-        calendarState.saveOpenedDays(calendar.id, openedDays);
+        getController(calendar).save(openedDays);
       }
 
       function waitingLabel(calendar) {
-        return calendarState.unlockLabel(calendarState.nextUnlock(calendar.id, getOpenedDays(calendar)));
+        return calendarState.unlockLabel(getController(calendar).nextUnlock());
       }
 
       function getStatus(calendar, openedDays) {
@@ -151,15 +150,25 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
 
       function cardMarkup(calendar) {
         const openedDays = getOpenedDays(calendar);
-        const status = getStatus(calendar, openedDays);
+        const enabled = calendar.enabled !== false;
+        const status = enabled
+          ? getStatus(calendar, openedDays)
+          : { state: "coming-soon", icon: "\u2026", label: "\u0421\u043a\u043e\u0440\u043e" };
         const calendarHref = calendar.id === "hello-kitty"
           ? "advent-hello-kitty.html"
           : calendar.id === "payot"
             ? "advent-payot.html"
-            : `#calendar/${calendar.id}`;
+            : null;
+        const cardTag = enabled ? "a" : "div";
+        const cardAttributes = enabled
+          ? `href="${calendarHref}"`
+          : 'aria-disabled="true"';
+        const progressLabel = enabled
+          ? `\u041e\u0442\u043a\u0440\u044b\u0442\u043e ${openedDays.size} \u0438\u0437 ${TOTAL_DAYS}`
+          : "\u0421\u043a\u043e\u0440\u043e";
         return `
           <li>
-            <a class="calendar-card" href="${calendarHref}" data-calendar-id="${calendar.id}" aria-label="Открыть календарь ${calendar.name}. ${status.label}. Открыто ${openedDays.size} из ${TOTAL_DAYS}">
+            <${cardTag} class="calendar-card${enabled ? "" : " calendar-card--disabled"}" ${cardAttributes} data-calendar-id="${calendar.id}" aria-label="${calendar.name}. ${status.label}${enabled ? `. ${progressLabel}` : ""}">
               <span class="calendar-art ${calendar.artClass}" aria-hidden="true"></span>
               <span class="calendar-copy">
                 <span class="calendar-status" data-state="${status.state}">
@@ -169,14 +178,13 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
                 <span class="calendar-title">${calendar.name}</span>
                 <span class="calendar-progress">
                   <span class="calendar-divider" aria-hidden="true"></span>
-                  <span class="calendar-progress-label">Открыто ${openedDays.size} из ${TOTAL_DAYS}</span>
+                  <span class="calendar-progress-label">${progressLabel}</span>
                 </span>
               </span>
-            </a>
+            </${cardTag}>
           </li>
         `;
       }
-
       function renderSelection() {
         const markup = calendars.map(cardMarkup).join("");
         if (selectionMarkup !== markup) {
@@ -190,7 +198,7 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
       }
 
       function isDayOpenable(calendar, day) {
-        return calendarState.isDayAvailable(calendar.id, day, getOpenedDays(calendar));
+        return getController(calendar).isDayAvailable(day);
       }
 
       function renderDetail(calendar) {
@@ -200,7 +208,7 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
         if (signature === detailSignature) return;
         detailSignature = signature;
         detailTitle.textContent = calendar.name;
-        detailSummary.textContent = `${openedDays.size} из ${TOTAL_DAYS} дней открыто`;
+        detailSummary.textContent = `\u041e\u0442\u043a\u0440\u044b\u0442\u043e ${openedDays.size} \u0438\u0437 ${TOTAL_DAYS}`;
         detailStatus.textContent = status.state === "waiting" ? `Следующее открытие: ${status.label}` : status.label;
         detailNote.textContent = calendar.note;
         document.title = `${calendar.name} — Адвенты`;
@@ -233,7 +241,6 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
         saveOpenedDays(calendar, openedDays);
         renderDetail(calendar);
         renderSelection();
-        scheduleRefresh();
         showToast(`День ${day} открыт.`);
       }
 
@@ -251,10 +258,14 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
         const calendar = match ? getCalendar(match[1]) : null;
         renderSelection();
 
-        if (!calendar) {
+        if (!calendar || calendar.enabled === false) {
           detailSignature = "";
           selectionPage.hidden = false;
           calendarPage.hidden = true;
+          if (calendar?.enabled === false) {
+            window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+            showToast("\u041a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044c \u0441\u043a\u043e\u0440\u043e \u043f\u043e\u044f\u0432\u0438\u0442\u0441\u044f.");
+          }
           document.title = "Адвенты — уютный декабрь";
           if (document.body.classList.contains("is-ready")) {
             window.requestAnimationFrame(playEntryAnimation);
@@ -272,25 +283,22 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
 
       window.addEventListener("hashchange", renderRoute);
       window.addEventListener("pageshow", () => {
-        calendarState.invalidate();
+        calendarControllers.forEach((controller) => controller.refresh());
         renderRoute();
-        scheduleRefresh();
       });
       window.addEventListener("storage", (event) => {
         if (calendarState.isProgressKey(event.key)) {
-          calendarState.invalidate();
+          calendarControllers.forEach((controller) => controller.refresh());
           renderRoute();
-          scheduleRefresh();
         }
       });
       document.addEventListener("visibilitychange", () => {
         if (!document.hidden) {
-          calendarState.invalidate();
+          calendarControllers.forEach((controller) => controller.refresh());
           renderRoute();
-          scheduleRefresh();
         }
       });
 
       renderRoute();
-      scheduleRefresh();
+      calendarControllers.forEach((controller) => controller.start());
       revealApp();

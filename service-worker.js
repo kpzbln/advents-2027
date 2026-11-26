@@ -1,13 +1,15 @@
-importScripts("./offline-assets.js");
+importScripts("./app-config.js", "./offline-assets.js");
 
 const CACHE_PREFIX = "advents-";
-const CACHE_NAME = "advents-2027-v21";
+const CACHE_NAME = globalThis.AdventAppConfig.cacheName;
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./app-config.js",
   "./main-page.css",
   "./main-page.js",
   "./calendar-state.js",
+  "./calendar-controller.js",
   "./calendar-data.js",
   "./page-resources.js",
   "./modal-dialog.js",

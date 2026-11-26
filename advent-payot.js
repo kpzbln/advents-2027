@@ -49,7 +49,11 @@ const gifts = Array.from({ length: TOTAL_DAYS }, (_, index) => {
   };
 });
 
-const isGiftAvailable = (day) => calendarState.isDayAvailable("payot", day, openedDays);
+const calendarController = AdventCalendarController.create("payot", {
+  onRefresh: () => refreshCalendar(true),
+});
+
+const isGiftAvailable = (day) => calendarController.isDayAvailable(day);
 
 const pageAssetUrls = [
   "img/advent-payot/calendar-progress.webp",
@@ -57,12 +61,10 @@ const pageAssetUrls = [
   "img/advent-payot/next-unlock.webp",
 ];
 
-const loadOpenedDays = () => calendarState.loadOpenedDays("payot");
-
-let openedDays = loadOpenedDays();
+let openedDays = calendarController.getOpenedDays();
 
 const saveOpenedDays = () => {
-  calendarState.saveOpenedDays("payot", openedDays);
+  openedDays = calendarController.save(openedDays);
 };
 
 const formatDate = new Intl.DateTimeFormat("ru-RU", {
@@ -317,22 +319,13 @@ if (focusGift) {
 updateProgress();
 
 let refreshSignature = "";
-let refreshTimer;
 
-function scheduleRefresh() {
-  window.clearTimeout(refreshTimer);
-  const next = calendarState.nextUnlock("payot", openedDays, new Date());
-  if (!next) return;
-  const delay = Math.max(next.getTime() - Date.now() + 50, 1000);
-  refreshTimer = window.setTimeout(() => {
-    refreshCalendar();
-    scheduleRefresh();
-  }, delay);
-}
-
-const refreshCalendar = () => {
-  calendarState.invalidate();
-  openedDays = loadOpenedDays();
+function refreshCalendar(fromController = false) {
+  if (!fromController) {
+    openedDays = calendarController.refresh();
+  } else {
+    openedDays = calendarController.getOpenedDays();
+  }
   const now = new Date();
   const signature = JSON.stringify([
     [...openedDays], now.toDateString(),
@@ -345,24 +338,21 @@ const refreshCalendar = () => {
   updateFocusPanel(getFocusDay());
   updateProgress();
   updateCalendarMeta();
-};
+}
 
 window.addEventListener("storage", (event) => {
   if (calendarState.isProgressKey(event.key)) {
     refreshCalendar();
-    scheduleRefresh();
   }
 });
 window.addEventListener("pageshow", () => {
   refreshCalendar();
-  scheduleRefresh();
 });
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) {
     refreshCalendar();
-    scheduleRefresh();
   }
 });
-scheduleRefresh();
+calendarController.start();
 
 PageResources.ready(pageAssetUrls).then(finishLoading);

@@ -1,7 +1,7 @@
 /* Shared progress and local-time unlock rules for every calendar page. */
 (() => {
   const TOTAL_DAYS = 24;
-  const SEASON_YEAR = 2026;
+  const SEASON_YEAR = globalThis.AdventAppConfig?.seasonYear ?? 2026;
   const configs = {
     "hello-kitty": {
       storageKey: "hello-kitty-opened-gifts",

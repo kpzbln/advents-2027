@@ -2,6 +2,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const vm = require("node:vm");
 const test = require("node:test");
+const configSource = fs.readFileSync("app-config.js", "utf8");
 const source = fs.readFileSync("calendar-state.js", "utf8");
 
 function calendar(storage = new Map(), blocked = false) {
@@ -10,6 +11,7 @@ function calendar(storage = new Map(), blocked = false) {
     setItem: (key, value) => { if (blocked) throw Error("blocked"); storage.set(key, value); },
     removeItem: (key) => storage.delete(key),
   } });
+  vm.runInContext(configSource, context);
   vm.runInContext(source, context);
   return context.AdventCalendar;
 }

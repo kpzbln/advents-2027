@@ -47,7 +47,9 @@ function worker() {
       addEventListener: (type, handler) => handlers.set(type, handler),
       skipWaiting: async () => {}, clients: { claim: async () => {} },
     },
-    importScripts(file) { vm.runInContext(fs.readFileSync(file, "utf8"), context); },
+    importScripts(...files) {
+      for (const file of files) vm.runInContext(fs.readFileSync(file, "utf8"), context);
+    },
   });
   vm.runInContext(fs.readFileSync("service-worker.js", "utf8"), context);
   const run = async (type) => {
@@ -113,5 +115,5 @@ test("upgrades remove old app caches and preserve unrelated caches", async () =>
   await sw.run("activate");
   assert.equal(sw.stores.has("advents-2027-v15"), false);
   assert.equal(sw.stores.has("other-app"), true);
-  assert.equal(sw.stores.has("advents-2027-v21"), true);
+  assert.equal(sw.stores.has("advents-2027-v22"), true);
 });

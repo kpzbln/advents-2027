@@ -154,34 +154,31 @@ const progressText = document.querySelector(".calendar-progress-text");
       const giftImagePlaceholder = document.querySelector(
         ".gift-image-placeholder",
       );
-      const loadOpenedGiftDays = () => new Set(
-        [...calendarState.loadOpenedDays("hello-kitty")].map(String),
+      const calendarController = AdventCalendarController.create("hello-kitty", {
+        onRefresh: () => refreshCalendar(true),
+      });
+      let openedGiftDays = new Set(
+        [...calendarController.getOpenedDays()].map(String),
       );
-
-      let openedGiftDays = loadOpenedGiftDays();
       let activeDoor = null;
       let activeGift = null;
       let imageFallbackAttempted = false;
-      let refreshTimer;
 
       const dateLabel = (day) => `${day} декабря`;
 
       const updateProgress = () => {
         const openedCount = openedGiftDays.size;
-        progressText.textContent = `Собрано ${openedCount} из 24`;
+        progressText.textContent = `\u041e\u0442\u043a\u0440\u044b\u0442\u043e ${openedCount} \u0438\u0437 24`;
       };
 
       const saveOpenedGiftDays = () => {
-        calendarState.saveOpenedDays("hello-kitty", openedGiftDays);
+        openedGiftDays = new Set(
+          [...calendarController.save(openedGiftDays)].map(String),
+        );
       };
 
       const isGiftAvailable = (day, now = new Date()) =>
-        calendarState.isDayAvailable(
-          "hello-kitty",
-          Number(day),
-          new Set([...openedGiftDays].map(Number)),
-          now,
-        );
+        calendarController.isDayAvailable(Number(day), now);
 
       const updateCalendarMeta = () => {
         const now = new Date();
@@ -190,7 +187,7 @@ const progressText = document.querySelector(".calendar-progress-text");
         ).format(now);
         document.querySelector(".next-unlock-text").textContent =
           openedGiftDays.size === 24 ? "Всё открыто" : calendarState.unlockLabel(
-            calendarState.nextUnlock("hello-kitty", new Set([...openedGiftDays].map(Number)), now), now,
+            calendarController.nextUnlock(now), now,
           );
       };
 
@@ -288,29 +285,20 @@ const progressText = document.querySelector(".calendar-progress-text");
 
       refreshDoors();
 
-      function scheduleRefresh() {
-        window.clearTimeout(refreshTimer);
-        const next = calendarState.nextUnlock(
-          "hello-kitty",
-          new Set([...openedGiftDays].map(Number)),
-          new Date(),
-        );
-        if (!next) return;
-        const delay = Math.max(next.getTime() - Date.now() + 50, 1000);
-        refreshTimer = window.setTimeout(() => {
-          refreshCalendar();
-          scheduleRefresh();
-        }, delay);
-      }
-
-      function refreshCalendar() {
-        calendarState.invalidate();
-        openedGiftDays = loadOpenedGiftDays();
+      function refreshCalendar(fromController = false) {
+        if (!fromController) {
+          openedGiftDays = new Set(
+            [...calendarController.refresh()].map(String),
+          );
+        } else {
+          openedGiftDays = new Set(
+            [...calendarController.getOpenedDays()].map(String),
+          );
+        }
         const now = new Date();
         refreshDoors(now);
         updateProgress();
         updateCalendarMeta();
-        scheduleRefresh();
       }
 
       updateProgress();
@@ -457,7 +445,7 @@ const progressText = document.querySelector(".calendar-progress-text");
           refreshCalendar();
         }
       });
-      window.addEventListener("pageshow", refreshCalendar);
+      window.addEventListener("pageshow", () => refreshCalendar());
       document.addEventListener("visibilitychange", () => {
         if (!document.hidden) refreshCalendar();
       });
@@ -511,4 +499,4 @@ const progressText = document.querySelector(".calendar-progress-text");
         window.location.replace(calendarHomeLink.href);
       });
 
-      scheduleRefresh();
+      calendarController.start();

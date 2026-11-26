@@ -80,7 +80,7 @@ function page(script, storage, initialTime) {
       requestAnimationFrame: (fn) => fn(), matchMedia: () => ({ matches: true }),
     },
   });
-  for (const file of ["calendar-state.js", "calendar-data.js", "page-resources.js", "modal-dialog.js", script]) {
+  for (const file of ["app-config.js", "calendar-state.js", "calendar-controller.js", "calendar-data.js", "page-resources.js", "modal-dialog.js", script]) {
     vm.runInContext(fs.readFileSync(file, "utf8"), context, { filename: file });
   }
   return { context, elements, events, now, intervals };
@@ -112,7 +112,7 @@ test("PAYOT and landing change availability at 06:00 without a reload", () => {
   const firstCard = payot.elements.get("#payot-gift-grid").cards[0];
   assert.equal(firstCard.disabled, true);
   landing.now.value = payot.now.value = new Date(2026, 11, 1, 6);
-  landing.intervals[0]();
+  landing.intervals.slice().forEach((refresh) => refresh());
   payot.intervals[0]();
   assert.match(landing.elements.get("#calendar-list").innerHTML, /Можно открыть 1/);
   assert.equal(vm.runInContext("isGiftAvailable(1)", payot.context), true);

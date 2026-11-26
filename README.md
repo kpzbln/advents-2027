@@ -16,14 +16,17 @@ $env:Path = "$nodeDir;$env:Path"
 
 Then run `npm start` to serve the site at `http://localhost:4173/`, or run
 `npm run check` to validate JavaScript, manifest and offline assets before the
-test suite. If `.tools\node-v22.23.5-win-x64` is missing, install Node.js 22 LTS
-and reopen the terminal.
+test suite. `npm run test:browser` runs real Chromium smoke tests using the
+installed Edge/Chrome executable. If `.tools\node-v22.23.5-win-x64` is missing,
+install Node.js 22 LTS and reopen the terminal.
 
 ## Progress and dates
 
-`calendar-state.js` is the shared source for progress, available days, labels and
+`app-config.js` is the shared source for the 2026 season and the 2027 PWA cache
+version. `calendar-state.js` contains progress, available days, labels and
 preview selection. PAYOT uses December **2026**, with each day opening at **06:00
-in the visitor's local time**. Change `SEASON_YEAR` there for a different season.
+in the visitor's local time**. `calendar-controller.js` shares storage refreshes
+and next-opening timers between the calendar pages.
 Hello Kitty follows the same daily December schedule as PAYOT, and Kinder Mix
 keeps its existing completed state.
 

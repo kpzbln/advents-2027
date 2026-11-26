@@ -12,6 +12,11 @@
       name="description"
       content="Три новогодних адвент-календаря для уютного декабря"
     />
+    <meta property="og:title" content="Адвенты — уютный декабрь" />
+    <meta property="og:description" content="Три адвент-календаря для уютного декабря" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="img/pwa/icon-512.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Адвенты — уютный декабрь</title>
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="img/pwa/icon-192.webp" type="image/webp" />
@@ -70,7 +75,9 @@
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite" data-visible="false"></div>
+    <script src="app-config.js"></script>
     <script src="calendar-state.js"></script>
+    <script src="calendar-controller.js"></script>
     <script src="page-resources.js"></script>
     <script src="main-page.js"></script>
     <script src="pwa.js"></script>
