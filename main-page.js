@@ -153,7 +153,7 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
         const enabled = calendar.enabled !== false;
         const status = enabled
           ? getStatus(calendar, openedDays)
-          : { state: "coming-soon", icon: "\u2026", label: "\u0421\u043a\u043e\u0440\u043e" };
+          : { state: "coming-soon", label: "\u0421\u043a\u043e\u0440\u043e" };
         const calendarHref = calendar.id === "hello-kitty"
           ? "advent-hello-kitty.html"
           : calendar.id === "payot"
@@ -172,7 +172,6 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
               <span class="calendar-art ${calendar.artClass}" aria-hidden="true"></span>
               <span class="calendar-copy">
                 <span class="calendar-status" data-state="${status.state}">
-                  <span class="calendar-status-icon" aria-hidden="true">${status.icon}</span>
                   <span>${status.label}</span>
                 </span>
                 <span class="calendar-title">${calendar.name}</span>

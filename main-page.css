@@ -278,19 +278,6 @@
         background: var(--waiting-status);
       }
 
-      .calendar-status-icon {
-        display: inline-flex;
-        width: 14px;
-        height: 14px;
-        align-items: center;
-        justify-content: center;
-        flex: 0 0 auto;
-        color: var(--green);
-        font-size: 14px;
-        line-height: 1;
-        transform: translateY(-1px);
-      }
-
       .calendar-title {
         align-self: stretch;
         margin: 0;

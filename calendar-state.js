@@ -105,14 +105,14 @@
   }
 
   function status(id, opened = loadOpenedDays(id), now = new Date()) {
-    if (opened.size >= TOTAL_DAYS) return { state: "complete", icon: "✓", label: "Всё открыто" };
+    if (opened.size >= TOTAL_DAYS) return { state: "complete", label: "Всё открыто" };
     let count = 0;
     for (let day = 1; day <= TOTAL_DAYS; day += 1) {
       if (!opened.has(day) && isDayAvailable(id, day, opened, now)) count += 1;
     }
     return count > 0
-      ? { state: "available", icon: "✓", label: `Можно открыть ${count}` }
-      : { state: "waiting", icon: "◷", label: unlockLabel(nextUnlock(id, opened, now), now) };
+      ? { state: "available", label: `Можно открыть ${count}` }
+      : { state: "waiting", label: unlockLabel(nextUnlock(id, opened, now), now) };
   }
 
   function focusDay(id, opened = loadOpenedDays(id), now = new Date()) {
