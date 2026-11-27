@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0f2d69" />
+    <meta name="description" content="Kinder Mix — адвент-календарь на 31 день: 24 сладких подарка и 7 игр." />
+    <meta property="og:title" content="Kinder Mix — Адвенты" />
+    <meta property="og:description" content="31 день, 24 сладких подарка и 7 игр по QR-кодам." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="img/advent-kinder/front-closed.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="img/pwa/icon-192.webp" type="image/webp" />
+    <link rel="apple-touch-icon" href="img/pwa/icon-192.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link rel="stylesheet" href="advent-kinder.css" />
+    <title>Kinder Mix — Адвенты</title>
+  </head>
+
+  <body class="kinder-is-loading">
+    <div class="kinder-loader" role="status" aria-live="polite" aria-label="Загружаем календарь Kinder Mix">
+      <span class="kinder-loader-spinner" aria-hidden="true"></span>
+      <span>Загружаем Kinder Mix…</span>
+    </div>
+
+    <main class="kinder-page">
+      <a class="kinder-back-link" href="index.html">← Все календари</a>
+
+      <header class="kinder-header">
+        <div class="kinder-logo" aria-label="Kinder Mix">
+          <span class="kinder-logo-word">Kinder</span>
+          <span class="kinder-logo-subtitle">MIX</span>
+        </div>
+        <div class="kinder-progress" aria-live="polite">Открыто 0 из 31</div>
+      </header>
+
+      <section class="kinder-meta" aria-label="Состояние календаря">
+        <div class="kinder-meta-card">
+          <span class="kinder-meta-label">Сегодня</span>
+          <strong id="kinder-current-date">26 ноября</strong>
+        </div>
+        <div class="kinder-meta-card">
+          <span class="kinder-meta-label">Следующее открытие</span>
+          <strong id="kinder-next-unlock">1 декабря в 06:00</strong>
+        </div>
+      </section>
+
+      <section class="kinder-box-section" aria-labelledby="kinder-box-title">
+        <div class="kinder-section-heading">
+          <div>
+            <span class="kinder-kicker">Твой праздничный набор</span>
+            <h1 id="kinder-box-title">31 день Kinder</h1>
+          </div>
+          <span class="kinder-count-badge">24 + 7</span>
+        </div>
+        <div class="kinder-side-tabs" role="tablist" aria-label="Сторона упаковки">
+          <button class="kinder-side-tab is-active" type="button" role="tab" aria-selected="true" data-side="front">Лицевая</button>
+          <button class="kinder-side-tab" type="button" role="tab" aria-selected="false" data-side="back">Задняя</button>
+        </div>
+        <figure class="kinder-box-figure">
+          <img id="kinder-side-image" src="img/advent-kinder/front-closed.webp" alt="Лицевая сторона календаря Kinder" decoding="async" />
+          <figcaption id="kinder-side-caption">Так выглядит календарь Kinder до открытия дверок.</figcaption>
+        </figure>
+      </section>
+
+      <section class="kinder-days-section" aria-labelledby="kinder-days-title">
+        <div class="kinder-section-heading">
+          <div>
+            <span class="kinder-kicker">Открывай по одному</span>
+            <h2 id="kinder-days-title">Дни календаря</h2>
+          </div>
+          <span class="kinder-days-hint">с 1 по 31 декабря</span>
+        </div>
+        <div id="kinder-day-grid" class="kinder-day-grid" aria-label="Дни Kinder Mix"></div>
+      </section>
+
+      <p class="kinder-note">Каждый день открывается в 06:00 по местному времени. В игровых днях спрятан QR-код Kinder.</p>
+    </main>
+
+    <div class="kinder-modal" role="presentation" aria-hidden="true">
+      <div class="kinder-modal-content" role="dialog" aria-modal="true" aria-labelledby="kinder-modal-title" aria-describedby="kinder-modal-description">
+        <button class="kinder-modal-close" type="button" aria-label="Закрыть">×</button>
+        <div class="kinder-confirmation">
+          <span id="kinder-modal-kicker" class="kinder-kicker">Подарок Kinder</span>
+          <h2 id="kinder-modal-title">Открыть день?</h2>
+          <p id="kinder-modal-description">Подарок уже ждёт тебя.</p>
+          <button class="kinder-modal-confirm" type="button">Открыть подарок</button>
+          <button class="kinder-modal-cancel" type="button">Позже</button>
+        </div>
+        <div class="kinder-result" hidden>
+          <div class="kinder-result-art">
+            <img id="kinder-modal-image" alt="" decoding="async" hidden />
+            <img id="kinder-modal-qr" alt="QR-код игры Kinder" decoding="async" hidden />
+          </div>
+          <span id="kinder-modal-category" class="kinder-result-category"></span>
+          <h2 id="kinder-modal-result-title"></h2>
+          <p id="kinder-modal-result-description"></p>
+          <a id="kinder-modal-link" class="kinder-modal-link" href="#" target="_blank" rel="noopener" hidden>Открыть игру</a>
+          <button class="kinder-modal-close-result" type="button">Закрыть</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app-config.js"></script>
+    <script src="calendar-state.js"></script>
+    <script src="calendar-controller.js"></script>
+    <script src="calendar-data.js"></script>
+    <script src="page-resources.js"></script>
+    <script src="modal-dialog.js"></script>
+    <script src="advent-kinder.js"></script>
+    <script src="pwa.js"></script>
+  </body>
+</html>

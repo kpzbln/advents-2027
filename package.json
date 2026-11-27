@@ -4,7 +4,7 @@
     "check": "node scripts/validate-project.cjs && npm test",
     "test:browser": "node --test tests/browser-smoke.cjs",
     "validate:project": "node scripts/validate-project.cjs",
-    "optimize:images": "node scripts/optimize-payot.cjs && node scripts/build-offline-assets.cjs",
+    "optimize:images": "node scripts/optimize-payot.cjs && node scripts/build-kinder-assets.cjs && node scripts/build-offline-assets.cjs",
     "test": "node --test tests/*.test.cjs"
   },
   "devDependencies": {

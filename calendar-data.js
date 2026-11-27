@@ -325,4 +325,31 @@ const giftDetails = {
       };
     return gifts;
   })()),
+  kinder: Object.freeze({
+    products: Object.freeze({
+      "kinder-love": { title: "Kinder Love Mini", category: "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u043e\u0435 \u0441\u0435\u0440\u0434\u0446\u0435", quantity: "5 \u0448\u0442.", image: "img/advent-kinder/products/kinder-love.webp" },
+      "mini-eggs-green": { title: "Kinder Mini Eggs", category: "\u042f\u0439\u0446\u043e \u0432 \u0437\u0435\u043b\u0451\u043d\u043e\u0439 \u0444\u043e\u043b\u044c\u0433\u0435", quantity: "5 \u0448\u0442.", image: "img/advent-kinder/products/mini-eggs-green.webp" },
+      "mini-eggs-blue": { title: "Kinder Mini Eggs", category: "\u042f\u0439\u0446\u043e \u0432 \u0441\u0438\u043d\u0435\u0439 \u0444\u043e\u043b\u044c\u0433\u0435", quantity: "5 \u0448\u0442.", image: "img/advent-kinder/products/mini-eggs-blue.webp" },
+      "kinder-bueno": { title: "Kinder Bueno", category: "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u044b\u0439 \u0431\u0430\u0442\u043e\u043d\u0447\u0438\u043a", quantity: "1 \u0448\u0442.", image: "img/advent-kinder/products/kinder-bueno.webp" },
+      "kinder-country": { title: "Kinder Country", category: "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u044b\u0439 \u0431\u0430\u0442\u043e\u043d\u0447\u0438\u043a", quantity: "3 \u0448\u0442.", image: "img/advent-kinder/products/kinder-country.webp" },
+      "schoko-bons": { title: "Schoko-Bons", category: "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u044b\u0435 \u043a\u043e\u043d\u0444\u0435\u0442\u044b", quantity: "5 \u0448\u0442.", image: "img/advent-kinder/products/schoko-bons.webp" },
+    }),
+    days: Object.freeze({
+      1: { type: "gift", product: "mini-eggs-blue" }, 2: { type: "gift", product: "kinder-love" }, 3: { type: "gift", product: "mini-eggs-blue" },
+      4: { type: "gift", product: "schoko-bons" }, 5: { type: "game", title: "\u0418\u0433\u0440\u0430 \u0441 \u043f\u043e\u0434\u0430\u0440\u043a\u043e\u043c", description: "\u041e\u0442\u043a\u0440\u043e\u0439 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0443\u044e \u0438\u0433\u0440\u0443 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.", qr: "05.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nao" },
+      6: { type: "gift", product: "mini-eggs-green" }, 7: { type: "gift", product: "kinder-country" }, 8: { type: "game", title: "\u0412\u043e\u043b\u0448\u0435\u0431\u043d\u0430\u044f \u0437\u0432\u0435\u0437\u0434\u0430", description: "\u0422\u0435\u0431\u044f \u0436\u0434\u0451\u0442 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0430\u044f \u0438\u0433\u0440\u0430 Kinder.", qr: "08.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nat" },
+      9: { type: "gift", product: "kinder-love" }, 10: { type: "gift", product: "mini-eggs-green" }, 11: { type: "gift", product: "kinder-love" },
+      12: { type: "game", title: "\u0421\u043d\u0435\u0436\u043d\u0430\u044f \u0438\u0433\u0440\u0430", description: "\u0417\u0438\u043c\u043d\u0438\u0439 \u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.", qr: "12.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nath" },
+      13: { type: "gift", product: "mini-eggs-green" },
+      14: { type: "gift", product: "schoko-bons" }, 15: { type: "game", title: "\u0417\u0432\u043e\u043d\u043a\u0430\u044f \u0438\u0433\u0440\u0430", description: "\u041d\u0430\u0439\u0434\u0438 \u0441\u0432\u043e\u0439 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u044b\u0439 \u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder.", qr: "15.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214naf" },
+      16: { type: "gift", product: "mini-eggs-blue" }, 17: { type: "gift", product: "kinder-love" }, 18: { type: "gift", product: "mini-eggs-blue" },
+      19: { type: "game", title: "\u0418\u0433\u0440\u0430 \u0441 \u044f\u0439\u0446\u043e\u043c", description: "\u041f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0430\u044f \u0438\u0433\u0440\u0430 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.", qr: "19.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nafi" },
+      20: { type: "gift", product: "schoko-bons" }, 21: { type: "gift", product: "kinder-country" }, 22: { type: "gift", product: "schoko-bons" },
+      23: { type: "game", title: "\u041f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0430\u044f \u0438\u0433\u0440\u0430", description: "\u0417\u0438\u043c\u043d\u0438\u0439 \u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.", qr: "23.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nasi" },
+      24: { type: "gift", product: "kinder-country" }, 25: { type: "gift", product: "mini-eggs-blue" }, 26: { type: "gift", product: "schoko-bons" },
+      27: { type: "game", title: "\u0412\u043e\u043b\u0448\u0435\u0431\u043d\u0430\u044f \u0438\u0433\u0440\u0430", description: "\u0424\u0438\u043d\u0430\u043b\u044c\u043d\u044b\u0439 QR-\u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder \u044d\u0442\u043e\u0433\u043e \u043c\u0435\u0441\u044f\u0446\u0430.", qr: "27.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nase" },
+      28: { type: "gift", product: "mini-eggs-green" }, 29: { type: "gift", product: "kinder-love" }, 30: { type: "gift", product: "mini-eggs-green" }, 31: { type: "gift", product: "kinder-bueno" },
+    }),
+    generalGame: { title: "\u0421\u043e\u0437\u0434\u0430\u0439 \u0432\u043e\u043b\u0448\u0435\u0431\u043d\u0443\u044e \u0441\u043a\u0430\u0437\u043a\u0443", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214n" },
+  }),
 });

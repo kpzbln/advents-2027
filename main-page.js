@@ -37,8 +37,7 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
           id: "kinder-mix",
           name: "Kinder Mix",
           artClass: "calendar-art--kinder-mix",
-          enabled: false,
-          note: "\u0421\u043a\u043e\u0440\u043e \u043f\u043e\u044f\u0432\u0438\u0442\u0441\u044f \u043f\u043e\u0434\u0440\u043e\u0431\u043d\u044b\u0439 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044c.",
+          note: "\u041a\u0430\u0436\u0434\u044b\u0439 \u0434\u0435\u043d\u044c \u0441 1 \u043f\u043e 31 \u0434\u0435\u043a\u0430\u0431\u0440\u044f \u043e\u0442\u043a\u0440\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u0432 06:00 \u043f\u043e \u043c\u0435\u0441\u0442\u043d\u043e\u043c\u0443 \u0432\u0440\u0435\u043c\u0435\u043d\u0438.",
         },
       ];
 
@@ -150,6 +149,7 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
 
       function cardMarkup(calendar) {
         const openedDays = getOpenedDays(calendar);
+        const calendarTotalDays = calendarState.totalDays(calendar.id);
         const enabled = calendar.enabled !== false;
         const status = enabled
           ? getStatus(calendar, openedDays)
@@ -158,13 +158,13 @@ const TOTAL_DAYS = calendarState.TOTAL_DAYS;
           ? "advent-hello-kitty.html"
           : calendar.id === "payot"
             ? "advent-payot.html"
-            : null;
+            : "advent-kinder.html";
         const cardTag = enabled ? "a" : "div";
         const cardAttributes = enabled
           ? `href="${calendarHref}"`
           : 'aria-disabled="true"';
         const progressLabel = enabled
-          ? `\u041e\u0442\u043a\u0440\u044b\u0442\u043e ${openedDays.size} \u0438\u0437 ${TOTAL_DAYS}`
+          ? `\u041e\u0442\u043a\u0440\u044b\u0442\u043e ${openedDays.size} \u0438\u0437 ${calendarTotalDays}`
           : "\u0421\u043a\u043e\u0440\u043e";
         return `
           <li>

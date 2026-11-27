@@ -56,11 +56,11 @@ if (!browserPath) {
     server?.kill();
   });
 
-  async function newPage() {
+  async function newPage(fixedDate = [2026, 10, 26, 12, 0, 0]) {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-    await page.addInitScript(() => {
+    await page.addInitScript(({ dateParts }) => {
       const NativeDate = Date;
-      const fixedTime = new NativeDate(2026, 10, 26, 12, 0, 0).getTime();
+      const fixedTime = new NativeDate(...dateParts).getTime();
       class FixedDate extends NativeDate {
         constructor(...args) {
           super(...(args.length ? args : [fixedTime]));
@@ -71,20 +71,19 @@ if (!browserPath) {
         }
       }
       globalThis.Date = FixedDate;
-    });
+    }, { dateParts: fixedDate });
     return page;
   }
 
-  test("landing page disables Kinder Mix and exposes calendar cards", async () => {
+  test("landing page exposes all three calendar cards", async () => {
     const page = await newPage();
     await page.goto(`${baseUrl}/index.html`, { waitUntil: "domcontentloaded" });
     await page.locator("#calendar-list").waitFor();
     assert.equal(await page.title(), "Адвенты — уютный декабрь");
     const kinder = page.locator('[data-calendar-id="kinder-mix"]');
-    assert.equal(await kinder.evaluate((element) => element.tagName), "DIV");
-    assert.equal(await kinder.getAttribute("aria-disabled"), "true");
-    assert.equal(await kinder.getAttribute("href"), null);
-    assert.match(await kinder.textContent(), /Скоро/);
+    assert.equal(await kinder.evaluate((element) => element.tagName), "A");
+    assert.equal(await kinder.getAttribute("href"), "advent-kinder.html");
+    assert.match(await kinder.textContent(), /Открыто 0 из 31/);
     await page.close();
   });
 
@@ -99,12 +98,30 @@ if (!browserPath) {
     await page.close();
   });
 
-  test("Kinder Mix hash navigation does not enter an unfinished calendar", async () => {
+  test("Kinder Mix opens as a 31-day calendar", async () => {
     const page = await newPage();
-    await page.goto(`${baseUrl}/index.html#calendar/kinder-mix`, { waitUntil: "domcontentloaded" });
-    await page.locator("#calendar-list").waitFor();
-    assert.equal(new URL(page.url()).hash, "");
-    assert.equal(await page.locator("#selection-page").isHidden(), false);
+    await page.goto(`${baseUrl}/advent-kinder.html`, { waitUntil: "domcontentloaded" });
+    await page.locator(".kinder-progress").waitFor();
+    assert.equal(await page.title(), "Kinder Mix — Адвенты");
+    assert.equal(await page.locator(".kinder-progress").textContent(), "Открыто 0 из 31");
+    assert.equal(await page.locator(".kinder-day").count(), 31);
+    assert.equal(await page.locator(".kinder-day:disabled").count(), 31);
+    assert.equal(await page.locator("#kinder-next-unlock").textContent(), "1 декабря в 06:00");
+    await page.close();
+  });
+
+  test("Kinder Mix opens a sweet gift and a QR game", async () => {
+    const page = await newPage([2026, 11, 5, 6, 0, 0]);
+    await page.goto(`${baseUrl}/advent-kinder.html`, { waitUntil: "domcontentloaded" });
+    await page.locator('.kinder-day[data-day="1"]').click();
+    await page.locator(".kinder-modal-confirm").click();
+    assert.equal(await page.locator("#kinder-modal-result-title").textContent(), "Kinder Mini Eggs");
+    assert.equal(await page.locator(".kinder-progress").textContent(), "Открыто 1 из 31");
+    await page.locator(".kinder-modal-close-result").click();
+    await page.locator('.kinder-day[data-day="5"]').click();
+    await page.locator(".kinder-modal-confirm").click();
+    assert.equal(await page.locator("#kinder-modal-qr").isHidden(), false);
+    assert.match(await page.locator("#kinder-modal-link").getAttribute("href"), /214nao/);
     await page.close();
   });
 

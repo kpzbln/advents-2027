@@ -21,6 +21,9 @@ const APP_SHELL = [
   "./advent-payot.html",
   "./advent-payot.css",
   "./advent-payot.js",
+  "./advent-kinder.html",
+  "./advent-kinder.css",
+  "./advent-kinder.js",
   "./manifest.webmanifest",
   ...self.ADVENT_IMAGE_ASSETS,
 ];

@@ -27,8 +27,8 @@ version. `calendar-state.js` contains progress, available days, labels and
 preview selection. PAYOT uses December **2026**, with each day opening at **06:00
 in the visitor's local time**. `calendar-controller.js` shares storage refreshes
 and next-opening timers between the calendar pages.
-Hello Kitty follows the same daily December schedule as PAYOT, and Kinder Mix
-keeps its existing completed state.
+Hello Kitty follows the same daily December schedule as PAYOT. Kinder Mix has 31
+days: 24 sweet gifts and 7 QR games, also opening daily at 06:00.
 
 PAYOT starts with no opened gifts for a new browser. Opening dates apply to each
 day; an already opened gift can always be viewed again. Progress is local to the
@@ -41,7 +41,9 @@ The site uses WebP assets. Original PAYOT PNGs are preserved locally in
 from earlier Git commits.
 
 Gift descriptions and image mappings live in `calendar-data.js`; page scripts only
-contain rendering and interaction logic. After replacing/adding source PAYOT PNGs, run `npm run optimize:images`. It keeps
+contain rendering and interaction logic. Source Kinder images and QR crops are in
+`img/advent-kinder/info/`; `npm run optimize:images` rebuilds the derived Kinder
+assets as well as PAYOT images. It keeps
 matching box/product proportions, archives the PNGs, and regenerates
 `offline-assets.js`. The image manifest includes every deployed image so a
 successful first service-worker installation supports all gifts offline.
@@ -58,6 +60,6 @@ closing, returning focus to the trigger, and preserving background `inert` state
 ## Checks
 
 Run `npm test` for date boundaries, saved progress and page integration,
-resource timeouts, and offline/service-worker behavior. These tests use Node's
-built-in test runner and simulated DOM/cache APIs; browser visual checks are
-separate.
+resource timeouts, and offline/service-worker behavior. Run `npm run test:browser`
+for real browser checks of all three calendars. These tests use Node's built-in
+test runner and simulated DOM/cache APIs; browser visual checks are separate.
