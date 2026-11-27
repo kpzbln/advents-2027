@@ -66,9 +66,8 @@ function validateCalendarContent() {
   const helloKitty = data.helloKitty;
   for (const day of requireDayKeys(helloKitty, 24, "calendar-data.js / helloKitty")) {
     const gift = helloKitty?.[day];
-    for (const field of ["caption", "category", "description", "image", "imageWebp"]) requireText(gift?.[field], `calendar-data.js / helloKitty day ${day}`, field);
+    for (const field of ["caption", "category", "description", "image"]) requireText(gift?.[field], `calendar-data.js / helloKitty day ${day}`, field);
     if (gift?.image) checkExists(gift.image, `calendar-data.js / helloKitty day ${day}`);
-    if (gift?.imageWebp) checkExists(gift.imageWebp, `calendar-data.js / helloKitty day ${day}`);
   }
 
   const kinder = data.kinder;

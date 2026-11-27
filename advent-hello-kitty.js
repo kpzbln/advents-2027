@@ -245,7 +245,7 @@ const progressText = document.querySelector(".calendar-progress-text");
         door.innerHTML =
           '<div class="gift-box-received gift-box-revealed" aria-hidden="true"></div><span class="gift-opened-mark" aria-hidden="true">✓</span>';
         const revealedGift = door.firstElementChild;
-        revealedGift.style.backgroundImage = `url("${gift.imageWebp}")`;
+        revealedGift.style.backgroundImage = `url("${gift.image}")`;
       };
 
       const markDoorOpened = (door, gift) => {
@@ -310,7 +310,7 @@ const progressText = document.querySelector(".calendar-progress-text");
         imageFallbackAttempted = false;
         giftModalImage.alt = `Подарок за ${dateLabel(day)}`;
         giftModalImage.src = gift.image;
-        giftModalImageSource.srcset = gift.imageWebp;
+        giftModalImageSource.srcset = gift.image;
       };
 
       const updateConfirmationPreview = (door) => {

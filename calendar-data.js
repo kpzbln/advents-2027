@@ -1,355 +1,558 @@
 /* Static calendar content shared by the detail pages. */
 globalThis.AdventCalendarData = Object.freeze({
-  payot: Object.freeze((() => {
-    const giftFiles = {
-  1: ["PAYOT_01_box_front_illustration.webp", "PAYOT_01_SOURCE_30ml_illustration.webp"],
-  2: ["PAYOT_02_box_front_illustration.webp", "PAYOT_02_NUE_GELEE_50ml_illustration.webp"],
-  3: ["PAYOT_03_box_front_illustration.webp", "PAYOT_03_ROSELIFT_5ml_illustration.webp"],
-  4: ["PAYOT_04_box_front_illustration.webp", "PAYOT_04_RITUEL_DOUCEUR_100ml_illustration.webp"],
-  5: ["PAYOT_05_box_front_illustration.webp", "PAYOT_05_NEO_SERUM_5ml_illustration.webp"],
-  6: ["PAYOT_06_box_front_illustration.webp", "PAYOT_06_PATE_GRISE_10ml_illustration.webp"],
-  7: ["PAYOT_07_box_front_illustration.webp", "PAYOT_07_NUE_LOTION_TONIQUE_20ml_illustration.webp"],
-  8: ["PAYOT_08_box_front_illustration.webp", "PAYOT_08_STICK_LEVRES_4g_illustration.webp"],
-  9: ["PAYOT_09_box_front_corrected_illustration.webp", "PAYOT_09_ESSENTIEL_SHAMPOO_25ml_illustration.webp"],
-  10: ["PAYOT_10_box_front_illustration.webp", "PAYOT_10_ESSENTIEL_CONDITIONER_25ml_illustration.webp"],
-  11: ["PAYOT_11_box_front_illustration.webp", "PAYOT_11_PATE_GRISE_MASK_15ml_illustration.webp"],
-  12: ["PAYOT_12_box_front_illustration.webp", "PAYOT_12_MY_PAYOT_CREME_VITAMINEE_15ml_illustration.webp"],
-  13: ["PAYOT_13_box_front_illustration.webp", "PAYOT_13_NUE_MASQUE_PEELING_INTENSE_4ml_illustration.webp"],
-  14: ["PAYOT_14_box_front_illustration.webp", "PAYOT_14_RITUEL_DOUCEUR_SCRUB_25ml_illustration.webp"],
-  15: ["PAYOT_15_box_front_illustration.webp", "PAYOT_15_SUPREME_EYE_5ml_illustration.webp"],
-  16: ["PAYOT_16_box_front_illustration.webp", "PAYOT_16_MY_PAYOT_CLEANSING_MASK_15ml_illustration.webp"],
-  17: ["PAYOT_17_box_front_illustration.webp", "PAYOT_17_PATE_GRISE_EMULSION_15ml_illustration.webp"],
-  18: ["PAYOT_18_box_front_illustration.webp", "PAYOT_18_RITUEL_DOUCEUR_HAND_CREAM_30ml_illustration.webp"],
-  19: ["PAYOT_19_box_front_illustration.webp", "PAYOT_19_MY_PAYOT_HUILE_BONNE_5ml_illustration.webp"],
-  20: ["PAYOT_20_box_front_illustration.webp", "PAYOT_20_SOURCE_MASQUE_15ml_illustration.webp"],
-  21: ["PAYOT_21_box_front_illustration.webp", "PAYOT_21_LISSE_SLEEPING_CREME_30ml_illustration.webp"],
-  22: ["PAYOT_22_box_front_illustration.webp", "PAYOT_22_NUE_EAU_MICELLAIRE_100ml_illustration.webp"],
-  23: ["PAYOT_23_box_front_illustration.webp", "PAYOT_23_PATE_GRISE_CLEANSING_GEL_50ml_illustration.webp"],
-  24: ["PAYOT_24_box_front_illustration.webp", "PAYOT_24_SOURCE_INFUSION_125ml_illustration.webp"],
-};
+  payot: Object.freeze(
+    (() => {
+      const giftFiles = {
+        1: [
+          "PAYOT_01_box_front_illustration.webp",
+          "PAYOT_01_SOURCE_30ml_illustration.webp",
+        ],
+        2: [
+          "PAYOT_02_box_front_illustration.webp",
+          "PAYOT_02_NUE_GELEE_50ml_illustration.webp",
+        ],
+        3: [
+          "PAYOT_03_box_front_illustration.webp",
+          "PAYOT_03_ROSELIFT_5ml_illustration.webp",
+        ],
+        4: [
+          "PAYOT_04_box_front_illustration.webp",
+          "PAYOT_04_RITUEL_DOUCEUR_100ml_illustration.webp",
+        ],
+        5: [
+          "PAYOT_05_box_front_illustration.webp",
+          "PAYOT_05_NEO_SERUM_5ml_illustration.webp",
+        ],
+        6: [
+          "PAYOT_06_box_front_illustration.webp",
+          "PAYOT_06_PATE_GRISE_10ml_illustration.webp",
+        ],
+        7: [
+          "PAYOT_07_box_front_illustration.webp",
+          "PAYOT_07_NUE_LOTION_TONIQUE_20ml_illustration.webp",
+        ],
+        8: [
+          "PAYOT_08_box_front_illustration.webp",
+          "PAYOT_08_STICK_LEVRES_4g_illustration.webp",
+        ],
+        9: [
+          "PAYOT_09_box_front_corrected_illustration.webp",
+          "PAYOT_09_ESSENTIEL_SHAMPOO_25ml_illustration.webp",
+        ],
+        10: [
+          "PAYOT_10_box_front_illustration.webp",
+          "PAYOT_10_ESSENTIEL_CONDITIONER_25ml_illustration.webp",
+        ],
+        11: [
+          "PAYOT_11_box_front_illustration.webp",
+          "PAYOT_11_PATE_GRISE_MASK_15ml_illustration.webp",
+        ],
+        12: [
+          "PAYOT_12_box_front_illustration.webp",
+          "PAYOT_12_MY_PAYOT_CREME_VITAMINEE_15ml_illustration.webp",
+        ],
+        13: [
+          "PAYOT_13_box_front_illustration.webp",
+          "PAYOT_13_NUE_MASQUE_PEELING_INTENSE_4ml_illustration.webp",
+        ],
+        14: [
+          "PAYOT_14_box_front_illustration.webp",
+          "PAYOT_14_RITUEL_DOUCEUR_SCRUB_25ml_illustration.webp",
+        ],
+        15: [
+          "PAYOT_15_box_front_illustration.webp",
+          "PAYOT_15_SUPREME_EYE_5ml_illustration.webp",
+        ],
+        16: [
+          "PAYOT_16_box_front_illustration.webp",
+          "PAYOT_16_MY_PAYOT_CLEANSING_MASK_15ml_illustration.webp",
+        ],
+        17: [
+          "PAYOT_17_box_front_illustration.webp",
+          "PAYOT_17_PATE_GRISE_EMULSION_15ml_illustration.webp",
+        ],
+        18: [
+          "PAYOT_18_box_front_illustration.webp",
+          "PAYOT_18_RITUEL_DOUCEUR_HAND_CREAM_30ml_illustration.webp",
+        ],
+        19: [
+          "PAYOT_19_box_front_illustration.webp",
+          "PAYOT_19_MY_PAYOT_HUILE_BONNE_5ml_illustration.webp",
+        ],
+        20: [
+          "PAYOT_20_box_front_illustration.webp",
+          "PAYOT_20_SOURCE_MASQUE_15ml_illustration.webp",
+        ],
+        21: [
+          "PAYOT_21_box_front_illustration.webp",
+          "PAYOT_21_LISSE_SLEEPING_CREME_30ml_illustration.webp",
+        ],
+        22: [
+          "PAYOT_22_box_front_illustration.webp",
+          "PAYOT_22_NUE_EAU_MICELLAIRE_100ml_illustration.webp",
+        ],
+        23: [
+          "PAYOT_23_box_front_illustration.webp",
+          "PAYOT_23_PATE_GRISE_CLEANSING_GEL_50ml_illustration.webp",
+        ],
+        24: [
+          "PAYOT_24_box_front_illustration.webp",
+          "PAYOT_24_SOURCE_INFUSION_125ml_illustration.webp",
+        ],
+      };
 
-const giftDetails = {
-  1: {
-    caption: "SOURCE — увлажняющий крем, 30 мл",
-    category: "Увлажнение",
-    description: "Адаптогенный увлажняющий крем PAYOT для ежедневного ухода.",
-  },
-  2: {
-    caption: "NUE — очищающий гель, 50 мл",
-    category: "Очищение",
-    description: "Мягкий очищающий гель для свежего и комфортного ухода за кожей.",
-  },
-  3: {
-    caption: "Roselift — уход для кожи, 5 мл",
-    category: "Уход за лицом",
-    description: "Мини-формат средства Roselift для ежедневного ухода PAYOT.",
-  },
-  4: {
-    caption: "RITUEL DOUCEUR — средство для ухода, 100 мл",
-    category: "Уход за телом",
-    description: "Нежное средство из линии RITUEL DOUCEUR для мягкого ухода.",
-  },
-  5: {
-    caption: "NEO-SERUM — сыворотка, 5 мл",
-    category: "Сыворотка",
-    description: "Концентрированный мини-формат сыворотки PAYOT.",
-  },
-  6: {
-    caption: "PÂTE GRISE — локальный уход, 10 мл",
-    category: "Уход за проблемной кожей",
-    description: "Средство линии PÂTE GRISE для локального ухода за кожей.",
-  },
-  7: {
-    caption: "NUE — тонизирующий лосьон, 20 мл",
-    category: "Тонизирование",
-    description: "Освежающий лосьон NUE для завершения этапа очищения.",
-  },
-  8: {
-    caption: "Stick lèvres — бальзам для губ, 4 г",
-    category: "Уход за губами",
-    description: "Компактный бальзам PAYOT для ежедневного ухода за губами.",
-  },
-  9: {
-    caption: "ESSENTIEL — шампунь, 25 мл",
-    category: "Уход за волосами",
-    description: "Дорожный формат шампуня ESSENTIEL для мягкого очищения волос.",
-  },
-  10: {
-    caption: "ESSENTIEL — кондиционер, 25 мл",
-    category: "Уход за волосами",
-    description: "Дорожный формат кондиционера ESSENTIEL для ухода за волосами.",
-  },
-  11: {
-    caption: "PÂTE GRISE — маска, 15 мл",
-    category: "Маска",
-    description: "Маска PÂTE GRISE для ухода за кожей с несовершенствами.",
-  },
-  12: {
-    caption: "MY PAYOT — витаминный крем, 15 мл",
-    category: "Уход за лицом",
-    description: "Витаминный крем MY PAYOT для свежего и сияющего вида кожи.",
-  },
-  13: {
-    caption: "NUE — интенсивная пилинг-маска, 4 мл",
-    category: "Маска",
-    description: "Интенсивная пилинг-маска NUE в компактном формате.",
-  },
-  14: {
-    caption: "RITUEL DOUCEUR — скраб, 25 мл",
-    category: "Уход за телом",
-    description: "Мягкий скраб RITUEL DOUCEUR для гладкости кожи.",
-  },
-  15: {
-    caption: "SUPREME EYE — уход для глаз, 5 мл",
-    category: "Уход за зоной вокруг глаз",
-    description: "Мини-формат ухода SUPREME EYE для нежной зоны вокруг глаз.",
-  },
-  16: {
-    caption: "MY PAYOT — очищающая маска, 15 мл",
-    category: "Маска",
-    description: "Очищающая маска MY PAYOT для ухода за кожей лица.",
-  },
-  17: {
-    caption: "PÂTE GRISE — эмульсия, 15 мл",
-    category: "Уход за проблемной кожей",
-    description: "Эмульсия PÂTE GRISE для ежедневного ухода за кожей.",
-  },
-  18: {
-    caption: "RITUEL DOUCEUR — крем для рук, 30 мл",
-    category: "Уход за руками",
-    description: "Питательный крем RITUEL DOUCEUR для мягкости кожи рук.",
-  },
-  19: {
-    caption: "MY PAYOT — масло для сияния кожи, 5 мл",
-    category: "Масло",
-    description: "Мини-формат масла MY PAYOT для ухоженного и сияющего вида кожи.",
-  },
-  20: {
-    caption: "SOURCE — маска, 15 мл",
-    category: "Маска",
-    description: "Увлажняющая маска SOURCE для ухода за кожей лица.",
-  },
-  21: {
-    caption: "LISSE — ночной крем, 30 мл",
-    category: "Ночной уход",
-    description: "Ночной крем LISSE для вечернего ухода за кожей.",
-  },
-  22: {
-    caption: "NUE — мицеллярная вода, 100 мл",
-    category: "Очищение",
-    description: "Мицеллярная вода NUE для бережного удаления макияжа и загрязнений.",
-  },
-  23: {
-    caption: "PÂTE GRISE — очищающий гель, 50 мл",
-    category: "Очищение",
-    description: "Очищающий гель PÂTE GRISE для ежедневного ухода за кожей.",
-  },
-  24: {
-    caption: "SOURCE — маска-инфузия, 125 мл",
-    category: "Увлажнение",
-    description: "Увлажняющее средство SOURCE для насыщенного ухода за кожей.",
-  },
-};
-    return { giftFiles, giftDetails };
-  })()),
-  helloKitty: Object.freeze((() => {
-    const gifts = {
+      const giftDetails = {
         1: {
-          caption: "Hello Kitty в праздничном костюме",
-          category: "Фигурка",
-          description: "Hello Kitty в красной шапочке и шарфе для зимней коллекции.",
-          image: "img/advent-hello-kitty/gifts/01.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/01.webp",
+          caption: "SOURCE — увлажняющий крем, 30 мл",
+          category: "Увлажнение",
+          description:
+            "Адаптогенный увлажняющий крем PAYOT для ежедневного ухода.",
         },
         2: {
-          caption: "Lala в зимней шапочке",
-          category: "Фигурка",
-          description: "Нежная Lala в розовом праздничном образе из серии Hello Kitty & Friends.",
-          image: "img/advent-hello-kitty/gifts/02.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/02.webp",
+          caption: "NUE — очищающий гель, 50 мл",
+          category: "Очищение",
+          description:
+            "Мягкий очищающий гель для свежего и комфортного ухода за кожей.",
         },
         3: {
-          caption: "Подставка Bitty Pop! для демонстрации",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/03.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/03.webp",
+          caption: "Roselift — уход для кожи, 5 мл",
+          category: "Уход за лицом",
+          description:
+            "Мини-формат средства Roselift для ежедневного ухода PAYOT.",
         },
         4: {
-          caption: "Kiki в зимней шапочке",
-          category: "Фигурка",
-          description: "Kiki в голубой зимней шапочке и тёплом праздничном образе.",
-          image: "img/advent-hello-kitty/gifts/04.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/04.webp",
+          caption: "RITUEL DOUCEUR — средство для ухода, 100 мл",
+          category: "Уход за телом",
+          description:
+            "Нежное средство из линии RITUEL DOUCEUR для мягкого ухода.",
         },
         5: {
-          caption: "Праздничная ёлочка",
-          category: "Аксессуар",
-          description: "Золотистая ёлочка на подставке для зимней витрины.",
-          image: "img/advent-hello-kitty/gifts/05.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/05.webp",
+          caption: "NEO-SERUM — сыворотка, 5 мл",
+          category: "Сыворотка",
+          description: "Концентрированный мини-формат сыворотки PAYOT.",
         },
         6: {
-          caption: "Подставка Bitty Pop! для демонстрации",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/06.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/06.webp",
+          caption: "PÂTE GRISE — локальный уход, 10 мл",
+          category: "Уход за проблемной кожей",
+          description:
+            "Средство линии PÂTE GRISE для локального ухода за кожей.",
         },
         7: {
-          caption: "Tuxedo Sam в зимнем образе",
-          category: "Фигурка",
-          description: "Забавный Tuxedo Sam в зимнем костюме и цилиндре.",
-          image: "img/advent-hello-kitty/gifts/07.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/07.webp",
+          caption: "NUE — тонизирующий лосьон, 20 мл",
+          category: "Тонизирование",
+          description: "Освежающий лосьон NUE для завершения этапа очищения.",
         },
         8: {
-          caption: "Двойная красная подставка Bitty Pop!",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации двух фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/08.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/08.webp",
+          caption: "Stick lèvres — бальзам для губ, 4 г",
+          category: "Уход за губами",
+          description:
+            "Компактный бальзам PAYOT для ежедневного ухода за губами.",
+        },
+        9: {
+          caption: "ESSENTIEL — шампунь, 25 мл",
+          category: "Уход за волосами",
+          description:
+            "Дорожный формат шампуня ESSENTIEL для мягкого очищения волос.",
+        },
+        10: {
+          caption: "ESSENTIEL — кондиционер, 25 мл",
+          category: "Уход за волосами",
+          description:
+            "Дорожный формат кондиционера ESSENTIEL для ухода за волосами.",
+        },
+        11: {
+          caption: "PÂTE GRISE — маска, 15 мл",
+          category: "Маска",
+          description:
+            "Маска PÂTE GRISE для ухода за кожей с несовершенствами.",
+        },
+        12: {
+          caption: "MY PAYOT — витаминный крем, 15 мл",
+          category: "Уход за лицом",
+          description:
+            "Витаминный крем MY PAYOT для свежего и сияющего вида кожи.",
+        },
+        13: {
+          caption: "NUE — интенсивная пилинг-маска, 4 мл",
+          category: "Маска",
+          description: "Интенсивная пилинг-маска NUE в компактном формате.",
+        },
+        14: {
+          caption: "RITUEL DOUCEUR — скраб, 25 мл",
+          category: "Уход за телом",
+          description: "Мягкий скраб RITUEL DOUCEUR для гладкости кожи.",
+        },
+        15: {
+          caption: "SUPREME EYE — уход для глаз, 5 мл",
+          category: "Уход за зоной вокруг глаз",
+          description:
+            "Мини-формат ухода SUPREME EYE для нежной зоны вокруг глаз.",
+        },
+        16: {
+          caption: "MY PAYOT — очищающая маска, 15 мл",
+          category: "Маска",
+          description: "Очищающая маска MY PAYOT для ухода за кожей лица.",
+        },
+        17: {
+          caption: "PÂTE GRISE — эмульсия, 15 мл",
+          category: "Уход за проблемной кожей",
+          description: "Эмульсия PÂTE GRISE для ежедневного ухода за кожей.",
+        },
+        18: {
+          caption: "RITUEL DOUCEUR — крем для рук, 30 мл",
+          category: "Уход за руками",
+          description: "Питательный крем RITUEL DOUCEUR для мягкости кожи рук.",
+        },
+        19: {
+          caption: "MY PAYOT — масло для сияния кожи, 5 мл",
+          category: "Масло",
+          description:
+            "Мини-формат масла MY PAYOT для ухоженного и сияющего вида кожи.",
+        },
+        20: {
+          caption: "SOURCE — маска, 15 мл",
+          category: "Маска",
+          description: "Увлажняющая маска SOURCE для ухода за кожей лица.",
+        },
+        21: {
+          caption: "LISSE — ночной крем, 30 мл",
+          category: "Ночной уход",
+          description: "Ночной крем LISSE для вечернего ухода за кожей.",
+        },
+        22: {
+          caption: "NUE — мицеллярная вода, 100 мл",
+          category: "Очищение",
+          description:
+            "Мицеллярная вода NUE для бережного удаления макияжа и загрязнений.",
+        },
+        23: {
+          caption: "PÂTE GRISE — очищающий гель, 50 мл",
+          category: "Очищение",
+          description:
+            "Очищающий гель PÂTE GRISE для ежедневного ухода за кожей.",
+        },
+        24: {
+          caption: "SOURCE — маска-инфузия, 125 мл",
+          category: "Увлажнение",
+          description:
+            "Увлажняющее средство SOURCE для насыщенного ухода за кожей.",
+        },
+      };
+      return { giftFiles, giftDetails };
+    })(),
+  ),
+  helloKitty: Object.freeze(
+    (() => {
+      const gifts = {
+        1: {
+          caption: "Hello Kitty — зимний праздничный костюм",
+          category: "Коллекционная фигурка",
+          description:
+            "Фигурка Hello Kitty в красной шапочке и шарфе, украшенная маленькой праздничной деталью.",
+          image: "img/advent-hello-kitty/gifts/01.webp",
+        },
+        2: {
+          caption: "Lala — розовый зимний образ",
+          category: "Коллекционная фигурка",
+          description:
+            "Фигурка Lala в розовой шапочке с голубым бантом и маленьким подарком.",
+          image: "img/advent-hello-kitty/gifts/02.webp",
+        },
+        3: {
+          caption: "Двойной модуль красной подставки",
+          category: "Элемент для демонстрации",
+          description:
+            "Красный прямоугольный элемент с местом для двух коллекционных фигурок.",
+          image: "img/advent-hello-kitty/gifts/03,08,12,18.webp",
+        },
+        4: {
+          caption: "Kiki — мятная шапочка и подарок",
+          category: "Коллекционная фигурка",
+          description:
+            "Фигурка Kiki в мятной шапочке с праздничным подарком в руках.",
+          image: "img/advent-hello-kitty/gifts/04.webp",
+        },
+        5: {
+          caption: "Праздничная ёлочка на подставке",
+          category: "Праздничный аксессуар",
+          description:
+            "Миниатюрная ёлочка с золотой звездой, красными и белыми украшениями.",
+          image: "img/advent-hello-kitty/gifts/05.webp",
+        },
+        6: {
+          caption: "Одинарный модуль красной подставки",
+          category: "Элемент для демонстрации",
+          description:
+            "Красный прямоугольный элемент с местом для одной коллекционной фигурки.",
+          image: "img/advent-hello-kitty/gifts/06,20.webp",
+        },
+        7: {
+          caption: "Tuxedo Sam — праздничный снеговик",
+          category: "Коллекционная фигурка",
+          description:
+            "Фигурка Tuxedo Sam в образе снеговика с цилиндром и ярким зимним шарфом.",
+          image: "img/advent-hello-kitty/gifts/07.webp",
+        },
+        8: {
+          caption: "Двойной модуль красной подставки",
+          category: "Элемент для демонстрации",
+          description:
+            "Красный прямоугольный элемент с местом для двух коллекционных фигурок.",
+          image: "img/advent-hello-kitty/gifts/03,08,12,18.webp",
         },
         9: {
           caption: "Подарочная коробка с бантом",
-          category: "Аксессуар",
-          description: "Праздничная коробочка для зимней композиции календаря.",
+          category: "Праздничный аксессуар",
+          description:
+            "Миниатюрная коробка с красным бантом, золотыми звёздами и праздничными украшениями.",
           image: "img/advent-hello-kitty/gifts/09.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/09.webp",
         },
         10: {
-          caption: "Красный элемент подставки Bitty Pop!",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/10.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/10.webp",
+          caption: "Узкий треугольный модуль красной подставки",
+          category: "Элемент для демонстрации",
+          description:
+            "Красный узкий треугольный элемент для оформления коллекционной композиции.",
+          image: "img/advent-hello-kitty/gifts/10,15.webp",
         },
         11: {
-          caption: "Chococat в праздничном костюме",
-          category: "Фигурка",
-          description: "Chococat в зелёном праздничном костюме и зимней шапочке.",
+          caption: "Chococat — костюм праздничной ёлочки",
+          category: "Коллекционная фигурка",
+          description:
+            "Фигурка Chococat в зелёном костюме ёлочки с золотой звездой.",
           image: "img/advent-hello-kitty/gifts/11.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/11.webp",
         },
         12: {
-          caption: "Подставка Bitty Pop! для демонстрации",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/12.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/12.webp",
+          caption: "Двойной модуль красной подставки",
+          category: "Элемент для демонстрации",
+          description:
+            "Красный прямоугольный элемент с местом для двух коллекционных фигурок.",
+          image: "img/advent-hello-kitty/gifts/03,08,12,18.webp",
         },
         13: {
-          caption: "My Melody в зимнем образе",
-          category: "Фигурка",
-          description: "My Melody в тёплой шапочке и праздничной зимней одежде.",
+          caption: "My Melody — тёплый зимний наряд",
+          category: "Коллекционная фигурка",
+          description:
+            "Фигурка My Melody в розовой шапочке, шарфе и праздничном зимнем костюме.",
           image: "img/advent-hello-kitty/gifts/13.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/13.webp",
         },
         14: {
-          caption: "Голубой футляр для брелка",
-          category: "Футляр",
-          description: "Голубой футляр с Hello Kitty для хранения брелка.",
-          image: "img/advent-hello-kitty/gifts/14.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/14.webp",
+          caption: "Голубой футляр Hello Kitty для брелока",
+          category: "Футляр для брелока",
+          description:
+            "Прозрачно-голубой мини-футляр с силуэтом Hello Kitty и металлическим креплением.",
+          image: "img/advent-hello-kitty/gifts/14,19.webp",
         },
         15: {
-          caption: "Красный элемент подставки Bitty Pop!",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/15.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/15.webp",
+          caption: "Одинарный треугольный модуль красной подставки",
+          category: "Элемент для демонстрации",
+          description:
+            "Красный одинарный треугольный элемент для оформления коллекционной композиции.",
+          image: "img/advent-hello-kitty/gifts/10,15.webp",
         },
         16: {
-          caption: "Pochacco в костюме ёлочки",
-          category: "Фигурка",
-          description: "Pochacco в зелёном костюме ёлочки с праздничной звездой.",
+          caption: "Pochacco — костюм ёлочки",
+          category: "Коллекционная фигурка",
+          description:
+            "Фигурка Pochacco в зелёном костюме ёлочки с праздничной звездой.",
           image: "img/advent-hello-kitty/gifts/16.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/16.webp",
         },
         17: {
-          caption: "Pompompurin в оленьих рожках",
-          category: "Фигурка",
-          description: "Pompompurin в праздничном образе с оленьими рожками.",
+          caption: "Pompompurin — праздничный олень",
+          category: "Коллекционная фигурка",
+          description:
+            "Фигурка Pompompurin с оленьими рожками и зимними праздничными украшениями.",
           image: "img/advent-hello-kitty/gifts/17.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/17.webp",
         },
         18: {
-          caption: "Подставка Bitty Pop! для демонстрации",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/18.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/18.webp",
+          caption: "Двойной модуль красной подставки",
+          category: "Элемент для демонстрации",
+          description:
+            "Красный прямоугольный элемент с местом для двух коллекционных фигурок.",
+          image: "img/advent-hello-kitty/gifts/03,08,12,18.webp",
         },
         19: {
-          caption: "Голубой футляр для брелка",
-          category: "Футляр",
-          description: "Голубой футляр с Hello Kitty для хранения брелка.",
-          image: "img/advent-hello-kitty/gifts/19.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/19.webp",
+          caption: "Голубой футляр Hello Kitty для брелока",
+          category: "Футляр для брелока",
+          description:
+            "Прозрачно-голубой мини-футляр с силуэтом Hello Kitty и металлическим креплением.",
+          image: "img/advent-hello-kitty/gifts/14,19.webp",
         },
         20: {
-          caption: "Подставка Bitty Pop! для демонстрации",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
-          image: "img/advent-hello-kitty/gifts/20.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/20.webp",
+          caption: "Одинарный модуль красной подставки",
+          category: "Элемент для демонстрации",
+          description:
+            "Красный прямоугольный элемент с местом для одной коллекционной фигурки.",
+          image: "img/advent-hello-kitty/gifts/06,20.webp",
         },
         21: {
-          caption: "Kuromi в костюме оленёнка",
-          category: "Фигурка",
-          description: "Kuromi в тёплом праздничном костюме маленького оленёнка.",
+          caption: "Kuromi — праздничный оленёнок",
+          category: "Коллекционная фигурка",
+          description:
+            "Фигурка Kuromi в зимнем костюме с оленьими рожками и праздничной шапочкой.",
           image: "img/advent-hello-kitty/gifts/21.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/21.webp",
         },
         22: {
-          caption: "Подарок с зимним бантом",
-          category: "Аксессуар",
-          description: "Розовая подарочная коробка со снежинками и праздничным бантом.",
+          caption: "Подарочная коробка со снежинками",
+          category: "Праздничный аксессуар",
+          description:
+            "Розовая коробка с красной лентой, белыми снежинками и золотой звездой.",
           image: "img/advent-hello-kitty/gifts/22.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/22.webp",
         },
         23: {
-          caption: "Красная треугольная подставка",
-          category: "Подставка",
-          description: "Красный элемент для демонстрации фигурок, который можно складывать друг на друга.",
+          caption: "Двойной треугольный модуль красной подставки",
+          category: "Элемент для демонстрации",
+          description:
+            "Красный двойной треугольный элемент для оформления коллекционной композиции.",
           image: "img/advent-hello-kitty/gifts/23.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/23.webp",
         },
         24: {
-          caption: "Hello Kitty в зимнем образе",
-          category: "Фигурка",
-          description: "Hello Kitty в праздничной шапочке и зимнем наряде.",
+          caption: "Hello Kitty — праздничный олений образ",
+          category: "Коллекционная фигурка",
+          description:
+            "Фигурка Hello Kitty в красно-зелёном зимнем наряде с праздничным головным убором.",
           image: "img/advent-hello-kitty/gifts/24.webp",
-          imageWebp: "img/advent-hello-kitty/gifts/24.webp",
         },
       };
-    return gifts;
-  })()),
+      return gifts;
+    })(),
+  ),
   kinder: Object.freeze({
     products: Object.freeze({
-      "kinder-love": { title: "Kinder Love Mini", category: "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u043e\u0435 \u0441\u0435\u0440\u0434\u0446\u0435", quantity: "5 \u0448\u0442.", image: "img/advent-kinder/products/kinder-love.webp" },
-      "mini-eggs-green": { title: "Kinder Mini Eggs", category: "\u042f\u0439\u0446\u043e \u0432 \u0437\u0435\u043b\u0451\u043d\u043e\u0439 \u0444\u043e\u043b\u044c\u0433\u0435", quantity: "5 \u0448\u0442.", image: "img/advent-kinder/products/mini-eggs-green.webp" },
-      "mini-eggs-blue": { title: "Kinder Mini Eggs", category: "\u042f\u0439\u0446\u043e \u0432 \u0441\u0438\u043d\u0435\u0439 \u0444\u043e\u043b\u044c\u0433\u0435", quantity: "5 \u0448\u0442.", image: "img/advent-kinder/products/mini-eggs-blue.webp" },
-      "kinder-bueno": { title: "Kinder Bueno", category: "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u044b\u0439 \u0431\u0430\u0442\u043e\u043d\u0447\u0438\u043a", quantity: "1 \u0448\u0442.", image: "img/advent-kinder/products/kinder-bueno.webp" },
-      "kinder-country": { title: "Kinder Country", category: "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u044b\u0439 \u0431\u0430\u0442\u043e\u043d\u0447\u0438\u043a", quantity: "3 \u0448\u0442.", image: "img/advent-kinder/products/kinder-country.webp" },
-      "schoko-bons": { title: "Schoko-Bons", category: "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u044b\u0435 \u043a\u043e\u043d\u0444\u0435\u0442\u044b", quantity: "5 \u0448\u0442.", image: "img/advent-kinder/products/schoko-bons.webp" },
+      "kinder-love": {
+        title: "Kinder Love Mini",
+        category:
+          "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u043e\u0435 \u0441\u0435\u0440\u0434\u0446\u0435",
+        quantity: "5 \u0448\u0442.",
+        image: "img/advent-kinder/products/kinder-love.webp",
+      },
+      "mini-eggs-green": {
+        title: "Kinder Mini Eggs",
+        category:
+          "\u042f\u0439\u0446\u043e \u0432 \u0437\u0435\u043b\u0451\u043d\u043e\u0439 \u0444\u043e\u043b\u044c\u0433\u0435",
+        quantity: "5 \u0448\u0442.",
+        image: "img/advent-kinder/products/mini-eggs-green.webp",
+      },
+      "mini-eggs-blue": {
+        title: "Kinder Mini Eggs",
+        category:
+          "\u042f\u0439\u0446\u043e \u0432 \u0441\u0438\u043d\u0435\u0439 \u0444\u043e\u043b\u044c\u0433\u0435",
+        quantity: "5 \u0448\u0442.",
+        image: "img/advent-kinder/products/mini-eggs-blue.webp",
+      },
+      "kinder-bueno": {
+        title: "Kinder Bueno",
+        category:
+          "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u044b\u0439 \u0431\u0430\u0442\u043e\u043d\u0447\u0438\u043a",
+        quantity: "1 \u0448\u0442.",
+        image: "img/advent-kinder/products/kinder-bueno.webp",
+      },
+      "kinder-country": {
+        title: "Kinder Country",
+        category:
+          "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u044b\u0439 \u0431\u0430\u0442\u043e\u043d\u0447\u0438\u043a",
+        quantity: "3 \u0448\u0442.",
+        image: "img/advent-kinder/products/kinder-country.webp",
+      },
+      "schoko-bons": {
+        title: "Schoko-Bons",
+        category:
+          "\u0428\u043e\u043a\u043e\u043b\u0430\u0434\u043d\u044b\u0435 \u043a\u043e\u043d\u0444\u0435\u0442\u044b",
+        quantity: "5 \u0448\u0442.",
+        image: "img/advent-kinder/products/schoko-bons.webp",
+      },
     }),
     days: Object.freeze({
-      1: { type: "gift", product: "mini-eggs-blue" }, 2: { type: "gift", product: "kinder-love" }, 3: { type: "gift", product: "mini-eggs-blue" },
-      4: { type: "gift", product: "schoko-bons" }, 5: { type: "game", title: "\u0418\u0433\u0440\u0430 \u0441 \u043f\u043e\u0434\u0430\u0440\u043a\u043e\u043c", description: "\u041e\u0442\u043a\u0440\u043e\u0439 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0443\u044e \u0438\u0433\u0440\u0443 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.", qr: "05.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nao" },
-      6: { type: "gift", product: "mini-eggs-green" }, 7: { type: "gift", product: "kinder-country" }, 8: { type: "game", title: "\u0412\u043e\u043b\u0448\u0435\u0431\u043d\u0430\u044f \u0437\u0432\u0435\u0437\u0434\u0430", description: "\u0422\u0435\u0431\u044f \u0436\u0434\u0451\u0442 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0430\u044f \u0438\u0433\u0440\u0430 Kinder.", qr: "08.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nat" },
-      9: { type: "gift", product: "kinder-love" }, 10: { type: "gift", product: "mini-eggs-green" }, 11: { type: "gift", product: "kinder-love" },
-      12: { type: "game", title: "\u0421\u043d\u0435\u0436\u043d\u0430\u044f \u0438\u0433\u0440\u0430", description: "\u0417\u0438\u043c\u043d\u0438\u0439 \u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.", qr: "12.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nath" },
+      1: { type: "gift", product: "mini-eggs-blue" },
+      2: { type: "gift", product: "kinder-love" },
+      3: { type: "gift", product: "mini-eggs-blue" },
+      4: { type: "gift", product: "schoko-bons" },
+      5: {
+        type: "game",
+        title:
+          "\u0418\u0433\u0440\u0430 \u0441 \u043f\u043e\u0434\u0430\u0440\u043a\u043e\u043c",
+        description:
+          "\u041e\u0442\u043a\u0440\u043e\u0439 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0443\u044e \u0438\u0433\u0440\u0443 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.",
+        qr: "05.webp",
+        url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nao",
+      },
+      6: { type: "gift", product: "mini-eggs-green" },
+      7: { type: "gift", product: "kinder-country" },
+      8: {
+        type: "game",
+        title:
+          "\u0412\u043e\u043b\u0448\u0435\u0431\u043d\u0430\u044f \u0437\u0432\u0435\u0437\u0434\u0430",
+        description:
+          "\u0422\u0435\u0431\u044f \u0436\u0434\u0451\u0442 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0430\u044f \u0438\u0433\u0440\u0430 Kinder.",
+        qr: "08.webp",
+        url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nat",
+      },
+      9: { type: "gift", product: "kinder-love" },
+      10: { type: "gift", product: "mini-eggs-green" },
+      11: { type: "gift", product: "kinder-love" },
+      12: {
+        type: "game",
+        title:
+          "\u0421\u043d\u0435\u0436\u043d\u0430\u044f \u0438\u0433\u0440\u0430",
+        description:
+          "\u0417\u0438\u043c\u043d\u0438\u0439 \u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.",
+        qr: "12.webp",
+        url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nath",
+      },
       13: { type: "gift", product: "mini-eggs-green" },
-      14: { type: "gift", product: "schoko-bons" }, 15: { type: "game", title: "\u0417\u0432\u043e\u043d\u043a\u0430\u044f \u0438\u0433\u0440\u0430", description: "\u041d\u0430\u0439\u0434\u0438 \u0441\u0432\u043e\u0439 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u044b\u0439 \u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder.", qr: "15.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214naf" },
-      16: { type: "gift", product: "mini-eggs-blue" }, 17: { type: "gift", product: "kinder-love" }, 18: { type: "gift", product: "mini-eggs-blue" },
-      19: { type: "game", title: "\u0418\u0433\u0440\u0430 \u0441 \u044f\u0439\u0446\u043e\u043c", description: "\u041f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0430\u044f \u0438\u0433\u0440\u0430 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.", qr: "19.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nafi" },
-      20: { type: "gift", product: "schoko-bons" }, 21: { type: "gift", product: "kinder-country" }, 22: { type: "gift", product: "schoko-bons" },
-      23: { type: "game", title: "\u041f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0430\u044f \u0438\u0433\u0440\u0430", description: "\u0417\u0438\u043c\u043d\u0438\u0439 \u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.", qr: "23.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nasi" },
-      24: { type: "gift", product: "kinder-country" }, 25: { type: "gift", product: "mini-eggs-blue" }, 26: { type: "gift", product: "schoko-bons" },
-      27: { type: "game", title: "\u0412\u043e\u043b\u0448\u0435\u0431\u043d\u0430\u044f \u0438\u0433\u0440\u0430", description: "\u0424\u0438\u043d\u0430\u043b\u044c\u043d\u044b\u0439 QR-\u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder \u044d\u0442\u043e\u0433\u043e \u043c\u0435\u0441\u044f\u0446\u0430.", qr: "27.webp", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nase" },
-      28: { type: "gift", product: "mini-eggs-green" }, 29: { type: "gift", product: "kinder-love" }, 30: { type: "gift", product: "mini-eggs-green" }, 31: { type: "gift", product: "kinder-bueno" },
+      14: { type: "gift", product: "schoko-bons" },
+      15: {
+        type: "game",
+        title:
+          "\u0417\u0432\u043e\u043d\u043a\u0430\u044f \u0438\u0433\u0440\u0430",
+        description:
+          "\u041d\u0430\u0439\u0434\u0438 \u0441\u0432\u043e\u0439 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u044b\u0439 \u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder.",
+        qr: "15.webp",
+        url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214naf",
+      },
+      16: { type: "gift", product: "mini-eggs-blue" },
+      17: { type: "gift", product: "kinder-love" },
+      18: { type: "gift", product: "mini-eggs-blue" },
+      19: {
+        type: "game",
+        title: "\u0418\u0433\u0440\u0430 \u0441 \u044f\u0439\u0446\u043e\u043c",
+        description:
+          "\u041f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0430\u044f \u0438\u0433\u0440\u0430 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.",
+        qr: "19.webp",
+        url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nafi",
+      },
+      20: { type: "gift", product: "schoko-bons" },
+      21: { type: "gift", product: "kinder-country" },
+      22: { type: "gift", product: "schoko-bons" },
+      23: {
+        type: "game",
+        title:
+          "\u041f\u0440\u0430\u0437\u0434\u043d\u0438\u0447\u043d\u0430\u044f \u0438\u0433\u0440\u0430",
+        description:
+          "\u0417\u0438\u043c\u043d\u0438\u0439 \u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder \u043f\u043e QR-\u043a\u043e\u0434\u0443.",
+        qr: "23.webp",
+        url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nasi",
+      },
+      24: { type: "gift", product: "kinder-country" },
+      25: { type: "gift", product: "mini-eggs-blue" },
+      26: { type: "gift", product: "schoko-bons" },
+      27: {
+        type: "game",
+        title:
+          "\u0412\u043e\u043b\u0448\u0435\u0431\u043d\u0430\u044f \u0438\u0433\u0440\u0430",
+        description:
+          "\u0424\u0438\u043d\u0430\u043b\u044c\u043d\u044b\u0439 QR-\u0441\u044e\u0440\u043f\u0440\u0438\u0437 Kinder \u044d\u0442\u043e\u0433\u043e \u043c\u0435\u0441\u044f\u0446\u0430.",
+        qr: "27.webp",
+        url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214nase",
+      },
+      28: { type: "gift", product: "mini-eggs-green" },
+      29: { type: "gift", product: "kinder-love" },
+      30: { type: "gift", product: "mini-eggs-green" },
+      31: { type: "gift", product: "kinder-bueno" },
     }),
-    generalGame: { title: "\u0421\u043e\u0437\u0434\u0430\u0439 \u0432\u043e\u043b\u0448\u0435\u0431\u043d\u0443\u044e \u0441\u043a\u0430\u0437\u043a\u0443", url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214n" },
+    generalGame: {
+      title:
+        "\u0421\u043e\u0437\u0434\u0430\u0439 \u0432\u043e\u043b\u0448\u0435\u0431\u043d\u0443\u044e \u0441\u043a\u0430\u0437\u043a\u0443",
+      url: "https://\u043a\u0438\u043d\u0434\u0435\u0440.\u0440\u0444/seasonal_ny/214n",
+    },
   }),
 });
