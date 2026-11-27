@@ -46,11 +46,6 @@ const pageSnow = document.querySelector(".page-snow");
         "img/advent-hello-kitty/gift-box-red.webp",
         "img/advent-hello-kitty/gift-box-green.webp",
         "img/advent-hello-kitty/winter-scene.webp",
-        ...Array.from(
-          { length: 24 },
-          (_, index) =>
-            `img/advent-hello-kitty/gifts/${String(index + 1).padStart(2, "0")}.webp`,
-        ),
       ];
 
       const finishPageLoading = () => {

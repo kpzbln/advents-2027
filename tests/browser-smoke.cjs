@@ -98,6 +98,18 @@ if (!browserPath) {
     await page.close();
   });
 
+  test("Hello Kitty does not block the first screen on gift images", async () => {
+    const page = await newPage();
+    await page.route("**/img/advent-hello-kitty/gifts/24.webp", async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+      await route.abort().catch(() => {});
+    });
+    await page.goto(`${baseUrl}/advent-hello-kitty.html`, { waitUntil: "domcontentloaded" });
+    await page.locator("body:not(.page-is-loading)").waitFor({ timeout: 2000 });
+    await page.unroute("**/img/advent-hello-kitty/gifts/24.webp");
+    await page.close();
+  });
+
   test("Kinder Mix opens as a 31-day calendar", async () => {
     const page = await newPage();
     await page.goto(`${baseUrl}/advent-kinder.html`, { waitUntil: "domcontentloaded" });

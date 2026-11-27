@@ -3,7 +3,7 @@
   const config = {
     seasonYear: 2026,
     cacheYear: 2027,
-    cacheVersion: 23,
+    cacheVersion: 24,
   };
   config.cacheName = `advents-${config.cacheYear}-v${config.cacheVersion}`;
   globalThis.AdventAppConfig = Object.freeze(config);

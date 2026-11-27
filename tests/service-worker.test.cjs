@@ -115,5 +115,5 @@ test("upgrades remove old app caches and preserve unrelated caches", async () =>
   await sw.run("activate");
   assert.equal(sw.stores.has("advents-2027-v15"), false);
   assert.equal(sw.stores.has("other-app"), true);
-  assert.equal(sw.stores.has("advents-2027-v23"), true);
+  assert.equal(sw.stores.has("advents-2027-v24"), true);
 });
