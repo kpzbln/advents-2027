@@ -398,21 +398,43 @@
         transform: none;
       }
 
-      .gift-opened-mark {
+      .gift-opened-badge {
         position: absolute;
         z-index: 2;
         top: -3px;
-        right: -3px;
+        right: -5px;
         display: grid;
-        width: 15px;
-        height: 15px;
+        width: 21px;
+        height: 21px;
         place-items: center;
-        border: 1px solid #fff;
-        border-radius: 50%;
-        background: #357a2c;
-        color: #fff;
-        font: 800 11px/1 Nunito, sans-serif;
+        border: 0;
+        border-radius: 5px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        filter: drop-shadow(0 1px 2px rgb(17 36 58 / 34%));
         pointer-events: none;
+      }
+
+      .gift-opened-badge.is-red {
+        background-image: url("img/advent-hello-kitty/gift-box-red.webp");
+      }
+
+      .gift-opened-badge.is-green {
+        background-image: url("img/advent-hello-kitty/gift-box-green.webp");
+      }
+
+      .gift-opened-number {
+        display: block;
+        color: #f3f8fb;
+        font: 800 8px/1 Nunito, sans-serif;
+        paint-order: stroke fill;
+        transform: translateY(2px);
+        -webkit-text-stroke: 1.5px #d03316;
+      }
+
+      .gift-opened-badge.is-green .gift-opened-number {
+        -webkit-text-stroke-color: #3ea32b;
       }
 
       .calendar-door-opened:focus-visible {

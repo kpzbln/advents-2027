@@ -241,9 +241,11 @@ const progressText = document.querySelector(".calendar-progress-text");
 
       const setGiftVisual = (door, gift) => {
         door.classList.add("calendar-door-gift");
-        door.classList.toggle("calendar-door-stand", gift.category === "Подставка");
+        door.classList.toggle("calendar-door-stand", gift.category === "Элемент для демонстрации");
+        const giftColor = door.querySelector(".gift-box-green") ? "is-green" : "is-red";
+        const day = door.dataset.day;
         door.innerHTML =
-          '<div class="gift-box-received gift-box-revealed" aria-hidden="true"></div><span class="gift-opened-mark" aria-hidden="true">✓</span>';
+          `<div class="gift-box-received gift-box-revealed" aria-hidden="true"></div><span class="gift-opened-badge ${giftColor}" aria-hidden="true"><span class="gift-opened-number">${day}</span></span>`;
         const revealedGift = door.firstElementChild;
         revealedGift.style.backgroundImage = `url("${gift.image}")`;
       };

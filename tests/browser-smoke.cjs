@@ -110,6 +110,17 @@ if (!browserPath) {
     await page.close();
   });
 
+  test("opened Hello Kitty doors show a numbered color gift badge", async () => {
+    const page = await newPage([2026, 11, 1, 6, 0, 0]);
+    await page.goto(`${baseUrl}/advent-hello-kitty.html`, { waitUntil: "domcontentloaded" });
+    await page.locator('[data-day="1"]').click();
+    await page.locator(".gift-modal-confirm").click();
+    const badge = page.locator('.calendar-door-opened[data-day="1"] .gift-opened-badge');
+    assert.equal(await badge.textContent(), "1");
+    assert.match(await badge.getAttribute("class"), /is-red/);
+    await page.close();
+  });
+
   test("Kinder Mix opens as a 31-day calendar", async () => {
     const page = await newPage();
     await page.goto(`${baseUrl}/advent-kinder.html`, { waitUntil: "domcontentloaded" });
