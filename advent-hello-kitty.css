@@ -427,7 +427,7 @@
       .gift-opened-number {
         display: block;
         color: #f3f8fb;
-        font: 800 10px/1 Nunito, sans-serif;
+        font: 800 11px/1 Nunito, sans-serif;
         paint-order: stroke fill;
         transform: translateY(2px);
         -webkit-text-stroke: 1.5px #d03316;
